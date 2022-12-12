@@ -6,9 +6,9 @@
 
   API harus dapat menambahkan thread melalui route:
 
-  Method: POST
-  Path: /threads
-  Body Request:
+  -Method: POST
+  -Path: /threads
+  -Body Request:
 
 ```{}
 {
@@ -21,7 +21,8 @@
 - Status Code: 201
 - Response Body:
 
-```{
+```{}
+{
     "status": "success",
     "data": {
         "addedThread": {
@@ -39,27 +40,29 @@ Menambahkan thread merupakan resource yang dibatasi (restrict). Untuk mengaksesn
 Jika properti body request tidak lengkap atau tidak sesuai, maka:
 Kembalikan dengan status code 400; serta
 Berikan body response:
-status: “fail”
-message: Pesan apapun selama tidak kosong.
+-status: “fail”
+-message: Pesan apapun selama tidak kosong.
 
 ## Kriteria 2: Menambahkan Komentar pada Thread
 
 API harus dapat menambahkan komentar pada thread melalui route:
-Method: POST
-Path: /threads/{threadId}/comments
+-Method: POST
+-Path: /threads/{threadId}/comments
 Body Request:
 
-```{
+```{}
+{
     "content": string
 }
 ```
 
 Response yang harus dikembalikan:
 
-Status Code: 201
+-Status Code: 201
 Response Body:
 
-```{
+```{}
+{
     "status": "success",
     "data": {
         "addedComment": {
@@ -77,8 +80,8 @@ Menambahkan komentar pada thread merupakan resource yang dibatasi (restrict). Un
 Jika thread yang diberi komentar tidak ada atau tidak valid, maka:
 Kembalikan dengan status code 404; serta
 Berikan body response:
-status: “fail”
-message: Pesan apapun selama tidak kosong.
+-status: “fail”
+-message: Pesan apapun selama tidak kosong.
 Jika properti body request tidak lengkap atau tidak sesuai, maka:
 Kembalikan dengan status code 400; serta
 Berikan body response:
@@ -88,15 +91,16 @@ Berikan body response:
 ## Kriteria 3: Menghapus Komentar pada Thread
 
 API harus dapat menghapus komentar pada thread melalui route:
-Method: DELETE
-Path: /threads/{threadId}/comments/{commentId}
+-Method: DELETE
+-Path: /threads/{threadId}/comments/{commentId}
 
 Response yang harus dikembalikan:
 
-Status Code: 200
+-Status Code: 200
 Response Body:
 
-```{
+```{}
+{
     "status": "success"
 }
 ```
@@ -112,20 +116,18 @@ Berikan body response:
 Jika thread atau komentar yang hendak dihapus tidak ada atau tidak valid, maka:
 Kembalikan dengan status code 404; serta
 Berikan body response:
-status: “fail”
-message: Pesan apapun selama tidak kosong.
+-status: “fail”
+-message: Pesan apapun selama tidak kosong.
 Komentar dihapus secara soft delete, alias tidak benar-benar dihapus dari database. Anda bisa membuat dan memanfaatkan kolom seperti is_delete sebagai indikator apakah komentar dihapus atau tidak.
 
 ## Kriteria 4: Melihat Detail Thread
 
 API harus dapat melihat detail thread melalui route:
-Method: GET
-Path: /threads/{threadId}
-
+-Method: GET
+-Path: /threads/{threadId}
 Response yang harus dikembalikan:
-
-Status Code: 200
-Response Body:
+-Status Code: 200
+-Response Body:
 
 ```{}
 {
@@ -157,13 +159,12 @@ Response Body:
 ```
 
 Ketentuan:
-
 Mendapatkan detail thread merupakan resource terbuka. Sehingga tidak perlu melampirkan access token.
 Jika thread yang diakses tidak ada atau tidak valid, maka:
 Kembalikan dengan status code 404; serta
 Berikan body response:
-status: “fail”
-message: Pesan apapun selama tidak kosong.
+-status: “fail”
+-message: Pesan apapun selama tidak kosong.
 Wajib menampilkan seluruh komentar yang terdapat pada thread tersebut sesuai dengan contoh di atas.
 Komentar yang dihapus ditampilkan dengan konten **komentar telah dihapus**.
 Komentar diurutkan secara ascending (dari kecil ke besar) berdasarkan waktu berkomentar.
@@ -172,18 +173,18 @@ Komentar diurutkan secara ascending (dari kecil ke besar) berdasarkan waktu berk
 
 Proyek Forum API wajib menerapkan automation testing dengan kriteria berikut:
 
-Unit Testing:
+-Unit Testing:
 Wajib menerapkan Unit Testing pada bisnis logika yang ada. Baik di Entities ataupun di Use Case.
-Integration Test:
+-Integration Test:
 Wajib menerapkan Integration Test dalam menguji interaksi database dengan Repository.
 
 ## Kriteria 6: Menerapkan Clean Architecture
 
 Proyek Forum API wajib menerapkan Clean Architecture. Di mana source code terdiri dari 4 layer yaitu:
 
-Entities (jika dibutuhkan)
+-Entities (jika dibutuhkan)
 Tempat penyimpanan data entitas bisnis utama. Jika suatu bisnis butuh mengelola struktur data yang kompleks, maka buatlah entities.
-Use Case:
+-Use Case:
 Di gunakan sebagai tempat menuliskannya flow atau alur bisnis logika.
 Interface Adapter (Repository dan Handler)
 Mediator atau penghubung antara layer framework dengan layer use case.
