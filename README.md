@@ -10,7 +10,8 @@
   Path: /threads
   Body Request:
 
-```{
+```{}
+{
     "title": string,
     "body": string
 }
@@ -126,7 +127,8 @@ Response yang harus dikembalikan:
 Status Code: 200
 Response Body:
 
-```{
+```{}
+{
     "status": "success",
     "data": {
         "thread": {
