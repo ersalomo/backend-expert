@@ -1,7 +1,9 @@
 # Kriteria Forum API
 
   Terdapat 6 kriteria utama yang harus Anda penuhi dalam membuat proyek Forum API.
-  Kriteria 1: Menambahkan Thread
+
+## Kriteria 1: Menambahkan Thread
+
   API harus dapat menambahkan thread melalui route:
 
   Method: POST
@@ -11,7 +13,8 @@
   ```{
     "title": string,
     "body": string
-  }
+  }```
+
   - Response yang harus dikembalikan:
   - Status Code: 201
   - Response Body:
@@ -25,7 +28,8 @@
             "owner": "user-DWrT3pXe1hccYkV1eIAxS"
         }
     }
-}
+}```
+
 Ketentuan:
 
 Menambahkan thread merupakan resource yang dibatasi (restrict). Untuk mengaksesnya membutuhkan access token guna mengetahui siapa yang membuat thread.
@@ -37,22 +41,22 @@ message: Pesan apapun selama tidak kosong.
 
 
 
-Kriteria 2: Menambahkan Komentar pada Thread
+##Kriteria 2: Menambahkan Komentar pada Thread
 API harus dapat menambahkan komentar pada thread melalui route:
 
 Method: POST
 Path: /threads/{threadId}/comments
 Body Request:
 
-{
+```{
     "content": string
-}
+}```
 Response yang harus dikembalikan:
 
 Status Code: 201
 Response Body:
 
-{
+```{
     "status": "success",
     "data": {
         "addedComment": {
@@ -61,7 +65,7 @@ Response Body:
             "owner": "user-CrkY5iAgOdMqv36bIvys2"
         }
     }
-}
+}```
 Ketentuan:
 
 Menambahkan komentar pada thread merupakan resource yang dibatasi (restrict). Untuk mengaksesnya membutuhkan access token guna mengetahui siapa yang membuat komentar.
@@ -77,7 +81,7 @@ status: “fail”
 message: Pesan apapun selama tidak kosong.
 
 
-Kriteria 3: Menghapus Komentar pada Thread
+##Kriteria 3: Menghapus Komentar pada Thread
 API harus dapat menghapus komentar pada thread melalui route:
 
 Method: DELETE
@@ -107,7 +111,7 @@ message: Pesan apapun selama tidak kosong.
 Komentar dihapus secara soft delete, alias tidak benar-benar dihapus dari database. Anda bisa membuat dan memanfaatkan kolom seperti is_delete sebagai indikator apakah komentar dihapus atau tidak.
 
 
-Kriteria 4: Melihat Detail Thread
+##Kriteria 4: Melihat Detail Thread
 API harus dapat melihat detail thread melalui route:
 
 Method: GET
@@ -158,7 +162,7 @@ Komentar diurutkan secara ascending (dari kecil ke besar) berdasarkan waktu berk
 
 
 
-Kriteria 5: Menerapkan Automation Testing
+##Kriteria 5: Menerapkan Automation Testing
 Proyek Forum API wajib menerapkan automation testing dengan kriteria berikut:
 
 Unit Testing: 
@@ -168,7 +172,8 @@ Wajib menerapkan Integration Test dalam menguji interaksi database dengan Reposi
 
 
 
-Kriteria 6: Menerapkan Clean Architecture
+## Kriteria 6: Menerapkan Clean Architecture
+
 Proyek Forum API wajib menerapkan Clean Architecture. Di mana source code terdiri dari 4 layer yaitu:
 
 Entities (jika dibutuhkan)
