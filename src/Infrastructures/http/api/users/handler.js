@@ -1,5 +1,4 @@
-const AddUserUseCase = require('../../../../Applications/use_case/AddUserUseCase');
-
+const AddUserUseCase = require('../../../../Applications/user_case/AddUserUseCase');
 class UsersHandler {
   constructor(container) {
     this._container = container;
@@ -20,6 +19,6 @@ class UsersHandler {
     response.code(201);
     return response;
   }
-}
+};
 
 module.exports = UsersHandler;
