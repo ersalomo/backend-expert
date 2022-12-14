@@ -1,5 +1,5 @@
 const Hapi = require('@hapi/hapi');
-const users = require('../../Infrastructures/http/api/users');
+const users = require('../../Interfaces/http/api/users');
 const DomainErrorTranslator = require('../../Commons/exceptions/DomainErrorTranslator');
 const ClientError = require('../../Commons/exceptions/ClientError');
 
