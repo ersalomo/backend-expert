@@ -2,7 +2,7 @@ const routes = (handler) => ([
   {
     method: 'POST',
     path: '/threads',
-    handler: handler,
+    handler: handler.postThreadHandler,
   },
   {
     method: 'GET',
