@@ -10,7 +10,7 @@ class AddThreadUseCase {
   async execute(useCasePayload) {
     const addThread = new AddThread(useCasePayload);
     await this.#threadRepository.veryfyUserId(addThread.userId);
-    return this.#threadRepository.addUser(registerUser);
+    return this.#threadRepository.addUser(addThread);
   }
 }
 
