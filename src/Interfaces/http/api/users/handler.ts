@@ -1,14 +1,14 @@
-import {Request} from '@hapi/hapi'
+import {Request, Res} from '@hapi/hapi'
 import AddUserUseCase from '../../../../Applications/use_case/AddUserUseCase';
 
 export default class UserHandler {
-    private container:Container;
+  private container:Container;
 
-    constructor(container:Container) {
-        this.container = container;
-    }
+  constructor(container:Container) {
+    this.container = container;
+  }
 
-    async postUserHandler(request:Request, h) {
+  async postUserHandler(request:Request, h) {
     const addUserUseCase = this.container.getInstance(AddUserUseCase.name);
     const addedUser = await addUserUseCase.execute(request.payload);
 
@@ -21,5 +21,4 @@ export default class UserHandler {
     response.code(201);
     return response;
   }
-
 }
