@@ -7,7 +7,6 @@ const AuthenticationsTableTestHelper = {
       text: 'INSERT INTO authentications VALUES($1)',
       values: [token],
     };
-
     await pool.query(query);
   },
 

@@ -1,5 +1,8 @@
 const Hapi = require('@hapi/hapi');
 const users = require('../../Interfaces/http/api/users');
+const authentications = require('../../Interfaces/http/api/authentications');
+const threads = require('../../Interfaces/http/api/threads');
+// const comments = require('../../Interfaces/http/api/comments');
 const DomainErrorTranslator = require('../../Commons/exceptions/DomainErrorTranslator');
 const ClientError = require('../../Commons/exceptions/ClientError');
 
@@ -12,6 +15,14 @@ const createServer = async (container) => {
   await server.register([
     {
       plugin: users,
+      options: {container},
+    },
+    {
+      plugin: authentications,
+      options: {container},
+    },
+    {
+      plugin: threads,
       options: {container},
     },
   ]);
@@ -38,6 +49,7 @@ const createServer = async (container) => {
       const newResponse = h.response({
         status: 'error',
         message: 'terjadi kegagalan pada server kami',
+        response,
       });
       newResponse.code(500);
       return newResponse;

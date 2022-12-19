@@ -8,6 +8,7 @@ class AddThreadUseCase {
   }
 
   async execute(useCasePayload) {
+    console.log('payload usecase', addThread);
     const addThread = new AddThread(useCasePayload);
     await this.#threadRepository.veryfyUserId(addThread.userId);
     return this.#threadRepository.addUser(addThread);

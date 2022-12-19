@@ -3,12 +3,12 @@ const routes = (handler) => ([
   {
     method: 'POST',
     path: '/threads/{threadId}/comments',
-    handeler: handler,
+    handler: handler,
   },
   {
     method: 'DELETE',
     path: '/threads/{threadId}/comments/{commentId}',
-    handeler: handler,
+    handler: handler,
   },
 ]);
 

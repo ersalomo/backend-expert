@@ -11,7 +11,7 @@ describe('AddThreadUseCase', () => {
       userId: 1,
       title: 'New Thread',
       body: 'new body dude',
-      date: new Date().toDateString(),
+      date: (new Date()).toDateString(),
     };
     const expectedAddedThread = new AddedThread({
       title: useCasePayload.title,
@@ -41,7 +41,8 @@ describe('AddThreadUseCase', () => {
     expect(mockThreadRepository.addThread).toBeCalledWith(new AddThread({
       title: useCasePayload.title,
       body: useCasePayload.body,
-    }));
+    }),
+    );
   });
 });
 

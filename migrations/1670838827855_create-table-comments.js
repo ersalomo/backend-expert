@@ -11,16 +11,16 @@ exports.up = (pgm) => {
     user_id: {
       type: 'VARCHAR(50)',
       notNull: true,
-      references: '"users"',
-      onDelete: 'cascade',
-      onUpdate: 'cascade',
+      // references: '"users"',
+      // onDelete: 'cascade',
+      // onUpdate: 'cascade',
     },
     thread_id: {
       type: 'VARCHAR(50)',
       notNull: true,
-      references: '"threads"',
-      onDelete: 'cascade',
-      onUpdate: 'cascade',
+      // references: '"threads"',
+      // onDelete: 'cascade',
+      // onUpdate: 'cascade',
     },
     content: {
       type: 'TEXT',
@@ -33,4 +33,4 @@ exports.up = (pgm) => {
   });
 };
 
-exports.down = (pgm) => pgm.dtopTable('comments');
+exports.down = (pgm) => pgm.dropTable('comments');
