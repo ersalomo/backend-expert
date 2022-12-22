@@ -1,15 +1,14 @@
 
 class AddThread {
   // constructor(payload) {
-  constructor({title, body}) {
+  constructor({id, title, body}) {
     // this.#verifyPayload(payload);
     // const {title, body} = payload;
-
-    this.id = id || 'errpr id users';
+    this.id = id || 'error id users';
     this.title = title || 'error title';
     this.body = body || 'errpr boyd';
   }
-  #verifyPayload({id, title, body}) {}
+  _verifyPayload({id, title, body}) {}
 };
 
 module.exports = AddThread;
