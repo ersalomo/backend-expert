@@ -13,13 +13,10 @@ class ThreadsHandler {
     const addedThread = await addThreadUseCase.execute(request.payload);
     addedThread.owner = addedThread.user_id;
     delete addedThread.user_id;
+    delete addedThread.body;
     const response = h.response({
       status: 'success',
-      data: {
-        'addedThread': {
-          addedThread,
-        },
-      },
+      data: {addedThread},
     });
     response.code(201);
     return response;
@@ -27,7 +24,6 @@ class ThreadsHandler {
   async getThreads(req, h) {
     const detailThreadUseCase = this._container.getInstance(DetailThreadUseCase.name);
     const detailThread = await detailThreadUseCase.execute(req.params.threadId);
-    detailThread.username = detailThread.user_id; delete detailThread.user_id;
     if (detailThread) {
       return h.response({
         status: 'success',

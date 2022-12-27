@@ -18,9 +18,9 @@ exports.up = (pgm) => {
     thread_id: {
       type: 'VARCHAR(50)',
       notNull: true,
-      // references: '"threads"',
-      // onDelete: 'cascade',
-      // onUpdate: 'cascade',
+      references: '"threads"',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     },
     content: {
       type: 'TEXT',
@@ -29,6 +29,11 @@ exports.up = (pgm) => {
       type: 'timestamp',
       notNull: true,
       default: pgm.func('current_timestamp'),
+    },
+    is_delete: {
+      type: 'varchar(1)',
+      values: [1, 0],
+      default: 0,
     },
   });
 };

@@ -22,13 +22,25 @@ class ThreadRepositoryPostgres extends ThreadRepository {
   }
 
   async veryfyUserId(idUser) {}
+
   async getThreads(idThread) {
-    const query = {
-      text: 'SELECT * FROM threads where id = $1',
+    // const query = {
+    //   text: 'SELECT id, title, user_id as owner FROM threads where id = $1',
+    //   values: [idThread],
+    // };
+    const query = { // thread-4lYJdtwRu3fllF_pF_11W
+      text: 'SELECT id, title, body, date, user_id as username FROM threads where id = $1',
       values: [idThread],
     };
-    const result = await this._pool.query(query);
-    return {...result.rows[0]};
+    const queryCommentThread = {
+      values: [idThread], // **komentar telah dihapus** untuk is_delete = 1
+      text: 'SELECT id,user_id as username, date, content FROM comments where thread_id in ($1)',
+    };
+    const resultThread = await this._pool.query(query);
+    const resultCommentThread = await this._pool.query(queryCommentThread);
+    // return {...result.rows[0]};
+    resultThread.rows[0].comments = resultCommentThread.rows;
+    return {...resultThread.rows[0]};
   }
 }
 
