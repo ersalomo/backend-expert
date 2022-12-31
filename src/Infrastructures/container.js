@@ -23,6 +23,9 @@ const CommentRepository = require('../Domains/comments/CommentRepository');
 const CommentRepositoryPostgres = require('./repository/CommentRepositoryPostgres');
 const AddCommentUseCase = require('../Applications/use_case/AddCommentUseCase');
 
+const AddReplyCommentUseCase = require('../Applications/use_case/AddReplyCommentUseCase');
+const ReplyCommentRepository = require('../Domains/replay_comments/ReplyCommentRepository');
+const ReplyRepositoryPostgres = require('../Infrastructures/repository/ReplayRepositoryPostgres');
 // auth
 const AuthenticationRepository = require('../Domains/authentications/AuthenticationRepository');
 const AuthenticationRepositoryPostgres = require('../Infrastructures/repository/AuthenticationRepositoryPostgres');
@@ -99,6 +102,20 @@ container.register([
     },
   },
   {
+    key: ReplyCommentRepository.name,
+    Class: ReplyRepositoryPostgres,
+    parameter: {
+      dependencies: [
+        {
+          concrete: pool,
+        },
+        {
+          concrete: nanoid,
+        },
+      ],
+    },
+  },
+  {
     key: AuthenticationTokenManager.name,
     Class: JwtTokenManager,
     parameter: {
@@ -148,6 +165,19 @@ container.register([
         {
           name: 'threadRepository',
           internal: ThreadRepository.name,
+        },
+      ],
+    },
+  },
+  {
+    key: AddReplyCommentUseCase.name,
+    Class: AddReplyCommentUseCase,
+    parameter: {
+      injectType: 'destructuring',
+      dependencies: [
+        {
+          name: 'replyCommentRepository',
+          internal: ReplyCommentRepository.name,
         },
       ],
     },

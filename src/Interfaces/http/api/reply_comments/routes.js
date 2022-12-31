@@ -7,7 +7,7 @@ const routes = (handler) => ([
   },
   {
     method: 'delete',
-    path: 'threads/{threadId}/comments/{commentId}/replies/{replyId}',
+    path: '/threads/{threadId}/comments/{commentId}/replies/{replyId}',
     handler: handler.deletePostReplayComment,
   },
 ]);

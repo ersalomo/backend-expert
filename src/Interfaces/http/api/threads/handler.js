@@ -11,9 +11,7 @@ class ThreadsHandler {
     // const userId = request.credential.userId ||;
     const addThreadUseCase = this._container.getInstance(AddThreadUseCase.name);
     const addedThread = await addThreadUseCase.execute(request.payload);
-    addedThread.owner = addedThread.user_id;
-    delete addedThread.user_id;
-    delete addedThread.body;
+
     const response = h.response({
       status: 'success',
       data: {addedThread},
