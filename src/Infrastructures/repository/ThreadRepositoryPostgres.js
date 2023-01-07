@@ -1,4 +1,5 @@
 const ThreadRepository = require('../../Domains/threads/ThreadRepository');
+const AddedThread = require('../../Domains/threads/entities/AddedThread');
 
 class ThreadRepositoryPostgres extends ThreadRepository {
   constructor(pool, idGenerator) {
@@ -8,17 +9,14 @@ class ThreadRepositoryPostgres extends ThreadRepository {
   }
   async addThread(registerThread) {
     console.log('threadPOstgres');
-
-    const {title, body} = registerThread;
+    const {owner, title, body} = registerThread;
     const id = `thread-${this._idGenerator()}`;
-    const userId = 'x';
     const query = {
-      text: 'INSERT INTO threads VALUES($1, $2, $3, $4) RETURNING id, user_id, title, body',
-      values: [id, userId, title, body],
+      text: 'INSERT INTO threads VALUES($1, $2, $3, $4) RETURNING id, title, user_id as owner',
+      values: [id, owner, title, body],
     };
     const result = await this._pool.query(query);
-    // return new RegisteredUser({...result.rows[0]});
-    return {...result.rows[0]};
+    return new AddedThread({...result.rows[0]});
   }
 
   async veryfyUserId(idUser) {}

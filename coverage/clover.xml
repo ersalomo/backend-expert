@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1672367928535" clover="3.2.0">
-  <project timestamp="1672367928535" name="All files">
-    <metrics statements="421" coveredstatements="304" conditionals="106" coveredconditionals="71" methods="108" coveredmethods="70" elements="635" coveredelements="445" complexity="0" loc="421" ncloc="421" packages="20" files="48" classes="48"/>
+<coverage generated="1673077134298" clover="3.2.0">
+  <project timestamp="1673077134299" name="All files">
+    <metrics statements="472" coveredstatements="324" conditionals="118" coveredconditionals="71" methods="121" coveredmethods="73" elements="711" coveredelements="468" complexity="0" loc="472" ncloc="472" packages="23" files="55" classes="55"/>
     <package name="src.Applications.security">
       <metrics statements="8" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="5"/>
       <file name="AuthenticationTokenManager.js" path="D:\Dicoding\Back-End\backend-expert\src\Applications\security\AuthenticationTokenManager.js">
@@ -20,7 +20,7 @@
       </file>
     </package>
     <package name="src.Applications.use_case">
-      <metrics statements="77" coveredstatements="65" conditionals="12" coveredconditionals="12" methods="19" coveredmethods="13"/>
+      <metrics statements="84" coveredstatements="67" conditionals="12" coveredconditionals="12" methods="21" coveredmethods="13"/>
       <file name="AddCommentUseCase.js" path="D:\Dicoding\Back-End\backend-expert\src\Applications\use_case\AddCommentUseCase.js">
         <metrics statements="7" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="2" count="1" type="stmt"/>
@@ -29,6 +29,16 @@
         <line num="11" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+      </file>
+      <file name="AddReplyCommentUseCase.js" path="D:\Dicoding\Back-End\backend-expert\src\Applications\use_case\AddReplyCommentUseCase.js">
+        <metrics statements="7" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
       </file>
       <file name="AddThreadUseCase.js" path="D:\Dicoding\Back-End\backend-expert\src\Applications\use_case\AddThreadUseCase.js">
@@ -141,11 +151,11 @@
       </file>
       <file name="ClientError.js" path="D:\Dicoding\Back-End\backend-expert\src\Commons\exceptions\ClientError.js">
         <metrics statements="6" coveredstatements="6" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
-        <line num="3" count="25" type="stmt"/>
-        <line num="5" count="25" type="cond" truecount="2" falsecount="0"/>
+        <line num="3" count="29" type="stmt"/>
+        <line num="5" count="29" type="cond" truecount="2" falsecount="0"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="8" count="24" type="stmt"/>
-        <line num="9" count="24" type="stmt"/>
+        <line num="8" count="28" type="stmt"/>
+        <line num="9" count="28" type="stmt"/>
         <line num="13" count="11" type="stmt"/>
       </file>
       <file name="DomainErrorTranslator.js" path="D:\Dicoding\Back-End\backend-expert\src\Commons\exceptions\DomainErrorTranslator.js">
@@ -154,13 +164,13 @@
         <line num="3" count="2" type="stmt"/>
         <line num="5" count="10" type="cond" truecount="2" falsecount="0"/>
         <line num="9" count="2" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
       </file>
       <file name="InvariantError.js" path="D:\Dicoding\Back-End\backend-expert\src\Commons\exceptions\InvariantError.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="6" type="stmt"/>
-        <line num="5" count="21" type="stmt"/>
-        <line num="6" count="21" type="stmt"/>
+        <line num="5" count="25" type="stmt"/>
+        <line num="6" count="25" type="stmt"/>
         <line num="9" count="6" type="stmt"/>
       </file>
       <file name="NotFoundError.js" path="D:\Dicoding\Back-End\backend-expert\src\Commons\exceptions\NotFoundError.js">
@@ -220,6 +230,27 @@
         <line num="15" count="1" type="stmt"/>
       </file>
     </package>
+    <package name="src.Domains.replay_comments">
+      <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="ReplyCommentRepository.js" path="D:\Dicoding\Back-End\backend-expert\src\Domains\replay_comments\ReplyCommentRepository.js">
+        <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.Domains.replay_comments.entities">
+      <metrics statements="6" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="AddReply.js" path="D:\Dicoding\Back-End\backend-expert\src\Domains\replay_comments\entities\AddReply.js">
+        <metrics statements="6" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+      </file>
+    </package>
     <package name="src.Domains.threads">
       <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="ThreadRepository.js" path="D:\Dicoding\Back-End\backend-expert\src\Domains\threads\ThreadRepository.js">
@@ -231,27 +262,31 @@
       </file>
     </package>
     <package name="src.Domains.threads.entities">
-      <metrics statements="15" coveredstatements="5" conditionals="16" coveredconditionals="2" methods="4" coveredmethods="2"/>
+      <metrics statements="19" coveredstatements="5" conditionals="24" coveredconditionals="2" methods="4" coveredmethods="2"/>
       <file name="AddThread.js" path="D:\Dicoding\Back-End\backend-expert\src\Domains\threads\entities\AddThread.js">
-        <metrics statements="4" coveredstatements="1" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="8" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="14" count="2" type="stmt"/>
+        <metrics statements="8" coveredstatements="1" conditionals="12" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="9" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
       </file>
       <file name="AddedThread.js" path="D:\Dicoding\Back-End\backend-expert\src\Domains\threads\entities\AddedThread.js">
-        <metrics statements="11" coveredstatements="4" conditionals="10" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <metrics statements="11" coveredstatements="4" conditionals="12" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
-        <line num="14" count="1" type="cond" truecount="2" falsecount="3"/>
+        <line num="14" count="1" type="cond" truecount="2" falsecount="4"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="18" count="0" type="cond" truecount="0" falsecount="5"/>
+        <line num="18" count="0" type="cond" truecount="0" falsecount="6"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.Domains.users">
@@ -319,9 +354,9 @@
       </file>
     </package>
     <package name="src.Infrastructures.http">
-      <metrics statements="27" coveredstatements="27" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+      <metrics statements="28" coveredstatements="28" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
       <file name="createServer.js" path="D:\Dicoding\Back-End\backend-expert\src\Infrastructures\http\createServer.js">
-        <metrics statements="27" coveredstatements="27" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <metrics statements="28" coveredstatements="28" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -329,30 +364,31 @@
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="6" type="stmt"/>
-        <line num="15" count="6" type="stmt"/>
-        <line num="34" count="6" type="stmt"/>
-        <line num="35" count="6" type="stmt"/>
-        <line num="37" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="38" count="5" type="stmt"/>
-        <line num="39" count="5" type="stmt"/>
-        <line num="41" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="42" count="3" type="stmt"/>
-        <line num="46" count="3" type="stmt"/>
-        <line num="47" count="3" type="stmt"/>
-        <line num="50" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="51" count="1" type="stmt"/>
-        <line num="54" count="1" type="stmt"/>
-        <line num="59" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="6" type="stmt"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="40" count="6" type="stmt"/>
+        <line num="41" count="6" type="stmt"/>
+        <line num="43" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="44" count="5" type="stmt"/>
+        <line num="45" count="5" type="stmt"/>
+        <line num="47" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="48" count="3" type="stmt"/>
+        <line num="52" count="3" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="56" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="57" count="1" type="stmt"/>
         <line num="60" count="1" type="stmt"/>
-        <line num="63" count="1" type="stmt"/>
-        <line num="66" count="6" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
         <line num="69" count="1" type="stmt"/>
+        <line num="72" count="6" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.Infrastructures.repository">
-      <metrics statements="81" coveredstatements="35" conditionals="12" coveredconditionals="4" methods="18" coveredmethods="7"/>
+      <metrics statements="95" coveredstatements="38" conditionals="12" coveredconditionals="4" methods="21" coveredmethods="7"/>
       <file name="AuthenticationRepositoryPostgres.js" path="D:\Dicoding\Back-End\backend-expert\src\Infrastructures\repository\AuthenticationRepositoryPostgres.js">
         <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
         <line num="1" count="2" type="stmt"/>
@@ -395,26 +431,43 @@
         <line num="53" count="0" type="stmt"/>
         <line num="56" count="1" type="stmt"/>
       </file>
-      <file name="ThreadRepositoryPostgres.js" path="D:\Dicoding\Back-End\backend-expert\src\Infrastructures\repository\ThreadRepositoryPostgres.js">
-        <metrics statements="18" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <file name="ReplayRepositoryPostgres.js" path="D:\Dicoding\Back-End\backend-expert\src\Infrastructures\repository\ReplayRepositoryPostgres.js">
+        <metrics statements="13" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+      </file>
+      <file name="ThreadRepositoryPostgres.js" path="D:\Dicoding\Back-End\backend-expert\src\Infrastructures\repository\ThreadRepositoryPostgres.js">
+        <metrics statements="19" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
       </file>
       <file name="UserRepositoryPostgres.js" path="D:\Dicoding\Back-End\backend-expert\src\Infrastructures\repository\UserRepositoryPostgres.js">
         <metrics statements="27" coveredstatements="17" conditionals="6" coveredconditionals="2" methods="5" coveredmethods="3"/>
@@ -546,10 +599,41 @@
         <line num="15" count="1" type="stmt"/>
       </file>
     </package>
+    <package name="src.Interfaces.http.api.reply_comments">
+      <metrics statements="19" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="3"/>
+      <file name="handler.js" path="D:\Dicoding\Back-End\backend-expert\src\Interfaces\http\api\reply_comments\handler.js">
+        <metrics statements="12" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+      </file>
+      <file name="index.js" path="D:\Dicoding\Back-End\backend-expert\src\Interfaces\http\api\reply_comments\index.js">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+      </file>
+      <file name="routes.js" path="D:\Dicoding\Back-End\backend-expert\src\Interfaces\http\api\reply_comments\routes.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+    </package>
     <package name="src.Interfaces.http.api.threads">
-      <metrics statements="26" coveredstatements="13" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="3"/>
+      <metrics statements="23" coveredstatements="13" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="3"/>
       <file name="handler.js" path="D:\Dicoding\Back-End\backend-expert\src\Interfaces\http\api\threads\handler.js">
-        <metrics statements="19" coveredstatements="6" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <metrics statements="16" coveredstatements="6" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="5" count="6" type="stmt"/>
@@ -557,18 +641,15 @@
         <line num="7" count="6" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
       </file>
       <file name="index.js" path="D:\Dicoding\Back-End\backend-expert\src\Interfaces\http\api\threads\index.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>

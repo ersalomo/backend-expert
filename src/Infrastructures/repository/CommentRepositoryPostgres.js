@@ -19,6 +19,7 @@ class CommentRepositoryPostgres extends CommentRepository {
       throw new NotFoundError('Thread tidak ditemukan');
     }
   }
+
   async verifyCommentId(commentId) {
     const query = {
       text: 'SELECT id from comments WHERE id = $1',
@@ -42,12 +43,11 @@ class CommentRepositoryPostgres extends CommentRepository {
   }
 
   async addComment(registerComment) {
-    const {threadId, content} = registerComment;
+    const {owner, threadId, content} = registerComment;
     const id = `comment-${this._idGenerator()}`;
-    const userId = 'Ersalomo';
     const query = {
       text: 'INSERT INTO comments VALUES($1, $2, $3, $4) RETURNING id, content, user_id as owner',
-      values: [id, userId, threadId, content],
+      values: [id, owner, threadId, content],
     };
     const result = await this._pool.query(query);
     return {...result.rows[0]};

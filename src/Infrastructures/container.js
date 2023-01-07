@@ -30,6 +30,8 @@ const ReplyRepositoryPostgres = require('../Infrastructures/repository/ReplayRep
 const AuthenticationRepository = require('../Domains/authentications/AuthenticationRepository');
 const AuthenticationRepositoryPostgres = require('../Infrastructures/repository/AuthenticationRepositoryPostgres');
 const LoginUserUseCase = require('../Applications/use_case/LoginUserUseCase');
+const LogoutUserUseCase = require('../Applications/use_case/LogoutUserUseCase');
+const RefreshAuthenticationUseCase = require('../Applications/use_case/RefreshAuthenticationUseCase');
 const AuthenticationTokenManager = require('../Applications/security/AuthenticationTokenManager');
 const JwtTokenManager = require('../Infrastructures/security/JwtTokenManager');
 // creating container
@@ -220,6 +222,36 @@ container.register([
         {
           name: 'passwordHash',
           internal: PasswordHash.name,
+        },
+      ],
+    },
+  },
+  {
+    key: LogoutUserUseCase.name,
+    Class: LogoutUserUseCase,
+    parameter: {
+      injectType: 'destructuring',
+      dependencies: [
+        {
+          name: 'authenticationRepository',
+          internal: AuthenticationRepository.name,
+        },
+      ],
+    },
+  },
+  {
+    key: RefreshAuthenticationUseCase.name,
+    Class: RefreshAuthenticationUseCase,
+    parameter: {
+      injectType: 'destructuring',
+      dependencies: [
+        {
+          name: 'authenticationRepository',
+          internal: AuthenticationRepository.name,
+        },
+        {
+          name: 'authenticationTokenManager',
+          internal: AuthenticationTokenManager.name,
         },
       ],
     },
