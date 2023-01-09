@@ -1,4 +1,5 @@
 const AddReplyCommentUseCase = require('../../../../Applications/use_case/AddReplyCommentUseCase');
+const DeleteReplyCommentUseCase = require('../../../../Applications/use_case/DeleteReplyCommentUseCase');
 
 class ReplyCommentHandler {
   constructor(container) {
@@ -9,9 +10,15 @@ class ReplyCommentHandler {
   }
 
   async addPostReplayComment(req, h) {
-    console.log(req.payload);
     const addReplyCommentUseCase = this._container.getInstance(AddReplyCommentUseCase.name);
-    const addedReply = await addReplyCommentUseCase.execute(req.payload);
+    const {threadId, commentId} = req.params;
+    const {id: owner} = req.auth.credentials;
+    const {content} = req.payload;
+    const useCasePayload = {
+      threadId, commentId, owner,
+      content,
+    };
+    const addedReply = await addReplyCommentUseCase.execute(useCasePayload);
 
     return h.response({
       status: 'success',
@@ -20,8 +27,10 @@ class ReplyCommentHandler {
   }
 
   async deletePostReplayComment(req, h) {
-    const {replyId} = req.params;
-    console.log(replyId);
+    const deleteReplyCommentUseCase = this._container.getInstance(DeleteReplyCommentUseCase.name);
+    const {id: owner}= req.auth.credentials;
+    req.params.owner = owner;
+    await deleteReplyCommentUseCase.execute(req.params);
     return h.response({
       status: 'success',
     }).code(200);

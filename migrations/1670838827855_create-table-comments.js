@@ -31,9 +31,9 @@ exports.up = (pgm) => {
       default: pgm.func('current_timestamp'),
     },
     is_delete: {
-      type: 'varchar(1)',
-      values: [1, 0],
-      default: 0,
+      type: 'BOOLEAN',
+      notNull: true,
+      default: false,
     },
   });
 };

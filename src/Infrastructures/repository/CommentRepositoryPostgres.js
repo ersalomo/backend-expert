@@ -1,5 +1,6 @@
 const CommentRepository = require('../../Domains/comments/CommentRepository');
 const NotFoundError = require('../../Commons/exceptions/NotFoundError');
+const AuthorizationError = require('../../Commons/exceptions/AuthorizationError');
 
 
 class CommentRepositoryPostgres extends CommentRepository {
@@ -8,9 +9,10 @@ class CommentRepositoryPostgres extends CommentRepository {
     this._pool = pool;
     this._idGenerator = idGenerator;
   }
+
   async verifyThreadId(threadId) {
     const query = {
-      text: 'SELECT id from threads WHERE id = $1',
+      text: 'SELECT thread_id from comments WHERE thread_id = $1',
       values: [threadId],
     };
     const result = await this._pool.query(query);
@@ -32,10 +34,21 @@ class CommentRepositoryPostgres extends CommentRepository {
     }
   }
 
+  async verifyOwner(owner, commentId) {
+    const query = {
+      text: 'SELECT * FROM comments WHERE user_id = $1 AND id = $2',
+      values: [owner, commentId],
+    };
+    const result = await this._pool.query(query);
+    if (result.rowCount < 1) {
+      throw new AuthorizationError('Anda tidak pemilik comment ini!');
+    }
+  }
+
   async deleteComment(commentId) {
     // just update column update
     const query = {
-      text: 'UPDATE comments SET is_delete = 1 where  id = $1',
+      text: 'UPDATE comments SET is_delete = TRUE where  id = $1',
       values: [commentId],
     };
     const result = await this._pool.query(query);

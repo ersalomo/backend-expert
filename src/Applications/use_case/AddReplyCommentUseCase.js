@@ -1,4 +1,4 @@
-const AddReply = require('../../Domains/replay_comments/entities/AddReply');
+const AddReply = require('../../Domains/reply_comments/entities/AddReply');
 
 class AddPostReplayCommentUseCase {
   constructor({replyCommentRepository}) {
@@ -6,9 +6,9 @@ class AddPostReplayCommentUseCase {
   }
 
   async execute(useCasePayload) {
-    console.log(useCasePayload.content);
     const addReply = new AddReply(useCasePayload);
-    console.log('payload usecase', addReply);
+    await this._replyCommentRepository.verifyThreadId(addReply.threadId); // and
+    await this._replyCommentRepository.verifyCommentId(addReply.commentId); // and
     return this._replyCommentRepository.addReplyComment(addReply);
   }
 }

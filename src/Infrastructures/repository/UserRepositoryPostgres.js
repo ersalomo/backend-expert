@@ -32,7 +32,7 @@ class UserRepositoryPostgres extends UserRepository {
     const result = await this._pool.query(query);
 
     if (!result.rowCount) {
-      throw new NotFoundError('username tidak ditemukan');
+      throw new InvariantError('username tidak ditemukan');
     }
     return result.rows[0].password;
   }

@@ -3,23 +3,38 @@
 exports.shorthands = undefined;
 
 exports.up = (pgm) => {
-  pgm.createTable('replay_comments', {
+  pgm.createTable('reply_comments', {
     id: {
       type: 'varchar(50)',
       primaryKey: true,
     },
+    id_thread: {
+      type: 'varchar(50)',
+      notNull: true,
+      references: '"threads"',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    },
     id_comment: {
       type: 'varchar(50)',
+      notNull: true,
+      references: '"comments"',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     },
     id_user: {
       type: 'varchar(50)',
+      notNull: true,
+      references: '"users"',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     },
     content: {
       type: 'TEXT',
     },
     is_delete: {
-      type: 'varchar(1)',
-      default: 0,
+      type: 'boolean',
+      default: false,
     },
     date: {
       type: 'timestamp',
@@ -29,4 +44,4 @@ exports.up = (pgm) => {
   });
 };
 
-exports.down = (pgm) => pgm.dropTable('replay_comments');
+exports.down = (pgm) => pgm.dropTable('reply_comments');

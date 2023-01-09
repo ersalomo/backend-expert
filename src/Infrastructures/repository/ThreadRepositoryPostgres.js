@@ -1,5 +1,6 @@
 const ThreadRepository = require('../../Domains/threads/ThreadRepository');
 const AddedThread = require('../../Domains/threads/entities/AddedThread');
+const NotFoundError = require('../../Commons/exceptions/NotFoundError');
 
 class ThreadRepositoryPostgres extends ThreadRepository {
   constructor(pool, idGenerator) {
@@ -8,7 +9,6 @@ class ThreadRepositoryPostgres extends ThreadRepository {
     this._idGenerator = idGenerator;
   }
   async addThread(registerThread) {
-    console.log('threadPOstgres');
     const {owner, title, body} = registerThread;
     const id = `thread-${this._idGenerator()}`;
     const query = {
@@ -19,24 +19,53 @@ class ThreadRepositoryPostgres extends ThreadRepository {
     return new AddedThread({...result.rows[0]});
   }
 
-  async veryfyUserId(idUser) {}
 
   async getThreads(idThread) {
-    // const query = {
-    //   text: 'SELECT id, title, user_id as owner FROM threads where id = $1',
-    //   values: [idThread],
-    // };
-    const query = { // thread-4lYJdtwRu3fllF_pF_11W
-      text: 'SELECT id, title, body, date, user_id as username FROM threads where id = $1',
+    const query = {
+      text: `SELECT threads.id, threads.title, threads.body, threads.date, users.username
+             FROM threads Left JOIN users
+             ON threads.user_id = users.id where threads.id = $1`,
       values: [idThread],
     };
-    const queryCommentThread = {
-      values: [idThread], // **komentar telah dihapus** untuk is_delete = 1
-      text: 'SELECT id,user_id as username, date, content FROM comments where thread_id in ($1)',
-    };
     const resultThread = await this._pool.query(query);
+    if (!resultThread.rowCount) {
+      throw new NotFoundError('Thread tidak ditemukan!');
+    }
+    const queryCommentThread = {
+      values: [idThread],
+      text: `SELECT comments.id, comments.date, comments.content,
+              comments.is_delete, users.username
+              FROM comments INNER JOIN users ON comments.user_id = users.id
+              WHERE comments.thread_id = $1 order by comments.date asc`,
+    };
+
     const resultCommentThread = await this._pool.query(queryCommentThread);
-    // return {...result.rows[0]};
+    if (resultCommentThread.rowCount) {
+      resultCommentThread.rows = resultCommentThread.rows.map((val, i) => {
+        if (val.is_delete) {
+          val.content = '**komentar telah dihapus**';
+          delete val.is_delete;
+          val.resplies = [];
+          return val;
+        }
+        delete val.is_delete;
+        val.resplies = [];
+        return val;
+      });
+      // .map(async (val, i) => {
+      //   const queryReplyComment = {
+      //     text: `SELECT reply_comments.id, reply_comments.content, reply_comments.date, users.username, reply_comments.is_delete
+      //        FROM reply_comments INNER JOIN users
+      //        ON reply_comments.id_user = users.id
+      //        WHERE reply_comments.id_comment = $1`,
+      //     values: [val.id],
+      //   };
+
+      //   const re = await this._pool.query(queryReplyComment);
+      //   return val.resplies.push(re);
+      // });
+    }
+
     resultThread.rows[0].comments = resultCommentThread.rows;
     return {...resultThread.rows[0]};
   }
