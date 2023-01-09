@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">8.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/12</span>
+                <span class='fraction'>1/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">71.42% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>10/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">8.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/12</span>
+                <span class='fraction'>1/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -91,52 +91,52 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">class RegisterUser {
-  constructor({username, password, fullname}) {
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!username || !password || !fullname) {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor({username, password, fullname}) {
+<span class="cstat-no" title="statement not covered" >    if (!username || !password || !fullname) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new Error('REGISTER_USER.NOT_CONTAIN_NEEDED_PROPERTY');</span>
     }
 &nbsp;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof username !== 'string' || typeof password !== 'string' || typeof fullname !== 'string') {
+<span class="cstat-no" title="statement not covered" >    if (typeof username !== 'string' || typeof password !== 'string' || typeof fullname !== 'string') {</span>
 <span class="cstat-no" title="statement not covered" >      throw new Error('REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION');</span>
     }
 &nbsp;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (username.length &gt; 50) {
+<span class="cstat-no" title="statement not covered" >    if (username.length &gt; 50) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new Error('REGISTER_USER.USERNAME_LIMIT_CHAR');</span>
     }
 &nbsp;
     // menggunakan /^[\w]+$/ (cara cepat untuk pola a-zA-Z1-9_).
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!username.match(/^[a-zA-Z1-9_]+$/)) {
+<span class="cstat-no" title="statement not covered" >    if (!username.match(/^[a-zA-Z1-9_]+$/)) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new Error('REGISTER_USER.USERNAME_CONTAIN_RESTRICTED_CHARACTER');</span>
     }
 &nbsp;
-    this.username = username;
-    this.password = password;
-    this.fullname = fullname;
+<span class="cstat-no" title="statement not covered" >    this.username = username;</span>
+<span class="cstat-no" title="statement not covered" >    this.password = password;</span>
+<span class="cstat-no" title="statement not covered" >    this.fullname = fullname;</span>
   }
 }
 &nbsp;
@@ -148,7 +148,7 @@ module.exports = RegisterUser;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-12-08T11:35:22.885Z
+                at 2022-12-22T14:31:50.539Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
