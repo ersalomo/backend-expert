@@ -8,13 +8,6 @@ exports.up = (pgm) => {
       type: 'varchar(50)',
       primaryKey: true,
     },
-    id_thread: {
-      type: 'varchar(50)',
-      notNull: true,
-      references: '"threads"',
-      onDelete: 'cascade',
-      onUpdate: 'cascade',
-    },
     id_comment: {
       type: 'varchar(50)',
       notNull: true,
@@ -32,7 +25,7 @@ exports.up = (pgm) => {
     content: {
       type: 'TEXT',
     },
-    is_delete: {
+    is_deleted: {
       type: 'boolean',
       default: false,
     },

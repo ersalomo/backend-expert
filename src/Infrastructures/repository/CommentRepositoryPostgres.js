@@ -10,19 +10,7 @@ class CommentRepositoryPostgres extends CommentRepository {
     this._idGenerator = idGenerator;
   }
 
-  async verifyThreadId(threadId) {
-    const query = {
-      text: 'SELECT thread_id from comments WHERE thread_id = $1',
-      values: [threadId],
-    };
-    const result = await this._pool.query(query);
-
-    if (result.rowCount < 1) {
-      throw new NotFoundError('Thread tidak ditemukan');
-    }
-  }
-
-  async verifyCommentId(commentId) {
+  async verifyExistsCommentById(commentId) {
     const query = {
       text: 'SELECT id from comments WHERE id = $1',
       values: [commentId],
@@ -34,24 +22,17 @@ class CommentRepositoryPostgres extends CommentRepository {
     }
   }
 
-  async verifyOwner(owner, commentId) {
+  async deleteComment(ids) {
+    const {commentId, owner} = ids;
     const query = {
-      text: 'SELECT * FROM comments WHERE user_id = $1 AND id = $2',
-      values: [owner, commentId],
+      text: 'UPDATE comments SET is_deleted = TRUE WHERE id = $1 AND user_id = $2',
+      values: [commentId, owner],
     };
+
     const result = await this._pool.query(query);
-    if (result.rowCount < 1) {
+    if (!result.rowCount) {
       throw new AuthorizationError('Anda tidak pemilik comment ini!');
     }
-  }
-
-  async deleteComment(commentId) {
-    // just update column update
-    const query = {
-      text: 'UPDATE comments SET is_delete = TRUE where  id = $1',
-      values: [commentId],
-    };
-    const result = await this._pool.query(query);
     return {...result.rows[0]};
   }
 
@@ -64,6 +45,18 @@ class CommentRepositoryPostgres extends CommentRepository {
     };
     const result = await this._pool.query(query);
     return {...result.rows[0]};
+  }
+
+  async getCommentsByThreadId(idThread) {
+    const query = {
+      values: [idThread],
+      text: `SELECT comments.id, comments.date, comments.content,
+              comments.is_deleted, users.username
+              FROM comments INNER JOIN users ON comments.user_id = users.id
+              WHERE comments.thread_id = $1 order by comments.date asc`,
+    };
+    const resultCommentThread = await this._pool.query(query);
+    return resultCommentThread.rows;
   }
 }
 module.exports = CommentRepositoryPostgres;

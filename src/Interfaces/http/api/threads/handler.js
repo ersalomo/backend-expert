@@ -20,6 +20,7 @@ class ThreadsHandler {
     response.code(201);
     return response;
   }
+
   async getThreads(req, h) {
     const detailThreadUseCase = this._container.getInstance(DetailThreadUseCase.name);
     const detailThread = await detailThreadUseCase.execute(req.params.threadId);
@@ -37,4 +38,5 @@ class ThreadsHandler {
     }).code(404);
   }
 }
+
 module.exports = ThreadsHandler;

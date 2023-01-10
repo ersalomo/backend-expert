@@ -157,6 +157,10 @@ container.register([
           name: 'commentRepository',
           internal: CommentRepository.name,
         },
+        {
+          name: 'threadRepository',
+          internal: ThreadRepository.name,
+        },
       ],
     },
   },
@@ -170,6 +174,14 @@ container.register([
           name: 'threadRepository',
           internal: ThreadRepository.name,
         },
+        {
+          name: 'commentRepository',
+          internal: CommentRepository.name,
+        },
+        {
+          name: 'replyCommentRepository',
+          internal: ReplyCommentRepository.name,
+        },
       ],
     },
   },
@@ -182,6 +194,10 @@ container.register([
         {
           name: 'replyCommentRepository',
           internal: ReplyCommentRepository.name,
+        },
+        {
+          name: 'commentRepository',
+          internal: CommentRepository.name,
         },
       ],
     },
@@ -251,6 +267,10 @@ container.register([
           name: 'commentRepository',
           internal: CommentRepository.name,
         },
+        {
+          name: 'threadRepository',
+          internal: ThreadRepository.name,
+        },
       ],
     },
   },
@@ -263,6 +283,10 @@ container.register([
         {
           name: 'replyCommentRepository',
           internal: ReplyCommentRepository.name,
+        },
+        {
+          name: 'commentRepository',
+          internal: CommentRepository.name,
         },
       ],
     },

@@ -8,6 +8,18 @@ class ThreadRepositoryPostgres extends ThreadRepository {
     this._pool = pool;
     this._idGenerator = idGenerator;
   }
+
+  async checkExistsThreadById(idThread) {
+    const query = {
+      text: 'SELECT id from threads WHERE id = $1',
+      values: [idThread],
+    };
+    const result = await this._pool.query(query);
+    if (result.rowCount < 1) {
+      throw new NotFoundError('Thread tidak ditemukan');
+    }
+  }
+
   async addThread(registerThread) {
     const {owner, title, body} = registerThread;
     const id = `thread-${this._idGenerator()}`;
@@ -19,7 +31,7 @@ class ThreadRepositoryPostgres extends ThreadRepository {
     return new AddedThread({...result.rows[0]});
   }
 
-  async getThreads(idThread) {
+  async getDetailThreadById(idThread) {
     const query = {
       text: `SELECT threads.id, threads.title, threads.body, threads.date, users.username
              FROM threads Left JOIN users
@@ -30,50 +42,7 @@ class ThreadRepositoryPostgres extends ThreadRepository {
     if (!resultThread.rowCount) {
       throw new NotFoundError('Thread tidak ditemukan!');
     }
-    const queryCommentThread = {
-      values: [idThread],
-      text: `SELECT comments.id, comments.date, comments.content,
-              comments.is_delete, users.username
-              FROM comments INNER JOIN users ON comments.user_id = users.id
-              WHERE comments.thread_id = $1 order by comments.date asc`,
-    };
-    const resultCommentThread = await this._pool.query(queryCommentThread);
-
-    // if (resultCommentThread.rowCount) {
-    resultCommentThread.rows = resultCommentThread.rows.map((val, i) => {
-      if (val.is_delete) {
-        val.content = '**komentar telah dihapus**';
-      }
-      delete val.is_delete;
-      return val;
-    });
-    // }
-    resultThread.rows[0].comments = await Promise.all(
-        await this.#getReplies(resultCommentThread.rows),
-    ).then((val)=> val);
     return {...resultThread.rows[0]};
-  }
-
-  async #getReplies(arrayComment) {
-    return arrayComment.map(async (val, i) => {
-      const queryReplyComment = {
-        text: `SELECT reply_comments.id, reply_comments.content, reply_comments.date, users.username, reply_comments.is_delete
-            FROM reply_comments INNER JOIN users ON reply_comments.id_user = users.id
-            WHERE reply_comments.id_comment = $1`,
-        values: [val.id],
-      };
-
-      const replies = await this._pool.query(queryReplyComment);
-      val.resplies = replies.rows;
-      val.resplies.map((val)=>{
-        if (val.is_delete) {
-          val.content = '**komentar telah dihapus**';
-        }
-        delete val.is_delete;
-        return val;
-      });
-      return val;
-    });
   }
 }
 
