@@ -8,6 +8,7 @@ class ReplyRepositoryPostgres extends ReplyCommentRepository {
     this._pool = pool;
     this._idGenerator = idGenerator;
   }
+
   async verifyExistsCommentAndThreadByIds({threadId, commentId}) {
     const query = {
       values: [commentId, threadId],

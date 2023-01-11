@@ -1,0 +1,5 @@
+
+
+describe('DeleteCommentUseCase', ()=> {
+  it('', async ()=>{});
+});

@@ -13,11 +13,21 @@ const ThreadTableTestHelper = {
       text: 'INSERT INTO threads VALUES($1, $2, $3, $4, $5)',
       values: [id, userId, title, body, date],
     };
-    await pool.query(query);
+    const result = await pool.query(query);
+    return result.rows[0];
+  },
+  async findThreadById(id) {
+    const query = {
+      text: 'SELECT * FROM threads WHERE id = $1',
+      values: [id],
+    };
+
+    const result = await pool.query(query);
+    return result.rows;
   },
 
   async cleanTable() {
-    await pool.query('TRUNCATE TABLE threads');
+    await pool.query('DELETE FROM threads');
   },
 };
 

@@ -1,4 +1,3 @@
-
 class AddReply {
   constructor({commentId, owner, content}) {
     if (!content ) {

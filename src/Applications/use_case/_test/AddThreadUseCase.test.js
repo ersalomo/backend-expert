@@ -8,22 +8,21 @@ describe('AddThreadUseCase', () => {
   it('should orchestrating the add thread action correctly', async () => {
     // Arrange
     const useCasePayload = {
-      userId: 1,
+      userId: 'user-1234',
       title: 'New Thread',
-      body: 'new body dude',
+      body: 'New body dude',
       date: (new Date()).toDateString(),
     };
     const expectedAddedThread = new AddedThread({
+      id: 'thread-1234',
       title: useCasePayload.title,
-      body: useCasePayload.body,
+      owner: useCasePayload.userId,
     });
 
     /** creating dependency of use case */
     const mockThreadRepository = new ThreadRepository();
 
     /** mocking needed function */
-    mockThreadRepository.veryfyUserId = jest.fn()
-        .mockImplementation(() => Promise.resolve());
     mockThreadRepository.addThread = jest.fn()
         .mockImplementation(() => Promise.resolve(expectedAddedThread));
 
@@ -37,10 +36,10 @@ describe('AddThreadUseCase', () => {
 
     // Assert
     expect(addedThread).toStrictEqual(expectedAddedThread);
-    expect(mockThreadRepository.veryfyUserId).toBeCalledWith(useCasePayload.userId);
     expect(mockThreadRepository.addThread).toBeCalledWith(new AddThread({
       title: useCasePayload.title,
       body: useCasePayload.body,
+      owner: 'user-1234',
     }),
     );
   });

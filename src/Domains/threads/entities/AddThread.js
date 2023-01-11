@@ -3,8 +3,8 @@ class AddThread {
   constructor({owner, title, body}) {
     this._verifyPayload({owner, title, body});
     this.owner = owner;
-    this.title = title || 'error title';
-    this.body = body || 'errpr boyd';
+    this.title = title;
+    this.body = body;
   }
   _verifyPayload({owner, title, body}) {
     if (!owner || !title || !body) {

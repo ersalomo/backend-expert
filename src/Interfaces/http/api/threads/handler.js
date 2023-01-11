@@ -32,10 +32,6 @@ class ThreadsHandler {
         },
       }).code(200);
     }
-    return h.response({
-      status: 'success',
-      message: 'Data not found',
-    }).code(404);
   }
 }
 

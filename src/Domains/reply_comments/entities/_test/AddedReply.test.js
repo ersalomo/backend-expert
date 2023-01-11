@@ -1,47 +1,43 @@
-const AddReply = require('../AddReply');
+const AddedReply = require('../AddedReply');
 
-describe('an AddReply entities', () => {
+describe('an AddedReply entities', () => {
   it('should throw error when payload did not contain needed property', () => {
     // Arrange
     const payload = {
+      id: 'reply-123',
       content: 'Hai, apa kabar',
-      owner: 'user-123',
     };
 
     // Action and Assert
-    expect(() => new AddReply(payload)).toThrowError(
-        'ADD_REPLY.NOT_CONTAIN_NEEDED_PROPERTY',
-    );
+    expect(() => new AddedReply(payload)).toThrowError('ADDED_REPLY.NOT_CONTAIN_NEEDED_PROPERTY');
   });
 
   it('should throw error when payload did not meet data type specification', () => {
     // Arrange
     const payload = {
-      commentId: ['comment-123'],
-      content: 123,
+      id: 123,
+      content: [],
       owner: 'user-123',
     };
 
     // Action and Assert
-    expect(() => new AddReply(payload)).toThrowError(
-        'ADD_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION',
-    );
+    expect(() => new AddedReply(payload)).toThrowError('ADDED_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION');
   });
 
-  it('should create addReply object correctly', () => {
+  it('should create AddedReply object correctly', () => {
     // Arrange
     const payload = {
-      commentId: 'reply-123',
+      id: 'reply-123',
       content: 'Hai, apa kabar',
       owner: 'user-123',
     };
 
     // Action
-    const {content, commentId, owner} = new AddReply(payload);
+    const {id, content, owner} = new AddedReply(payload);
 
     // Assert
+    expect(id).toEqual(payload.id);
     expect(content).toEqual(payload.content);
-    expect(commentId).toEqual(payload.commentId);
     expect(owner).toEqual(payload.owner);
   });
 });
