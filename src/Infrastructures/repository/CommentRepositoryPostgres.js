@@ -1,6 +1,6 @@
 const CommentRepository = require('../../Domains/comments/CommentRepository');
 const NotFoundError = require('../../Commons/exceptions/NotFoundError');
-const AuthorizationError = require('../../Commons/exceptions/AuthorizationError');
+const ForbiddenError = require('../../Commons/exceptions/ForbiddenError');
 
 
 class CommentRepositoryPostgres extends CommentRepository {
@@ -17,8 +17,8 @@ class CommentRepositoryPostgres extends CommentRepository {
     };
     const result = await this._pool.query(query);
 
-    if (result.rowCount < 1) {
-      throw new NotFoundError('Comment tidak ditemukan');
+    if (!result.rowCount) {
+      throw new NotFoundError('komentar tidak ditemukan');
     }
   }
 
@@ -31,9 +31,8 @@ class CommentRepositoryPostgres extends CommentRepository {
 
     const result = await this._pool.query(query);
     if (!result.rowCount) {
-      throw new AuthorizationError('Anda tidak pemilik comment ini!');
+      throw new ForbiddenError('Anda tidak pemilik comment ini!');
     }
-    return {...result.rows[0]};
   }
 
   async addComment(registerComment) {
@@ -55,8 +54,8 @@ class CommentRepositoryPostgres extends CommentRepository {
               FROM comments INNER JOIN users ON comments.user_id = users.id
               WHERE comments.thread_id = $1 order by comments.date asc`,
     };
-    const resultCommentThread = await this._pool.query(query);
-    return resultCommentThread.rows;
+    const results = await this._pool.query(query);
+    return results.rows;
   }
 }
 module.exports = CommentRepositoryPostgres;

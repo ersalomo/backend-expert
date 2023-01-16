@@ -36,6 +36,7 @@ class UserRepositoryPostgres extends UserRepository {
     }
     return result.rows[0].password;
   }
+
   async getIdByUsername(username) {
     const query = {
       text: 'SELECT id FROM users WHERE username = $1',
@@ -44,7 +45,7 @@ class UserRepositoryPostgres extends UserRepository {
     const result = await this._pool.query(query);
 
     if (!result.rowCount) {
-      throw new NotFoundError('user tidak ditemukan');
+      throw new InvariantError('user tidak ditemukan');
     }
     return result.rows[0].id;
   }

@@ -1,3 +1,7 @@
+const ThreadDetail = require('../../Domains/threads/entities/ThreadDetail');
+const CommentDetail = require('../../Domains/comments/entities/CommentDetail');
+const ReplyDetail = require('../../Domains/reply_comments/entities/ReplyDetail');
+
 class DetailThreadUseCase {
   constructor({threadRepository, commentRepository, replyCommentRepository}) {
     this._threadRepository = threadRepository;
@@ -9,21 +13,18 @@ class DetailThreadUseCase {
     const detailThread = await this._threadRepository.getDetailThreadById(useCasePayload);
     const comments = await this._commentcommentRepository.getCommentsByThreadId(useCasePayload);
     const replies = await this._replyCommentRepository.getRepliesByThreadId(useCasePayload);
-
     detailThread.comments = this._getDetailsCommentReplies(comments, replies);
-    return detailThread;
+    return new ThreadDetail(detailThread);
   }
 
   _getDetailsCommentReplies(comments, replies) {
-    return comments?.map((comment) => {
-      (comment.is_deleted) ? comment.content = '**komentar telah dihapus**' : ''; delete comment.is_deleted;
-      comment.replies = replies?.filter((reply) => reply.id_comment === comment.id)
-          .map((reply)=>{
-            (reply.is_deleted) ? (reply.content = '**komentar telah dihapus**') : '';
-            delete reply.is_deleted; delete reply.id_comment;
-            return reply;
-          });
-      return comment;
+    return comments.map((comment) => {
+      comment.replies =
+              replies?.filter(
+                  (reply) => reply.id_comment === comment.id)
+                  .map(
+                      (reply) => new ReplyDetail(reply));
+      return new CommentDetail(comment);
     });
   }
 }

@@ -1,22 +1,22 @@
 class ReplyCommentRepository {
-  addReplyComment(addReply) {
+  async addReplyComment(addReply) {
     throw new Error('REPLY_COMMENT_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  deleteReplyComment(ids) {
+  async deleteReplyComment(ids) {
     throw new Error('REPLY_COMMENT_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  verifyExistsReplyById(replyId) {
+  async verifyExistsReplyById(replyId) {
     throw new Error('REPLY_COMMENT_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  verifyExistsCommentAndThreadByIds(ids) {
-    throw new Error('REPLY_COMMENT_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-  }
+  // async verifyExistsCommentAndThreadByIds(ids) {
+  //   throw new Error('REPLY_COMMENT_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+  // }
 
-  getRepliesByThreadId(threadId) {
-    throw new Error('REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+  async getRepliesByThreadId(threadId) {
+    throw new Error('REPLY_COMMENT_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 }
 
