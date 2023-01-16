@@ -4,8 +4,8 @@ const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const ForbiddenError = require('../../../Commons/exceptions/ForbiddenError');
 const NotFoundError = require('../../../Commons/exceptions/NotFoundError');
 const AddComment = require('../../../Domains/comments/entities/AddComment');
-const AddedComment = require('../../../Domains/comments/entities/AddedComment');
-const DeleteComment = require('../../../Domains/threads/comment/entities/DeleteComment');
+// const AddedComment = require('../../../Domains/comments/entities/AddedComment');
+const DeleteComment = require('../../../Domains/comments/entities/DeleteComment');
 const pool = require('../../database/postgres/pool');
 const CommentRepositoryPostgres = require('../CommentRepositoryPostgres');
 
@@ -24,13 +24,13 @@ describe('CommentRepositoryPostgres', () => {
     await pool.end();
   });
 
-  describe('verifyCommentExist function', () => {
-    it('should throw NotFoundError when comment is not exist', async () => {
+  describe('verifyExistsCommentById function', () => {
+    it('should throw NotFoundError when comment does\'nt exist', async () => {
     // Arrange
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
       // Action and Assertawait
-      expect(commentRepositoryPostgres.verifyCommentExist('reply-123')).rejects.toThrow(NotFoundError);
+      expect(commentRepositoryPostgres.verifyExistsCommentById('comment-1231')).rejects.toThrow(NotFoundError);
     });
 
     it('should not throw NotFoundError when comment is exist', async () => {
@@ -40,10 +40,8 @@ describe('CommentRepositoryPostgres', () => {
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
       // Action and Assert
-      await expect(commentRepositoryPostgres.verifyCommentExist({
-        threadId: 'thread-123',
-        commentId: 'comment-123',
-      })).resolves.not.toThrowError(NotFoundError);
+      await expect(commentRepositoryPostgres.verifyExistsCommentById('comment-123'),
+      ).resolves.not.toThrowError(NotFoundError);
     });
   });
 
@@ -55,9 +53,9 @@ describe('CommentRepositoryPostgres', () => {
     it('should persist add comment', async () => {
     // Arrange
       const addComment = new AddComment({
+        owner: 'user-123',
         threadId: 'thread-123',
         content: 'Tentang cerita dulu',
-        owner: 'user-123',
       });
 
       const fakeIdGenerator = () => '123'; // stub
@@ -67,13 +65,12 @@ describe('CommentRepositoryPostgres', () => {
       await commentRepositoryPostgres.addComment(addComment);
 
       // Assert
-      const comment = await CommentTableTestHelper.findCommentById(
-          'comment-123');
+      const comment = await CommentTableTestHelper.findCommentById('comment-123');
       expect(comment).toHaveLength(1);
       expect(comment[0]).toHaveProperty('id', 'comment-123');
       expect(comment[0]).toHaveProperty('thread_id', 'thread-123');
       expect(comment[0]).toHaveProperty('content', 'Tentang cerita dulu');
-      expect(comment[0]).toHaveProperty('owner', 'user-123');
+      expect(comment[0]).toHaveProperty('user_id', 'user-123');
       expect(comment[0]).toHaveProperty('is_deleted', false);
       expect(comment[0]).toHaveProperty('date');
     });
@@ -93,7 +90,7 @@ describe('CommentRepositoryPostgres', () => {
       const addedComment = await commentRepositoryPostgres.addComment(addComment);
 
       // Assert
-      expect(addedComment).toStrictEqual(new AddedComment({
+      expect(addedComment).toStrictEqual(({
         id: 'comment-123',
         content: 'Hai, apa kabar',
         owner: 'user-123',
@@ -111,10 +108,7 @@ describe('CommentRepositoryPostgres', () => {
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
       // Action
-      const comments =
-                await commentRepositoryPostgres.getCommentsByThreadId({
-                  threadId: 'thread-123',
-                });
+      const comments = await commentRepositoryPostgres.getCommentsByThreadId('thread-123');
 
       // Assert
       expect(comments).toHaveLength(0);
@@ -127,18 +121,12 @@ describe('CommentRepositoryPostgres', () => {
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
       // Action
-      const comments =
-                await commentRepositoryPostgres.getCommentsByThreadId({
-                  threadId: 'thread-123',
-                });
+      const comments = await commentRepositoryPostgres.getCommentsByThreadId('thread-123');
 
       // Assert
       expect(comments).toHaveLength(1);
       expect(comments[0]).toHaveProperty('id', 'comment-123');
-      expect(comments[0]).toHaveProperty('thread_id', 'thread-123');
-      expect(comments[0]).toHaveProperty(
-          'content',
-          'Tentang cerita dulu');
+      expect(comments[0]).toHaveProperty('content', 'Gak tau kok nanya saya');
       expect(comments[0]).toHaveProperty('username', 'dicoding');
       expect(comments[0]).toHaveProperty('is_deleted', false);
       expect(comments[0]).toHaveProperty('date');
@@ -180,9 +168,7 @@ describe('CommentRepositoryPostgres', () => {
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
       // Action and Assert
-      await expect(
-          commentRepositoryPostgres.deleteCommentById(deleteComment),
-      ).rejects.toThrow(ForbiddenError);
+      await expect(commentRepositoryPostgres.deleteComment(deleteComment)).rejects.toThrow(ForbiddenError);
       const comment = await CommentTableTestHelper.findCommentById(
           'comment-123',
       );

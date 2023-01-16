@@ -33,7 +33,7 @@ describe('an AddedReply entities', () => {
     };
 
     // Action
-    const {id, content, owner} = new AddedReply(payload);
+    const {id, owner, content} = new AddedReply(payload);
 
     // Assert
     expect(id).toEqual(payload.id);

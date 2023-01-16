@@ -4,7 +4,7 @@ describe('an AddedThread entities', () => {
   it('should throw error when payload did not contain needed property', async () => {
     // Arrange
     const payload = {
-      id: 'thread-1234',
+      id: 'thread-123',
       title: 'New Thread',
     };
 

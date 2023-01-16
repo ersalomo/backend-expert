@@ -1,6 +1,7 @@
 const ReplyCommentRepository = require('../../Domains/reply_comments/ReplyCommentRepository');
 const NotFoundError = require('../../Commons/exceptions/NotFoundError');
-const AuthorizationError = require('../../Commons/exceptions/AuthorizationError');
+const AddedReply = require('../../Domains/reply_comments/entities/AddedReply');
+const ForbiddenError = require('../../Commons/exceptions/ForbiddenError');
 
 class ReplyRepositoryPostgres extends ReplyCommentRepository {
   constructor(pool, idGenerator) {
@@ -9,22 +10,22 @@ class ReplyRepositoryPostgres extends ReplyCommentRepository {
     this._idGenerator = idGenerator;
   }
 
-  async verifyExistsCommentAndThreadByIds({threadId, commentId}) {
-    const query = {
-      values: [commentId, threadId],
-      text: `SELECT reply_comments.id FROM reply_comments
-             INNER JOIN comments
-             ON reply_comments.id_comment = $1
-             INNER JOIN threads
-             ON threads.id = comments.thread_id
-             WHERE comments.thread_id = $2`,
-    };
+  // async verifyExistsCommentAndThreadByIds({threadId, commentId}) {
+  //   const query = {
+  //     values: [commentId, threadId],
+  //     text: `SELECT reply_comments.id FROM reply_comments
+  //            INNER JOIN comments
+  //            ON reply_comments.id_comment = $1
+  //            INNER JOIN threads
+  //            ON threads.id = comments.thread_id
+  //            WHERE comments.thread_id = $2`,
+  //   };
 
-    const result = await this._pool.query(query);
-    if (!result.rowCount) {
-      throw new NotFoundError('Comment or Thread tidak ditemukan!');
-    }
-  }
+  //   const result = await this._pool.query(query);
+  //   if (!result.rowCount) {
+  //     throw new NotFoundError('Comment or Thread tidak ditemukan!');
+  //   }
+  // }
 
   async addReplyComment(addReply) {
     const {owner, commentId, content} = addReply;
@@ -35,12 +36,12 @@ class ReplyRepositoryPostgres extends ReplyCommentRepository {
     };
 
     const result = await this._pool.query(query);
-    return {...result.rows[0]};
+    return new AddedReply({...result.rows[0]});
   }
 
   async verifyExistsReplyById(replyId) {
     const query = {
-      text: 'SELECT id from reply_comments where id = $1',
+      text: 'SELECT id FROM reply_comments WHERE id = $1',
       values: [replyId],
     };
     const result = await this._pool.query(query);
@@ -56,7 +57,7 @@ class ReplyRepositoryPostgres extends ReplyCommentRepository {
     };
     const result = await this._pool.query(query);
     if (!result.rowCount) {
-      throw new AuthorizationError('Anda tidak pemilik pesan ini!');
+      throw new ForbiddenError('Anda tidak pemilik pesan ini!');
     }
     return {...result.rows[0]};
   }

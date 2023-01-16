@@ -24,14 +24,12 @@ class ThreadsHandler {
   async getThreads(req, h) {
     const detailThreadUseCase = this._container.getInstance(DetailThreadUseCase.name);
     const detailThread = await detailThreadUseCase.execute(req.params.threadId);
-    if (detailThread) {
-      return h.response({
-        status: 'success',
-        data: {
-          thread: detailThread,
-        },
-      }).code(200);
-    }
+    return h.response({
+      status: 'success',
+      data: {
+        thread: detailThread,
+      },
+    }).code(200);
   }
 }
 

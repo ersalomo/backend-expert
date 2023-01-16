@@ -3,10 +3,10 @@ const pool = require('../src/Infrastructures/database/postgres/pool');
 
 const CommentTableTestHelper = {
   async addComment({
-    id= 'comment-1234',
-    userId= 'user-1234',
-    threadId= 'thread-1234',
-    content= 'new comment',
+    id= 'comment-123',
+    userId= 'user-123',
+    threadId= 'thread-123',
+    content= 'Gak tau kok nanya saya',
   }) {
     const query = {
       text: 'INSERT INTO comments VALUES($1, $2, $3, $4) RETURNING id',
@@ -38,7 +38,7 @@ const CommentTableTestHelper = {
   },
 
   async cleanTable() {
-    await pool.query('DELETE FROM comments');
+    await pool.query('TRUNCATE TABLE comments CASCADE');
   },
 };
 module.exports = CommentTableTestHelper;

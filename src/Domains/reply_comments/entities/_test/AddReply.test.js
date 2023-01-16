@@ -9,9 +9,7 @@ describe('an AddReply entities', () => {
     };
 
     // Action and Assert
-    expect(() => new AddReply(payload)).toThrowError(
-        'ADD_REPLY.NOT_CONTAIN_NEEDED_PROPERTY',
-    );
+    expect(() => new AddReply(payload)).toThrowError('ADD_REPLY.NOT_CONTAIN_NEEDED_PROPERTY');
   });
 
   it('should throw error when payload did not meet data type specification', () => {

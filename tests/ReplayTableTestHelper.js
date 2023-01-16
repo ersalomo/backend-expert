@@ -3,10 +3,10 @@ const pool = require('../src/Infrastructures/database/postgres/pool');
 
 const ReplayTableTestHelper = {
   async addReply({
-    id = 'reply-1234',
-    commentId = 'comment-1234',
+    id = 'reply-123',
+    commentId = 'comment-123',
     content = 'Wow Wok',
-    owner = 'user-1234',
+    owner = 'user-123',
   }) {
     const query = {
       text: 'INSERT INTO reply_comments VALUES($1, $2, $3, $4) RETURNING id',
@@ -38,7 +38,7 @@ const ReplayTableTestHelper = {
   },
 
   async cleanTable() {
-    await pool.query('DELETE FROM reply_comments');
+    await pool.query('TRUNCATE TABLE reply_comments CASCADE');
   },
 };
 
