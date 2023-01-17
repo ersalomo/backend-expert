@@ -12,7 +12,7 @@ const UsersTableTestHelper = {
     await pool.query(query);
   },
 
-  async findUsersById(id) {
+  async findUsersById(id:string) {
     const query = {
       text: 'SELECT * FROM users WHERE id = $1',
       values: [id],

@@ -1,0 +1,1 @@
+{"version":3,"file":"InvariantError.js","sourceRoot":"","sources":["../../../src/commons/exceptions/InvariantError.ts"],"names":[],"mappings":";;;;;AAAA,gEAAwC;AAExC,MAAqB,cAAe,SAAQ,qBAAW;IACrD,YAAmB,OAAc;QAC/B,KAAK,CAAC,OAAO,CAAC,CAAC;QADE,YAAO,GAAP,OAAO,CAAO;QAE/B,IAAI,CAAC,IAAI,GAAG,gBAAgB,CAAC;IAC/B,CAAC;CACF;AALD,iCAKC"}
