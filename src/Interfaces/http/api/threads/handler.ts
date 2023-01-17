@@ -1,18 +1,17 @@
 import {Request, ResponseToolkit} from '@hapi/hapi';
-const AddThreadUseCase = require('../../../../Applications/use_case/AddThreadUseCase');
-const DetailThreadUseCase = require('../../../../Applications/use_case/DetailThreadUseCase');
+import AddThreadUseCase from '../../../../Applications/use_case/AddThreadUseCase';
+import DetailThreadUseCase from '../../../../Applications/use_case/DetailThreadUseCase';
+import {Container} from 'instances-container';
 
 export default class ThreadsHandler {
-  private _container: any;
-  constructor(container:any) {
-    this._container = container;
+  constructor(private _container:Container) {
     this.postThreadHandler = this.postThreadHandler.bind(this);
     this.getThreads = this.getThreads.bind(this);
   }
 
   async postThreadHandler(request: Request, h: ResponseToolkit) {
     // const {id: owner} = request.auth.credentials;
-    const addThreadUseCase = this._container.getInstance(AddThreadUseCase.name);
+    const addThreadUseCase:AddThreadUseCase = this._container.getInstance(AddThreadUseCase.name);
     // request.payload.owner = owner;
     const addedThread = await addThreadUseCase.execute(request.payload);
     const response = h.response({

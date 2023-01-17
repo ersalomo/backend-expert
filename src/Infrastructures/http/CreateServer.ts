@@ -1,14 +1,14 @@
 import {Server, Request, ResponseToolkit} from '@hapi/hapi';
-import {users} from '../../Interfaces/http/api/users';
 import Jwt from '@hapi/jwt';
-import DomainErrorTranslator from '../../Commons/exceptions/DomainErrorTranslator';
+import {DomainErrorTranslator} from '../../Commons/exceptions/DomainErrorTranslator';
 import ClientError from '../../Commons/exceptions/ClientError';
-import authentications from '../../Interfaces/http/api/authentications';
-import threads from '../../Interfaces/http/api/threads';
-import comments from '../../Interfaces/http/api/comments';
-import replies from '../../Interfaces/http/api/reply_comments';
+import {authentications} from '../../Interfaces/http/api/authentications';
+import {users} from '../../Interfaces/http/api/users';
+import {threads} from '../../Interfaces/http/api/threads';
+import {comments} from '../../Interfaces/http/api/comments';
+import {replies} from '../../Interfaces/http/api/reply_comments';
 
-const createServer = async (container:any):Promise<Server> => {
+export const createServer = async (container:any):Promise<Server> => {
   const server:Server = new Server({
     host: process.env.HOST,
     port: process.env.PORT,
@@ -85,5 +85,4 @@ const createServer = async (container:any):Promise<Server> => {
   });
   return server;
 };
-export default createServer;
 

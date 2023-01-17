@@ -1,7 +1,7 @@
 /* istanbul ignore file */
-const pool = require('../src/Infrastructures/database/postgres/pool');
+import {pool} from '../src/Infrastructures/database/postgres/pool';
 
-const UsersTableTestHelper = {
+export const UsersTableTestHelper = {
   async addUser({
     id = 'user-123', username = 'dicoding', password = 'secret', fullname = 'Dicoding Indonesia',
   }) {
@@ -28,4 +28,3 @@ const UsersTableTestHelper = {
 
 };
 
-module.exports = UsersTableTestHelper;
