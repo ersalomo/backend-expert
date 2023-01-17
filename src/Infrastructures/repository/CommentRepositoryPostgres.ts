@@ -1,11 +1,11 @@
 import CommentRepository from '../../Domains/comments/CommentRepository';
-import NotFoundError from '../../Commons/exceptions/NotFoundError';
-import ForbiddenError from '../../Commons/exceptions/ForbiddenError';
+import NotFoundError from '../../commons/exceptions/NotFoundError';
+import ForbiddenError from '../../commons/exceptions/ForbiddenError';
 import AddComment from '../../Domains/comments/entities/AddComment';
 import {Pool} from 'pg';
 
 
-class CommentRepositoryPostgres implements CommentRepository {
+export default class CommentRepositoryPostgres implements CommentRepository {
   constructor(private _pool:Pool, private _idGenerator:any) {}
 
   async verifyExistsCommentById(commentId:string) {
@@ -56,4 +56,3 @@ class CommentRepositoryPostgres implements CommentRepository {
     return results.rows;
   }
 }
-module.exports = CommentRepositoryPostgres;

@@ -4,7 +4,6 @@ export default class ClientError extends Error {
     if (this.constructor.name === 'ClientError') {
       throw new Error('cannot instantiate abstract class');
     }
-
     this.statusCode = statusCode;
     this.name = 'ClientError';
   }

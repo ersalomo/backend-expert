@@ -1,13 +1,13 @@
-export default class RefreshAuthenticationUseCase {
-  constructor({
-    authenticationRepository,
-    authenticationTokenManager,
-  }) {
-    this._authenticationRepository = authenticationRepository;
-    this._authenticationTokenManager = authenticationTokenManager;
-  }
+import AuthenticationRepository from '../../Domains/authentications/AuthenticationRepository'
+import AuthenticationTokenManager from '../security/AuthenticationTokenManager';
 
-  async execute(useCasePayload) {
+export default class RefreshAuthenticationUseCase {
+  constructor(
+      private _authenticationRepository: AuthenticationRepository,
+      private _authenticationTokenManager:AuthenticationTokenManager,
+  ) {}
+
+  async execute(useCasePayload:{refreshToken:string}) {
     this._verifyPayload(useCasePayload);
     const {refreshToken} = useCasePayload;
 

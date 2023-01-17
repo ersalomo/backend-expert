@@ -1,7 +1,9 @@
-class DeleteComment {
-  constructor(payload) {
+export default class DeleteComment {
+  public threadId: string;
+  public commentId: string;
+  public owner: string;
+  constructor(payload:DeletePayload) {
     this._verifyPayload(payload);
-
     const {threadId, commentId, owner} = payload;
 
     this.threadId = threadId;
@@ -9,7 +11,8 @@ class DeleteComment {
     this.owner = owner;
   }
 
-  _verifyPayload({threadId, commentId, owner}) {
+  _verifyPayload(payload:DeletePayload) {
+    const {threadId, commentId, owner} = payload;
     if (!threadId || !commentId || !owner) {
       throw new Error('DELETE_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY');
     }
@@ -19,5 +22,9 @@ class DeleteComment {
     }
   }
 }
+type DeletePayload = {
+  threadId:string
+  commentId:string
+  owner:string
+}
 
-module.exports = DeleteComment;

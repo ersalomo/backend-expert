@@ -1,11 +1,11 @@
 import ReplyCommentRepository from '../../Domains/reply_comments/ReplyCommentRepository';
-import NotFoundError from '../../Commons/exceptions/NotFoundError';
 import AddedReply from '../../Domains/reply_comments/entities/AddedReply';
 import AddReply from '../../Domains/reply_comments/entities/AddReply';
-import ForbiddenError from '../../Commons/exceptions/ForbiddenError';
+import NotFoundError from '../../commons/exceptions/NotFoundError';
+import ForbiddenError from '../../commons/exceptions/ForbiddenError';
 import {Pool} from 'pg';
 
-class ReplyRepositoryPostgres implements ReplyCommentRepository {
+export default class ReplyRepositoryPostgres implements ReplyCommentRepository {
   constructor(private _pool:Pool, private _idGenerator:any) {}
 
   async addReplyComment(addReply:AddReply):Promise<AddedReply> {
@@ -58,4 +58,3 @@ class ReplyRepositoryPostgres implements ReplyCommentRepository {
   }
 }
 
-module.exports = ReplyRepositoryPostgres;

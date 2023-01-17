@@ -1,7 +1,7 @@
 import ThreadRepository from '../../Domains/threads/ThreadRepository';
 import AddedThread from '../../Domains/threads/entities/AddedThread';
 import AddThread from '../../Domains/threads/entities/AddThread';
-import NotFoundError from '../../Commons/exceptions/NotFoundError';
+import NotFoundError from '../../commons/exceptions/NotFoundError';
 import {Pool} from 'pg';
 
 export default class ThreadRepositoryPostgres implements ThreadRepository {

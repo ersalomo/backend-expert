@@ -1,7 +1,6 @@
 /* istanbul ignore file */
-
 import {createContainer} from 'instances-container';
-// import {Container} from 'instances-container';
+import {Container} from 'instances-container';
 // external agency
 import {nanoid} from 'nanoid';
 import bcrypt from 'bcrypt';
@@ -10,33 +9,28 @@ import Jwt from '@hapi/jwt';
 // service (repository, helper, manager, etc)
 import UserRepositoryPostgres from './repository/UserRepositoryPostgres';
 import BcryptPasswordHash from './security/BcryptPasswordHash';
-
-// use case
 import AddUserUseCase from '../Applications/use_case/AddUserUseCase';
-import UserRepository from '../Domains/users/UserRepository';
-import PasswordHash from '../Applications/security/PasswordHash';
-// new add
 import AddThreadUseCase from '../Applications/use_case/AddThreadUseCase';
+import ThreadRepositoryPostgres from './repository/ThreadRepositoryPostgres';
+import DetailThreadUseCase from '../Applications/use_case/DetailThreadUseCase';
+import CommentRepositoryPostgres from './repository/CommentRepositoryPostgres';
+import AddCommentUseCase from '../Applications/use_case/AddCommentUseCase';
+import DeleteCommentUseCase from '../Applications/use_case/DeleteCommentUseCase';
+import DeleteReplyCommentUseCase from '../Applications/use_case/DeleteReplyCommentUseCase';
+import AddReplyCommentUseCase from '../Applications/use_case/AddReplyCommentUseCase';
+import ReplyRepositoryPostgres from '../Infrastructures/repository/ReplyRepositoryPostgres';
+import AuthenticationRepositoryPostgres from '../Infrastructures/repository/AuthenticationRepositoryPostgres';
+import LoginUserUseCase from '../Applications/use_case/LoginUserUseCase';
+import LogoutUserUseCase from '../Applications/use_case/LogoutUserUseCase';
+import RefreshAuthenticationUseCase from '../Applications/use_case/RefreshAuthenticationUseCase';
+import UserRepository from '../Domains/users/UserRepository';
 import ThreadRepository from '../Domains/threads/ThreadRepository';
-import ThreadRepositoryPostgres from'./repository/ThreadRepositoryPostgres';
-import DetailThreadUseCase from'../Applications/use_case/DetailThreadUseCase';
-import CommentRepository from'../Domains/comments/CommentRepository';
-import CommentRepositoryPostgres from'./repository/CommentRepositoryPostgres';
-import AddCommentUseCase from'../Applications/use_case/AddCommentUseCase';
-import DeleteCommentUseCase from'../Applications/use_case/DeleteCommentUseCase';
-import DeleteReplyCommentUseCase from'../Applications/use_case/DeleteReplyCommentUseCase';
-
-import AddReplyCommentUseCase from'../Applications/use_case/AddReplyCommentUseCase';
-import ReplyCommentRepository from'../Domains/reply_comments/ReplyCommentRepository';
-import ReplyRepositoryPostgres from'../Infrastructures/repository/ReplyRepositoryPostgres';
-// auth
-import AuthenticationRepository from'../Domains/authentications/AuthenticationRepository';
-import AuthenticationRepositoryPostgres from'../Infrastructures/repository/AuthenticationRepositoryPostgres';
-import LoginUserUseCase from'../Applications/use_case/LoginUserUseCase';
-import LogoutUserUseCase from'../Applications/use_case/LogoutUserUseCase';
-import RefreshAuthenticationUseCase from'../Applications/use_case/RefreshAuthenticationUseCase';
-import AuthenticationTokenManager from'../Applications/security/AuthenticationTokenManager';
-import JwtTokenManager from'../Infrastructures/security/JwtTokenManager';
+import PasswordHash from '../Applications/security/PasswordHash';
+import CommentRepository from '../Domains/comments/CommentRepository';
+import ReplyCommentRepository from '../Domains/reply_comments/ReplyCommentRepository';
+import AuthenticationRepository from '../Domains/authentications/AuthenticationRepository';
+import AuthenticationTokenManager from '../Applications/security/AuthenticationTokenManager';
+import JwtTokenManager from '../Infrastructures/security/JwtTokenManager';
 // creating container
 export const container = createContainer();
 

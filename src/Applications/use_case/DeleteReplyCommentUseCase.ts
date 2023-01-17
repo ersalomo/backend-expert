@@ -1,9 +1,11 @@
+import ReplyRepositoryPostgres from '../../Domains/reply_comments/ReplyCommentRepository';
+import CommentRepository from '../../Domains/comments/CommentRepository';
 
 export default class DeleteReplyCommentUseCase {
-  constructor({replyCommentRepository, commentRepository}) {
-    this._replyCommentRepository = replyCommentRepository;
-    this._commentRepository = commentRepository;
-  }
+  constructor(
+    private _replyCommentRepository: ReplyRepositoryPostgres,
+    private _commentRepository: CommentRepository,
+  ) {}
 
   async execute(useCasePayload) {
     const {threadId, commentId, owner, replyId} = useCasePayload;
@@ -13,5 +15,3 @@ export default class DeleteReplyCommentUseCase {
     return this._replyCommentRepository.deleteReplyComment({replyId, owner});
   }
 }
-
-

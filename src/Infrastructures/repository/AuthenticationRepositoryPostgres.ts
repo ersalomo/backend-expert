@@ -1,8 +1,8 @@
-import InvariantError from '../../Commons/exceptions/InvariantError';
+import InvariantError from '../../commons/exceptions/InvariantError';
 import AuthenticationRepository from '../../Domains/authentications/AuthenticationRepository';
 import {Pool} from 'pg';
 
-class AuthenticationRepositoryPostgres implements AuthenticationRepository {
+export default class AuthenticationRepositoryPostgres implements AuthenticationRepository {
   constructor(private _pool:Pool) {}
 
   async addToken(token:string) {
@@ -37,4 +37,3 @@ class AuthenticationRepositoryPostgres implements AuthenticationRepository {
   }
 }
 
-module.exports = AuthenticationRepositoryPostgres;

@@ -1,10 +1,10 @@
-import InvariantError from '../../Commons/exceptions/InvariantError';
+import InvariantError from '../../commons/exceptions/InvariantError';
 import RegisteredUser from '../../Domains/users/entities/RegisteredUser';
 import RegisterUser from '../../Domains/users/entities/RegisterUser';
 import UserRepository from '../../Domains/users/UserRepository';
 import {Pool} from 'pg';
 
-class UserRepositoryPostgres implements UserRepository {
+export default class UserRepositoryPostgres implements UserRepository {
   constructor(private _pool:Pool, private _idGenerator:any) {}
 
   async verifyAvailableUsername(username:string) {
@@ -62,4 +62,3 @@ class UserRepositoryPostgres implements UserRepository {
   }
 }
 
-module.exports = UserRepositoryPostgres;

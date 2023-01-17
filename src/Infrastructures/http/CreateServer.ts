@@ -1,14 +1,15 @@
 import {Server, Request, ResponseToolkit} from '@hapi/hapi';
+import {Container} from 'instances-container';
 import Jwt from '@hapi/jwt';
 import {DomainErrorTranslator} from '../../Commons/exceptions/DomainErrorTranslator';
-import ClientError from '../../Commons/exceptions/ClientError';
+import ClientError from '../../commons/exceptions/ClientError';
 import {authentications} from '../../Interfaces/http/api/authentications';
 import {users} from '../../Interfaces/http/api/users';
 import {threads} from '../../Interfaces/http/api/threads';
 import {comments} from '../../Interfaces/http/api/comments';
 import {replies} from '../../Interfaces/http/api/reply_comments';
 
-export const createServer = async (container:any):Promise<Server> => {
+export const createServer = async (container:Container):Promise<Server> => {
   const server:Server = new Server({
     host: process.env.HOST,
     port: process.env.PORT,
