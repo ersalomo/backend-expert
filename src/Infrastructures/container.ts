@@ -23,6 +23,7 @@ import AuthenticationRepositoryPostgres from '../Infrastructures/repository/Auth
 import LoginUserUseCase from '../Applications/use_case/LoginUserUseCase';
 import LogoutUserUseCase from '../Applications/use_case/LogoutUserUseCase';
 import RefreshAuthenticationUseCase from '../Applications/use_case/RefreshAuthenticationUseCase';
+import JwtTokenManager from '../Infrastructures/security/JwtTokenManager';
 import UserRepository from '../Domains/users/UserRepository';
 import ThreadRepository from '../Domains/threads/ThreadRepository';
 import PasswordHash from '../Applications/security/PasswordHash';
@@ -30,7 +31,6 @@ import CommentRepository from '../Domains/comments/CommentRepository';
 import ReplyCommentRepository from '../Domains/reply_comments/ReplyCommentRepository';
 import AuthenticationRepository from '../Domains/authentications/AuthenticationRepository';
 import AuthenticationTokenManager from '../Applications/security/AuthenticationTokenManager';
-import JwtTokenManager from '../Infrastructures/security/JwtTokenManager';
 // creating container
 export const container = createContainer();
 
