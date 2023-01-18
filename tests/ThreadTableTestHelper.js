@@ -7,11 +7,11 @@ const ThreadTableTestHelper = {
     userId= 'user-123',
     title= 'New Thread',
     body= 'New body',
-    date= (new Date()).toISOString(),
+    // date= ('"2021-08-08T00:19:09.775Z"'),
   }) {
     const query = {
-      text: 'INSERT INTO threads VALUES($1, $2, $3, $4, $5)',
-      values: [id, userId, title, body, date],
+      text: 'INSERT INTO threads VALUES($1, $2, $3, $4)',
+      values: [id, userId, title, body],
     };
     const result = await pool.query(query);
     return result.rows[0];

@@ -1,4 +1,3 @@
-const DeleteComment = require('../../../Domains/comments/entities/DeleteComment');
 const CommentRepository = require('../../../Domains/comments/CommentRepository');
 const ThreadRepository = require('../../../Domains/threads/ThreadRepository');
 const DeleteCommentUseCase = require('../DeleteCommentUseCase');
@@ -47,14 +46,8 @@ describe('DeleteCommentUseCase', () => {
         useCasePayload.commentId,
     );
     expect(mockCommentRepository.deleteComment).toBeCalledWith({
-      // threadId: 'thread-123',
       commentId: 'comment-123',
       owner: 'user-123',
     });
-    // expect(mockCommentRepository.deleteComment).toBeCalledWith(new DeleteComment({
-    //   threadId: 'thread-123',
-    //   commentId: 'comment-123',
-    //   owner: 'user-123',
-    // }));
   });
 });

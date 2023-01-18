@@ -65,6 +65,9 @@ describe('DetailThreadUseCase', () => {
     // const mockLikeRepository = new LikeRepository();
 
     /** mocking needed function */
+    mockThreadRepository.checkExistsThreadById = jest.fn(() =>
+      Promise.resolve(),
+    );
     mockThreadRepository.getDetailThreadById = jest.fn(() =>
       Promise.resolve({
         id: 'thread-123',
@@ -73,9 +76,6 @@ describe('DetailThreadUseCase', () => {
         date: new Date('2021-08-08T07:19:09.775Z'),
         username: 'dicoding',
       }),
-    );
-    mockThreadRepository.checkExistsThreadById = jest.fn(() =>
-      Promise.resolve(),
     );
 
     mockCommentRepository.getCommentsByThreadId = jest.fn(() =>

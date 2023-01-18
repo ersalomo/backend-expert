@@ -4,7 +4,7 @@ const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const ForbiddenError = require('../../../Commons/exceptions/ForbiddenError');
 const NotFoundError = require('../../../Commons/exceptions/NotFoundError');
 const AddComment = require('../../../Domains/comments/entities/AddComment');
-// const AddedComment = require('../../../Domains/comments/entities/AddedComment');
+const AddedComment = require('../../../Domains/comments/entities/AddedComment');
 const DeleteComment = require('../../../Domains/comments/entities/DeleteComment');
 const pool = require('../../database/postgres/pool');
 const CommentRepositoryPostgres = require('../CommentRepositoryPostgres');
@@ -72,7 +72,7 @@ describe('CommentRepositoryPostgres', () => {
       expect(comment[0]).toHaveProperty('content', 'Tentang cerita dulu');
       expect(comment[0]).toHaveProperty('user_id', 'user-123');
       expect(comment[0]).toHaveProperty('is_deleted', false);
-      expect(comment[0]).toHaveProperty('date');
+      expect(comment[0].date).toBeDefined();
     });
 
     it('should return added comment correctly', async () => {
@@ -90,7 +90,7 @@ describe('CommentRepositoryPostgres', () => {
       const addedComment = await commentRepositoryPostgres.addComment(addComment);
 
       // Assert
-      expect(addedComment).toStrictEqual(({
+      expect(addedComment).toStrictEqual(new AddedComment({
         id: 'comment-123',
         content: 'Hai, apa kabar',
         owner: 'user-123',
@@ -129,7 +129,7 @@ describe('CommentRepositoryPostgres', () => {
       expect(comments[0]).toHaveProperty('content', 'Gak tau kok nanya saya');
       expect(comments[0]).toHaveProperty('username', 'dicoding');
       expect(comments[0]).toHaveProperty('is_deleted', false);
-      expect(comments[0]).toHaveProperty('date');
+      expect(comments[0].date).toBeDefined();
     });
   });
 

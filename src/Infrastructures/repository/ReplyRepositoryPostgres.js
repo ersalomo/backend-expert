@@ -31,7 +31,7 @@ class ReplyRepositoryPostgres extends ReplyCommentRepository {
     const {owner, commentId, content} = addReply;
     const id = `reply-${this._idGenerator()}`;
     const query = {
-      text: 'INSERT INTO reply_comments VALUES($1, $2, $3, $4) RETURNING id, content, id_user as owner',
+      text: 'INSERT INTO reply_comments(id, id_comment, id_user, content) VALUES($1, $2, $3, $4) RETURNING id, content, id_user as owner',
       values: [id, commentId, owner, content],
     };
 
@@ -52,7 +52,7 @@ class ReplyRepositoryPostgres extends ReplyCommentRepository {
 
   async deleteReplyComment({replyId, owner}) {
     const query = {
-      text: 'UPDATE reply_comments SET is_deleted = TRUE where id = $1 AND id_user = $2',
+      text: 'UPDATE reply_comments SET is_deleted = TRUE WHERE id = $1 AND id_user = $2',
       values: [replyId, owner],
     };
     const result = await this._pool.query(query);

@@ -10,6 +10,7 @@ class DetailThreadUseCase {
   }
 
   async execute(useCasePayload) {
+    await this._threadRepository.checkExistsThreadById(useCasePayload);
     const detailThread = await this._threadRepository.getDetailThreadById(useCasePayload);
     const comments = await this._commentcommentRepository.getCommentsByThreadId(useCasePayload);
     const replies = await this._replyCommentRepository.getRepliesByThreadId(useCasePayload);
