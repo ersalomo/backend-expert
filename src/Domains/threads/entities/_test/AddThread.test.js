@@ -5,8 +5,6 @@ describe('an AddThread entities', () => {
   // Arrange
     const payload = {
       owner: '',
-      title: '',
-      body: '',
     };
     // Action and Assert
     expect(() => new AddThread(payload).toThrowError('ADD_THREAD.NOT_CONTAIN_NEEDED_PROPERTY'));

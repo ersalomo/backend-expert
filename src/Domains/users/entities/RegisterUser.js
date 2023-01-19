@@ -12,8 +12,8 @@ class RegisterUser {
       throw new Error('REGISTER_USER.USERNAME_LIMIT_CHAR');
     }
 
-    // menggunakan /^[\w]+$/ (cara cepat untuk pola a-zA-Z1-9_).
-    if (!username.match(/^[a-zA-Z1-9_]+$/)) {
+    // menggunakan /^[\w]+$/  (cara cepat untuk pola a-zA-Z1-9_). // #/^[a-zA-Z1-9_]+$/
+    if (!username.match(/^[\w]+$/)) {
       throw new Error('REGISTER_USER.USERNAME_CONTAIN_RESTRICTED_CHARACTER');
     }
 

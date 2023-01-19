@@ -16,7 +16,7 @@ class ThreadRepositoryPostgres extends ThreadRepository {
     };
     const result = await this._pool.query(query);
     if (result.rowCount < 1) {
-      throw new NotFoundError('Thread tidak ditemukan');
+      throw new NotFoundError('Thread tidak ditemukan!');
     }
   }
 
@@ -24,7 +24,7 @@ class ThreadRepositoryPostgres extends ThreadRepository {
     const {owner, title, body} = registerThread;
     const id = `thread-${this._idGenerator()}`;
     const query = {
-      text: 'INSERT INTO threads VALUES($1, $2, $3, $4) RETURNING id, title, user_id as owner',
+      text: 'INSERT INTO threads(id, user_id, title, body) VALUES($1, $2, $3, $4) RETURNING id, title, user_id as owner',
       values: [id, owner, title, body],
     };
     const result = await this._pool.query(query);
@@ -42,7 +42,7 @@ class ThreadRepositoryPostgres extends ThreadRepository {
     if (!resultThread.rowCount) {
       throw new NotFoundError('Thread tidak ditemukan!');
     }
-    return {...resultThread.rows[0]};
+    return ({...resultThread.rows[0]});
   }
 }
 

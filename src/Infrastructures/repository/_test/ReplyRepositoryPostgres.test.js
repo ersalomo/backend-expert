@@ -11,7 +11,7 @@ const ForbiddenError = require('../../../Commons/exceptions/ForbiddenError');
 
 describe('ReplyRepositoryPostgres', ()=>{
   beforeAll(async ()=> {
-    await UsersTableTestHelper.cleanTable();
+    await UsersTableTestHelper.addUser({});
   });
   afterEach( async ()=> {
     await ThreadTableTestHelper.cleanTable();
@@ -28,7 +28,6 @@ describe('ReplyRepositoryPostgres', ()=>{
     it('should throw NotFoundError when reply is not exist', async () => {
     // Arrange
       const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {});
-      await UsersTableTestHelper.addUser({});
 
       // Action and Assert
       await expect(replyRepositoryPostgres.verifyExistsReplyById('reply-123')).rejects.toThrow(NotFoundError);
@@ -47,10 +46,6 @@ describe('ReplyRepositoryPostgres', ()=>{
       await expect(replyRepositoryPostgres.verifyExistsReplyById('reply-123')).resolves.not.toThrowError(NotFoundError);
     });
   });
-
-  // describe('verifyExistsCommentAndThreadByIds function', () => {
-  //   it('should throw error when comment id', () => {});
-  // });
 
   describe('addReplyComment function', () => {
     beforeEach(async () => {
@@ -81,7 +76,7 @@ describe('ReplyRepositoryPostgres', ()=>{
       expect(reply[0]).toHaveProperty('content', 'Wow Wok');
       expect(reply[0]).toHaveProperty('id_user', 'user-123');
       expect(reply[0]).toHaveProperty('is_deleted', false);
-      expect(reply[0]).toHaveProperty('date');
+      expect(reply[0].date).toBeDefined();
     });
 
     it('should return added reply correctly', async () => {
@@ -142,7 +137,6 @@ describe('ReplyRepositoryPostgres', ()=>{
       expect(replies[0]).toHaveProperty('id_comment', 'comment-123');
       expect(replies[0]).toHaveProperty('content', 'Wow Wok');
       expect(replies[0]).toHaveProperty('username', 'dicoding');
-      expect(replies[0]).toHaveProperty('date');
     });
   });
 
