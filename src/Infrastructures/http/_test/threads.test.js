@@ -41,7 +41,7 @@ describe('/threads endpoint', ()=> {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
-      expect(responseJson.message).toEqual('tidak dapat membuat comment baru karena properti yang dibutuhkan tidak ada');
+      expect(responseJson.message).toEqual('tidak dapat membuat thread baru karena properti yang dibutuhkan tidak ada');
     });
 
     it('should response 400 when request payload not meet data type specification', async () => {
@@ -66,7 +66,7 @@ describe('/threads endpoint', ()=> {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
-      expect(responseJson.message).toEqual('tidak dapat membuat comment baru karena tipe data tidak sesuai');
+      expect(responseJson.message).toEqual('tidak dapat membuat thread baru karena tipe data tidak sesuai');
     });
 
     it('should response 401 when acess token not given', async () => {
@@ -135,12 +135,12 @@ describe('/threads endpoint', ()=> {
     it('should response 200 and persisted thread detail without comment', async () => {
       // Arrange
       await UsersTableTestHelper.addUser({});
-      await ThreadTableTestHelper.addThread({});
+      const {id: threadId} = await ThreadTableTestHelper.addThread({});
       // Action
       const server = await createServer(container);
       const response = await server.inject({
         method: 'GET',
-        url: '/threads/thread-123',
+        url: '/threads/'+threadId,
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -160,13 +160,13 @@ describe('/threads endpoint', ()=> {
     it('should response 200 and persisted thread detail without replies', async () => {
       // Arrange
       await UsersTableTestHelper.addUser({});
-      await ThreadTableTestHelper.addThread({});
+      const {id: threadId} = await ThreadTableTestHelper.addThread({});
       await CommentTableTestHelper.addComment({});
       // Action
       const server = await createServer(container);
       const response = await server.inject({
         method: 'GET',
-        url: '/threads/thread-123',
+        url: '/threads/'+threadId,
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -191,18 +191,19 @@ describe('/threads endpoint', ()=> {
     it('should response 200 and persisted thread detail', async () => {
       // Arrange
       await UsersTableTestHelper.addUser({});
-      await ThreadTableTestHelper.addThread({});
+      const {id: threadId} = await ThreadTableTestHelper.addThread({});
       await CommentTableTestHelper.addComment({});
       await ReplayTableTestHelper.addReply({});
       // Action
       const server = await createServer(container);
       const response = await server.inject({
         method: 'GET',
-        url: '/threads/thread-123',
+        url: '/threads/'+threadId,
       });
 
       const responseJson = JSON.parse(response.payload);
       // Assert
+
       expect(response.statusCode).toEqual(200);
       expect(responseJson.status).toEqual('success');
       expect(responseJson.data.thread).toBeDefined();

@@ -19,7 +19,7 @@ class DetailThreadUseCase {
   }
 
   _getDetailsCommentReplies(comments, replies) {
-    return comments.map((comment) => {
+    return comments?.map((comment) => {
       comment.replies =
               replies?.filter(
                   (reply) => reply.id_comment === comment.id)

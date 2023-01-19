@@ -123,7 +123,7 @@ describe('ReplyRepositoryPostgres', ()=>{
 
     it('should return replies correctly', async () => {
     // Arrange
-      await ReplayTableTestHelper.addReply({});
+      const {date} = await ReplayTableTestHelper.addReply({});
 
       const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {});
 
@@ -137,6 +137,7 @@ describe('ReplyRepositoryPostgres', ()=>{
       expect(replies[0]).toHaveProperty('id_comment', 'comment-123');
       expect(replies[0]).toHaveProperty('content', 'Wow Wok');
       expect(replies[0]).toHaveProperty('username', 'dicoding');
+      expect(replies[0]).toHaveProperty('date', date);
     });
   });
 

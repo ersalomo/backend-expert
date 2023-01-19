@@ -9,11 +9,11 @@ const CommentTableTestHelper = {
     content= 'Gak tau kok nanya saya',
   }) {
     const query = {
-      text: 'INSERT INTO comments VALUES($1, $2, $3, $4) RETURNING id',
+      text: 'INSERT INTO comments VALUES($1, $2, $3, $4) RETURNING id, date',
       values: [id, userId, threadId, content],
     };
     const result = await pool.query(query);
-    return result.rows[0].id;
+    return result.rows[0];
   },
   async deleteComment({
     id = 'comment-123',
