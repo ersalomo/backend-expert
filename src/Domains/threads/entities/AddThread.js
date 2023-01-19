@@ -1,6 +1,7 @@
 
 class AddThread {
-  constructor({owner, title, body}) {
+  constructor(payload) {
+    const {owner, title, body} = payload;
     this._verifyPayload({owner, title, body});
     this.owner = owner;
     this.title = title;

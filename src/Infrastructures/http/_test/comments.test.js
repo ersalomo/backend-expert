@@ -21,7 +21,7 @@ describe('/comments endpoint', () => {
         content: '',
       };
       const accessToken = await ServerTestHelper.getAccessToken();
-      const threadId = await ThreadTableTestHelper.addThread({});
+      const {id: threadId} = await ThreadTableTestHelper.addThread({});
       const server = await createServer(container);
       // Action
       const response = await server.inject({
@@ -46,7 +46,7 @@ describe('/comments endpoint', () => {
         content: {},
       };
       const accessToken = await ServerTestHelper.getAccessToken();
-      const threadId = await ThreadTableTestHelper.addThread({});
+      const {id: threadId} = await ThreadTableTestHelper.addThread({});
       const server = await createServer(container);
       // Action
       const response = await server.inject({
@@ -116,12 +116,12 @@ describe('/comments endpoint', () => {
         content: 'Wow bos',
       };
       const acessToken = await ServerTestHelper.getAccessToken();
-      await ThreadTableTestHelper.addThread({});
+      const {id: threadId} = await ThreadTableTestHelper.addThread({});
       const server = await createServer(container);
       // Action
       const response = await server.inject({
         method: 'POST',
-        url: `/threads/thread-123/comments`,
+        url: `/threads/${threadId}/comments`,
         payload: reqPayload,
         headers: {
           Authorization: 'Bearer '+ acessToken,
@@ -143,15 +143,15 @@ describe('/comments endpoint', () => {
       // Arrange
       const accessToken = await ServerTestHelper.getAccessToken();
       //   const threadId = await ThreadTableTestHelper.addThread({});
-      await ThreadTableTestHelper.addThread({});
-      const commentId = await CommentTableTestHelper.addComment({});
+      const {id: threadId} = await ThreadTableTestHelper.addThread({});
+      const {id: commentId} = await CommentTableTestHelper.addComment({});
 
       const server = await createServer(container);
 
       // Action
       const response = await server.inject({
         method: 'DELETE',
-        url: `/threads/thread-123/comments/${commentId}`,
+        url: `/threads/${threadId}/comments/${commentId}`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -166,7 +166,7 @@ describe('/comments endpoint', () => {
     it('should response 404 when comment is not exist', async () => {
       // Arrange
       const accessToken = await ServerTestHelper.getAccessToken();
-      await ThreadTableTestHelper.addThread({});
+      const {id: threadId} = await ThreadTableTestHelper.addThread({});
 
       const server = await createServer(container);
 
@@ -174,7 +174,7 @@ describe('/comments endpoint', () => {
 
       const response = await server.inject({
         method: 'DELETE',
-        url: `/threads/thread-123/comments/comment-123`,
+        url: `/threads/${threadId}/comments/comment-123`,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

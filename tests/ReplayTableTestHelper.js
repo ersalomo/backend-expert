@@ -9,11 +9,11 @@ const ReplayTableTestHelper = {
     owner = 'user-123',
   }) {
     const query = {
-      text: 'INSERT INTO reply_comments VALUES($1, $2, $3, $4) RETURNING id',
+      text: 'INSERT INTO reply_comments VALUES($1, $2, $3, $4) RETURNING id, date',
       values: [id, commentId, owner, content],
     };
     const result = await pool.query(query);
-    return result.rows[0].id;
+    return result.rows[0];
   },
   async deleteReply({
     id = 'reply-123',

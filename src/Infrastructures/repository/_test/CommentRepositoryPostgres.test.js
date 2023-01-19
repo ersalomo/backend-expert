@@ -72,7 +72,6 @@ describe('CommentRepositoryPostgres', () => {
       expect(comment[0]).toHaveProperty('content', 'Tentang cerita dulu');
       expect(comment[0]).toHaveProperty('user_id', 'user-123');
       expect(comment[0]).toHaveProperty('is_deleted', false);
-      expect(comment[0].date).toBeDefined();
     });
 
     it('should return added comment correctly', async () => {
@@ -116,7 +115,7 @@ describe('CommentRepositoryPostgres', () => {
 
     it('should return comments correctly', async () => {
     // Arrange
-      await CommentTableTestHelper.addComment({});
+      const {date} = await CommentTableTestHelper.addComment({});
 
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
@@ -129,7 +128,7 @@ describe('CommentRepositoryPostgres', () => {
       expect(comments[0]).toHaveProperty('content', 'Gak tau kok nanya saya');
       expect(comments[0]).toHaveProperty('username', 'dicoding');
       expect(comments[0]).toHaveProperty('is_deleted', false);
-      expect(comments[0].date).toBeDefined();
+      expect(comments[0]).toHaveProperty('date', date);
     });
   });
 

@@ -114,20 +114,21 @@ describe('ThreadRepositoryPostgres', ()=>{
 
     it('should return thread details correctly', async () => {
       // Arrange
-      await ThreadTableTestHelper.addThread({});
+      const {date} = await ThreadTableTestHelper.addThread({});
 
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(
           pool, {});
 
       // Action
       const threadDetails = await threadRepositoryPostgres.getDetailThreadById('thread-123');
-
       // Assert
-      expect(threadDetails).toHaveProperty('id', 'thread-123');
-      expect(threadDetails).toHaveProperty('title', 'New Thread');
-      expect(threadDetails).toHaveProperty('body', 'New body');
-      expect(threadDetails).toHaveProperty('username', 'dicoding');
-      // expect(threadDetails).toHaveProperty('date', '2021-08-08T00:19:09.775Z');
+      expect(threadDetails).toStrictEqual(({
+        id: 'thread-123',
+        title: 'New Thread',
+        body: 'New body',
+        username: 'dicoding',
+        date: date,
+      }));
     });
   });
 });
