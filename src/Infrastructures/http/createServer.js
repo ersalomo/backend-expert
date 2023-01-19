@@ -67,7 +67,7 @@ const createServer = async (container) => {
     const {response} = req;
 
     if (response instanceof Error) {
-      // console.log(response);
+      console.log(response);
       const translatedError = DomainErrorTranslator.translate(response);
 
       if (translatedError instanceof ClientError) {
