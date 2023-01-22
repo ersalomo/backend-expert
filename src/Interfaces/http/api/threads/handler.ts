@@ -2,6 +2,7 @@ import {Request, ResponseToolkit} from '@hapi/hapi';
 import AddThreadUseCase from '../../../../Applications/use_case/AddThreadUseCase';
 import DetailThreadUseCase from '../../../../Applications/use_case/DetailThreadUseCase';
 import {Container} from 'instances-container';
+// import AddThread from '../../../../Domains/threads/entities/AddThread';
 
 export default class ThreadsHandler {
   constructor(private _container:Container) {

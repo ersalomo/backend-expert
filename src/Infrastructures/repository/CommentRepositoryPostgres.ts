@@ -1,6 +1,6 @@
 import CommentRepository from '../../Domains/comments/CommentRepository';
-import NotFoundError from '../../commons/exceptions/NotFoundError';
-import ForbiddenError from '../../commons/exceptions/ForbiddenError';
+import NotFoundError from '../../Commons/exceptions/NotFoundError';
+import ForbiddenError from '../../Commons/exceptions/ForbiddenError';
 import AddComment from '../../Domains/comments/entities/AddComment';
 import {Pool} from 'pg';
 

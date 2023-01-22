@@ -1,6 +1,6 @@
 import AuthenticationRepository from '../../Domains/authentications/AuthenticationRepository';
 
-class DeleteAuthenticationUseCase {
+export default class DeleteAuthenticationUseCase {
   constructor(
     private _authenticationRepository: AuthenticationRepository,
   ) {}
@@ -24,4 +24,3 @@ class DeleteAuthenticationUseCase {
   }
 }
 
-module.exports = DeleteAuthenticationUseCase;

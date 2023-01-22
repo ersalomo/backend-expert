@@ -1,4 +1,4 @@
-export default interface PasswordHash {
-  hash(password:string):any
-  comparePassword(password:string, hashedPassword:string):Promise<boolean>
+export default abstract class PasswordHash {
+  abstract hash(password:string):Promise<string>;
+  abstract comparePassword(password:string, hashedPassword:string):Promise<void>;
 }

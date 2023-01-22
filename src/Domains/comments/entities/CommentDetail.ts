@@ -1,9 +1,12 @@
 export default class CommentDetail {
-  constructor(payload) {
+  public id
+  public content
+  public date
+  public username
+  public replies
+  constructor(payload:any) {
     this._verifyPayload(payload);
-
     const {id, content, date, username, is_deleted: isDeleted, replies} = payload;
-
     this.id = id;
     this.content = isDeleted ? '**komentar telah dihapus**' : content;
     this.date = date;
@@ -11,13 +14,14 @@ export default class CommentDetail {
     this.replies = replies;
   }
 
-  _verifyPayload({
-    id,
-    content,
-    date,
-    username,
-    is_deleted: isDeleted,
-    replies}) {
+  _verifyPayload(payload:any) {
+    const {
+      id,
+      content,
+      date,
+      username,
+      is_deleted: isDeleted,
+      replies} = payload;
     if (!id ||
             !content ||
             !date ||

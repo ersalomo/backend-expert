@@ -1,7 +1,7 @@
 export default class NewAuth {
-  public accessToken?: string
-  public refreshToken?: string
-  constructor(payload: {accessToken?:string, refreshToken?:string}) {
+  public accessToken: string
+  public refreshToken: string
+  constructor(payload: {accessToken:string, refreshToken:string}) {
     this._verifyPayload(payload);
     this.accessToken = payload.accessToken;
     this.refreshToken = payload.refreshToken;

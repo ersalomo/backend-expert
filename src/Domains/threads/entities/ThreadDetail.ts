@@ -1,5 +1,11 @@
 export default class ThreadDetail {
-  constructor(payload) {
+  public id: string;
+  public title: string;
+  public body: string;
+  public date: Date;
+  public username:string;
+  public comments:any
+  constructor(payload:any) {
     this._verifyPayload(payload);
     const {id, title, body, date, username, comments} = payload;
     this.id = id;
@@ -10,7 +16,8 @@ export default class ThreadDetail {
     this.comments = comments;
   }
 
-  _verifyPayload({id, title, body, date, username, comments}) {
+  _verifyPayload(payload:any) {
+    const {id, title, body, date, username, comments} = payload;
     if (!id || !title || !body || !date || !username || !comments) {
       throw new Error('THREAD_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY');
     }

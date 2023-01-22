@@ -1,9 +1,9 @@
 import RegisterUser from './entities/RegisterUser';
+import RegisteredUser from './entities/RegisteredUser';
 
-export default interface UserRepository {
- addUser(registerUser:RegisterUser):any
- verifyAvailableUsername(username:string):any
- getIdByUsername(username:string):any
- getPasswordByUsername(username:string):any
-    // throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+export default abstract class UserRepository {
+  abstract addUser(registerUser: RegisterUser): Promise<RegisteredUser>;
+  abstract verifyAvailableUsername(username:string):Promise<void>;
+  abstract getIdByUsername(username:string):Promise<{}>
+  abstract getPasswordByUsername(username:string):Promise<string>
 }

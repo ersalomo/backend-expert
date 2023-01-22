@@ -1,11 +1,10 @@
 /* istanbul ignore file */
 import {createContainer} from 'instances-container';
-import {Container} from 'instances-container';
 // external agency
 import {nanoid} from 'nanoid';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import {pool} from './database/postgres/pool';
-import Jwt from '@hapi/jwt';
+import * as Jwt from '@hapi/jwt';
 // service (repository, helper, manager, etc)
 import UserRepositoryPostgres from './repository/UserRepositoryPostgres';
 import BcryptPasswordHash from './security/BcryptPasswordHash';
@@ -33,7 +32,6 @@ import AuthenticationRepository from '../Domains/authentications/AuthenticationR
 import AuthenticationTokenManager from '../Applications/security/AuthenticationTokenManager';
 // creating container
 export const container = createContainer();
-
 // registering services and repository
 container.register([
   {

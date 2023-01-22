@@ -16,7 +16,8 @@ export default class CommentHandler {
     const comment = {
       owner: owner,
       threadId: req.params.threadId,
-      content: req.payload.content,
+      // content: req.payload.content,
+      content: 'siap',
     };
     const addedComment = await addCommentUseCase.execute(comment);
 

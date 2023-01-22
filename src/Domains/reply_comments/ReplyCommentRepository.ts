@@ -1,12 +1,6 @@
-import AddedReply from './entities/AddedReply'
-import AddReply from './entities/AddReply'
-
-export default interface ReplyCommentRepository {
-  addReplyComment(addReply:AddReply):Promise<AddedReply>
-  deleteReplyComment(ids:{replyId:string, owner:string}):any
-  verifyExistsReplyById(replyId:string):any
-  getRepliesByThreadId(threadId:string):any
+export default abstract class ReplyCommentRepository {
+  abstract addReplyComment(addReply:object):Promise<any>
+  abstract deleteReplyComment(ids:{replyId:string, owner:string}):Promise<void>
+  abstract verifyExistsReplyById(replyId:string):Promise<void>
+  abstract getRepliesByThreadId(threadId:string):Promise<Array<{}>>
 }
-// async verifyExistsCommentAndThreadByIds(ids) {
-//   throw new Error('REPLY_COMMENT_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-// }

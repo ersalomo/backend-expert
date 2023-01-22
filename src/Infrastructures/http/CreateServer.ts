@@ -1,8 +1,8 @@
-import {Server, Request, ResponseToolkit} from '@hapi/hapi';
+import {Server, ResponseToolkit} from '@hapi/hapi';
 import {Container} from 'instances-container';
-import Jwt from '@hapi/jwt';
+// import * as Jwt from '@hapi/jwt';
 import {DomainErrorTranslator} from '../../Commons/exceptions/DomainErrorTranslator';
-import ClientError from '../../commons/exceptions/ClientError';
+import ClientError from '../../Commons/exceptions/ClientError';
 import {authentications} from '../../Interfaces/http/api/authentications';
 import {users} from '../../Interfaces/http/api/users';
 import {threads} from '../../Interfaces/http/api/threads';
@@ -11,27 +11,27 @@ import {replies} from '../../Interfaces/http/api/reply_comments';
 
 export const createServer = async (container:Container):Promise<Server> => {
   const server:Server = new Server({
-    host: process.env.HOST,
-    port: process.env.PORT,
+    host: process.env.HOST || 'localhost',
+    port: process.env.PORT || 5000,
   });
-  await server.register([
-    {plugin: Jwt},
-  ]);
-  server.auth.strategy('forumapi_jwt', 'jwt', {
-    keys: process.env.ACCESS_TOKEN_KEY,
-    verify: {
-      aud: false,
-      iss: false,
-      sub: false,
-      maxAgeSec: process.env.ACCESS_TOKEN_AGE,
-    },
-    validate: (artifacts:any) => ({
-      isValid: true,
-      credentials: {
-        id: artifacts.decoded.payload.id,
-      },
-    }),
-  });
+  // await server.register([
+  //   {plugin: Jwt},
+  // ]);
+  // server.auth.strategy('forumapi_jwt', 'jwt', {
+  //   keys: process.env.ACCESS_TOKEN_KEY,
+  //   verify: {
+  //     aud: false,
+  //     iss: false,
+  //     sub: false,
+  //     maxAgeSec: process.env.ACCESS_TOKEN_AGE,
+  //   },
+  //   validate: (artifacts:any) => ({
+  //     isValid: true,
+  //     credentials: {
+  //       id: artifacts.decoded.payload.id,
+  //     },
+  //   }),
+  // });
   await server.register([
     {
       plugin: users,
@@ -55,7 +55,7 @@ export const createServer = async (container:Container):Promise<Server> => {
     },
   ]);
 
-  server.ext('onPreResponse', (req:Request, h:ResponseToolkit )=> {
+  server.ext('onPreResponse', (req:any, h:ResponseToolkit )=> {
     const {response} = req;
     if (response instanceof ClientError) {
       console.log(response);

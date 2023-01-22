@@ -10,7 +10,7 @@ export default class AddPostReplayCommentUseCase {
     this._commentRepository = params.commentRepository;
   }
 
-  async execute(useCasePayload:AddReply) {
+  async execute(useCasePayload:any) {
     const addReply = new AddReply(useCasePayload);
     await this._commentRepository.verifyExistsCommentById(addReply.commentId);
     return this._replyCommentRepository.addReplyComment(addReply);

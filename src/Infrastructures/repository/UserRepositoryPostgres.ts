@@ -1,12 +1,13 @@
-import InvariantError from '../../commons/exceptions/InvariantError';
+import InvariantError from '../../Commons/exceptions/InvariantError';
 import RegisteredUser from '../../Domains/users/entities/RegisteredUser';
 import RegisterUser from '../../Domains/users/entities/RegisterUser';
 import UserRepository from '../../Domains/users/UserRepository';
 import {Pool} from 'pg';
 
-export default class UserRepositoryPostgres implements UserRepository {
-  constructor(private _pool:Pool, private _idGenerator:any) {}
-
+export default class UserRepositoryPostgres extends UserRepository {
+  constructor(private _pool:Pool, private _idGenerator:any) {
+    super()
+  }
   async verifyAvailableUsername(username:string) {
     const query = {
       text: 'SELECT username FROM users WHERE username = $1',
@@ -47,7 +48,7 @@ export default class UserRepositoryPostgres implements UserRepository {
     return result.rows[0].id;
   }
 
-  async addUser(registerUser:RegisterUser):Promise<RegisteredUser> {
+  async addUser(registerUser:RegisterUser): Promise<RegisteredUser> {
     const {username, password, fullname} = registerUser;
     const id = `user-${this._idGenerator()}`;
 

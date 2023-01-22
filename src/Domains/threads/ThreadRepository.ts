@@ -1,6 +1,5 @@
-export default interface ThreadRepository {
-  checkExistsThreadById(idThread:string):Promise<void>
-  addThread(registerthread:typeof AddThread):Promise<typeof AddedThread>
-  getDetailThreadById(idThread:string):Promise<typeof ThreadDetail>
-    // throw new Error('THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+export default abstract class ThreadRepository {
+  abstract checkExistsThreadById(idThread:string):Promise<any>
+  abstract addThread(registerthread:any):Promise<any>
+  abstract getDetailThreadById(idThread:any):Promise<any>
 };

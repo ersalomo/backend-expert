@@ -1,13 +1,15 @@
 import PasswordHash from '../../Applications/security/PasswordHash';
-import AuthenticationError from '../../Commons/exceptions/AuthenticationError';
+import AuthenticationError from '../../Commons/exceptions/AuthorizationError';
 
-export default class BcryptPasswordHash implements PasswordHash {
-  constructor(private _bcrypt:{}, private _saltRound:number = 10) {}
+export default class BcryptPasswordHash extends PasswordHash {
+  constructor(private _bcrypt:any, private _saltRound:number = 10) {
+    super()
+  }
 
   async hash(password:string) {
     return this._bcrypt.hash(password, this._saltRound);
   }
-  async comparePassword(password, hashedPassword):Promise<boolean> {
+  async comparePassword(password:string, hashedPassword:string): Promise<void> {
     const result = await this._bcrypt.compare(password, hashedPassword);
 
     if (!result) {

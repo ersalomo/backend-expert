@@ -1,7 +1,6 @@
-export default interface CommentRepository {
-  addComment(registerComment)
-  verifyExistsCommentById(commentId)
-  deleteComment(ids)
-  getCommentsByThreadId(threadId)
+export default abstract class CommentRepository {
+  abstract addComment(registerComment: object): Promise<void>;
+  abstract verifyExistsCommentById(commentId:string):Promise<void>
+  abstract deleteComment(ids: object): Promise<void>
+  abstract getCommentsByThreadId(threadId:string): Promise<{}>
 }
-// throw new Error('COMMENT_REPOSITORY.METHOD_NOT_IMPLEMENTED');

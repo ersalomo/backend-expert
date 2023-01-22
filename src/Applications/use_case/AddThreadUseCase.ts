@@ -5,7 +5,7 @@ export default class AddThreadUseCase {
   constructor(private _threadRepository:ThreadRepository) {
   }
 
-  async execute(useCasePayload: AddThread) {
+  async execute(useCasePayload: any) {
     const addThread = new AddThread(useCasePayload);
     return this._threadRepository.addThread(addThread);
   }

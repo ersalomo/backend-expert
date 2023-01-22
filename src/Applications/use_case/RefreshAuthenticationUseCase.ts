@@ -19,7 +19,7 @@ export default class RefreshAuthenticationUseCase {
     return this._authenticationTokenManager.createAccessToken({username, id});
   }
 
-  _verifyPayload(payload) {
+  _verifyPayload(payload:any) {
     const {refreshToken} = payload;
 
     if (!refreshToken) {

@@ -12,7 +12,7 @@ export default class DetailThreadUseCase {
     private _replyCommentRepository: ReplyCommentRepository,
   ) {}
 
-  async execute(useCasePayload) {
+  async execute(useCasePayload:any) {
     const detailThread = await this._threadRepository.getDetailThreadById(useCasePayload);
     const comments = await this._commentRepository.getCommentsByThreadId(useCasePayload);
     const replies = await this._replyCommentRepository.getRepliesByThreadId(useCasePayload);
@@ -20,13 +20,13 @@ export default class DetailThreadUseCase {
     return new ThreadDetail(detailThread);
   }
 
-  _getDetailsCommentReplies(comments:any[], replies: any[]) {
-    return comments.map((comment) => {
+  _getDetailsCommentReplies(comments:any, replies: any) {
+    return comments.map((comment:any) => {
       comment.replies =
               replies?.filter(
-                  (reply) => reply.id_comment === comment.id)
+                  (reply:any) => reply.id_comment === comment.id)
                   .map(
-                      (reply) => new ReplyDetail(reply));
+                      (reply:any) => new ReplyDetail(reply));
       return new CommentDetail(comment);
     });
   }

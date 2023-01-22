@@ -1,14 +1,14 @@
 import ReplyCommentRepository from '../../Domains/reply_comments/ReplyCommentRepository';
 import AddedReply from '../../Domains/reply_comments/entities/AddedReply';
 import AddReply from '../../Domains/reply_comments/entities/AddReply';
-import NotFoundError from '../../commons/exceptions/NotFoundError';
-import ForbiddenError from '../../commons/exceptions/ForbiddenError';
+import ForbiddenError from '../../Commons/exceptions/ForbiddenError';
+import NotFoundError from '../../Commons/exceptions/NotFoundError';
 import {Pool} from 'pg';
 
 export default class ReplyRepositoryPostgres implements ReplyCommentRepository {
   constructor(private _pool:Pool, private _idGenerator:any) {}
 
-  async addReplyComment(addReply:AddReply):Promise<AddedReply> {
+  async addReplyComment(addReply:AddReply):Promise<any> {
     const {owner, commentId, content} = addReply;
     const id = `reply-${this._idGenerator()}`;
     const query = {

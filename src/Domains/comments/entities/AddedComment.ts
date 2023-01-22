@@ -1,4 +1,4 @@
-module.exports = class AddedComment {
+export default class AddedComment {
   constructor(payload) {
     this._verifyPayload(payload);
 

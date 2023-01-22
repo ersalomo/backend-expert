@@ -16,7 +16,7 @@ export default class ReplyCommentHandler {
       threadId: req.params.threadId,
       commentId: req.params.commentId,
       owner,
-      content: req.payload.content,
+      content: req.payload,
     };
     const addedReply = await addReplyCommentUseCase.execute(useCasePayload);
 
@@ -28,7 +28,7 @@ export default class ReplyCommentHandler {
 
   async deletePostReplayComment(req:Request, h: ResponseToolkit) {
     const deleteReplyCommentUseCase = this._container.getInstance(DeleteReplyCommentUseCase.name);
-    const {id: owner}= req.auth.credentials;
+    const {id: owner} = req.auth.credentials;
     req.params.owner = owner;
     await deleteReplyCommentUseCase.execute(req.params);
     return h.response({

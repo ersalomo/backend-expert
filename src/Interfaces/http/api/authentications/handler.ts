@@ -13,6 +13,7 @@ export default class AuthenticationsHandler {
 
   async postAuthenticationHandler(request:Request, h: ResponseToolkit) {
     const loginUserUseCase:LoginUserUseCase = this._container.getInstance(LoginUserUseCase.name);
+
     const {accessToken, refreshToken} = await loginUserUseCase.execute(request.payload);
     const response = h.response({
       status: 'success',

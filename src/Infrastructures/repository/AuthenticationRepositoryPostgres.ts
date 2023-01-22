@@ -1,4 +1,4 @@
-import InvariantError from '../../commons/exceptions/InvariantError';
+import InvariantError from '../../Commons/exceptions/InvariantError';
 import AuthenticationRepository from '../../Domains/authentications/AuthenticationRepository';
 import {Pool} from 'pg';
 

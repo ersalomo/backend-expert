@@ -1,14 +1,15 @@
 import ReplyRepositoryPostgres from '../../Domains/reply_comments/ReplyCommentRepository';
-import CommentRepository from '../../Domains/comments/CommentRepository';
+// import CommentRepository from '../../Domains/comments/CommentRepository';
 
 export default class DeleteReplyCommentUseCase {
   constructor(
     private _replyCommentRepository: ReplyRepositoryPostgres,
-    private _commentRepository: CommentRepository,
+  // private _commentRepository: CommentRepository,
   ) {}
 
-  async execute(useCasePayload) {
-    const {threadId, commentId, owner, replyId} = useCasePayload;
+  async execute(useCasePayload:any) {
+    const {owner, replyId} = useCasePayload;
+    // const {threadId, commentId, owner, replyId} = useCasePayload;
     // gimana kalo thread dan comment tidak ada tapi reply ada
     // await this._replyCommentRepository.verifyExistsCommentAndThreadByIds({threadId, commentId});
     await this._replyCommentRepository.verifyExistsReplyById(replyId);

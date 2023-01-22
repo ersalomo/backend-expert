@@ -13,7 +13,7 @@ export default class LoginUserUseCase {
       private _passwordHash: PasswordHash,
   ) {}
 
-  async execute(useCasePayload) {
+  async execute(useCasePayload:any) {
     const {username, password} = new UserLogin(useCasePayload);
     const encryptedPassword = await this._userRepository.getPasswordByUsername(username);
     await this._passwordHash.comparePassword(password, encryptedPassword);
@@ -22,11 +22,7 @@ export default class LoginUserUseCase {
         .createAccessToken({username, id});
     const refreshToken = await this._authenticationTokenManager
         .createRefreshToken({username, id});
-
-    const newAuthentication = new NewAuthentication({
-      accessToken,
-      refreshToken,
-    });
+    const newAuthentication = new NewAuthentication({accessToken, refreshToken});
 
     await this._authenticationRepository.addToken(newAuthentication.refreshToken);
 

@@ -1,5 +1,9 @@
 export default class ReplyDetail {
-  constructor(payload) {
+  public id
+  public content
+  public date
+  public username
+  constructor(payload:any) {
     this._verifyPayload(payload);
 
     const {id, content, date, username, is_deleted: isDeleted} = payload;
@@ -10,7 +14,8 @@ export default class ReplyDetail {
     this.username = username;
   }
 
-  _verifyPayload({id, content, date, username, is_deleted: isDeleted}) {
+  _verifyPayload(payload:any) {
+    const {id, content, date, username, is_deleted: isDeleted} = payload;
     if (!id || !content || !date || !username) {
       throw new Error('REPLY_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY');
     }

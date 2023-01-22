@@ -1,4 +1,3 @@
-
 import AddComment from '../../Domains/comments/entities/AddComment';
 import CommentRepository from '../../Domains/comments/CommentRepository';
 import ThreadRepository from '../../Domains/threads/ThreadRepository';
