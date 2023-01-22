@@ -5,8 +5,10 @@ import ForbiddenError from '../../Commons/exceptions/ForbiddenError';
 import NotFoundError from '../../Commons/exceptions/NotFoundError';
 import {Pool} from 'pg';
 
-export default class ReplyRepositoryPostgres implements ReplyCommentRepository {
-  constructor(private _pool:Pool, private _idGenerator:any) {}
+export default class ReplyRepositoryPostgres extends ReplyCommentRepository {
+  constructor(private _pool:Pool, private _idGenerator:any) {
+    super()
+  }
 
   async addReplyComment(addReply:AddReply):Promise<any> {
     const {owner, commentId, content} = addReply;

@@ -8,7 +8,8 @@ export default class UserHandler {
     this._container = container;
   }
   async postUserHandler(request:Request, h: ResponseToolkit) {
-    const addUserUseCase = this._container.getInstance(AddUserUseCase.name);
+    console.log('halllo con', this._container.getInstance('AddUserUseCase'));
+    const addUserUseCase:AddUserUseCase = this._container.getInstance(AddUserUseCase.name);
     const addedUser = await addUserUseCase.execute(request.payload);
 
     const response = h.response({

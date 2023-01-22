@@ -199,14 +199,14 @@ container.register([
     key: AddUserUseCase.name,
     Class: AddUserUseCase,
     parameter: {
-      injectType: 'destructuring',
+      // injectType: 'destructuring',
       dependencies: [
         {
-          name: 'userRepository',
+          // name: 'userRepository',
           internal: UserRepository.name,
         },
         {
-          name: 'passwordHash',
+          // name: 'passwordHash',
           internal: PasswordHash.name,
         },
       ],

@@ -5,8 +5,10 @@ import AddComment from '../../Domains/comments/entities/AddComment';
 import {Pool} from 'pg';
 
 
-export default class CommentRepositoryPostgres implements CommentRepository {
-  constructor(private _pool:Pool, private _idGenerator:any) {}
+export default class CommentRepositoryPostgres extends CommentRepository {
+  constructor(private _pool:Pool, private _idGenerator:any) {
+    super()
+  }
 
   async verifyExistsCommentById(commentId:string) {
     const query = {

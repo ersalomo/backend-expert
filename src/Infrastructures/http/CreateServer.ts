@@ -58,7 +58,7 @@ export const createServer = async (container:Container):Promise<Server> => {
   server.ext('onPreResponse', (req:any, h:ResponseToolkit )=> {
     const {response} = req;
     if (response instanceof ClientError) {
-      console.log(response);
+      // console.log(response);
       const translatedError = DomainErrorTranslator.translate(response);
 
       if (translatedError instanceof ClientError) {

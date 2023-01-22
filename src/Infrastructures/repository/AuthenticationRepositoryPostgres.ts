@@ -2,8 +2,10 @@ import InvariantError from '../../Commons/exceptions/InvariantError';
 import AuthenticationRepository from '../../Domains/authentications/AuthenticationRepository';
 import {Pool} from 'pg';
 
-export default class AuthenticationRepositoryPostgres implements AuthenticationRepository {
-  constructor(private _pool:Pool) {}
+export default class AuthenticationRepositoryPostgres extends AuthenticationRepository {
+  constructor(private _pool:Pool) {
+    super()
+  }
 
   async addToken(token:string) {
     const query = {

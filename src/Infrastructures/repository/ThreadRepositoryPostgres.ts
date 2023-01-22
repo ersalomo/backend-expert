@@ -4,8 +4,10 @@ import AddThread from '../../Domains/threads/entities/AddThread';
 import NotFoundError from '../../Commons/exceptions/NotFoundError';
 import {Pool} from 'pg';
 
-export default class ThreadRepositoryPostgres implements ThreadRepository {
-  constructor(private _pool:Pool, private _idGenerator:any) {}
+export default class ThreadRepositoryPostgres extends ThreadRepository {
+  constructor(private _pool:Pool, private _idGenerator:any) {
+    super()
+  }
 
   async checkExistsThreadById(idThread: string):Promise<void> {
     const query = {
