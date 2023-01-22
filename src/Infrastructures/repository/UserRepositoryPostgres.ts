@@ -3,6 +3,7 @@ import RegisteredUser from '../../Domains/users/entities/RegisteredUser';
 import RegisterUser from '../../Domains/users/entities/RegisterUser';
 import UserRepository from '../../Domains/users/UserRepository';
 import {Pool} from 'pg';
+import 'dotenv/config'
 
 export default class UserRepositoryPostgres extends UserRepository {
   constructor(private _pool:Pool, private _idGenerator:any) {
@@ -13,7 +14,6 @@ export default class UserRepositoryPostgres extends UserRepository {
       text: 'SELECT username FROM users WHERE username = $1',
       values: [username],
     };
-
     const result = await this._pool.query(query);
 
     if (result.rowCount) {
@@ -48,17 +48,16 @@ export default class UserRepositoryPostgres extends UserRepository {
     return result.rows[0].id;
   }
 
-  async addUser(registerUser:RegisterUser): Promise<RegisteredUser> {
+  async addUser(registerUser:RegisterUser): Promise<any> {
     const {username, password, fullname} = registerUser;
     const id = `user-${this._idGenerator()}`;
 
     const query = {
-      text: 'INSERT INTO users VALUES($1, $2, $3, $4) RETURNING id, username, fullname',
-      values: [id, username, password, fullname],
+      text: 'INSERT INTO users(id, username, fullname, password) VALUES($1, $2, $3, $4) RETURNING id, username, fullname',
+      values: [id, username, fullname, password],
     };
-
     const result = await this._pool.query(query);
-
+    console.log('----------00000000000000000------', result)
     return new RegisteredUser({...result.rows[0]});
   }
 }

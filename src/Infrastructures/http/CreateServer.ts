@@ -1,37 +1,38 @@
-import {Server, ResponseToolkit} from '@hapi/hapi';
+import {Server, Request, ResponseToolkit} from '@hapi/hapi';
 import {Container} from 'instances-container';
-// import * as Jwt from '@hapi/jwt';
-import {DomainErrorTranslator} from '../../Commons/exceptions/DomainErrorTranslator';
+import * as Jwt from '@hapi/jwt';
+import DomainErrorTranslator from '../../Commons/exceptions/DomainErrorTranslator';
 import ClientError from '../../Commons/exceptions/ClientError';
 import {authentications} from '../../Interfaces/http/api/authentications';
 import {users} from '../../Interfaces/http/api/users';
 import {threads} from '../../Interfaces/http/api/threads';
 import {comments} from '../../Interfaces/http/api/comments';
 import {replies} from '../../Interfaces/http/api/reply_comments';
+import 'dotenv/config'
 
 export const createServer = async (container:Container):Promise<Server> => {
   const server:Server = new Server({
-    host: process.env.HOST || 'localhost',
-    port: process.env.PORT || 5000,
+    host: process.env['HOST'],
+    port: process.env['PORT'],
   });
-  // await server.register([
-  //   {plugin: Jwt},
-  // ]);
-  // server.auth.strategy('forumapi_jwt', 'jwt', {
-  //   keys: process.env.ACCESS_TOKEN_KEY,
-  //   verify: {
-  //     aud: false,
-  //     iss: false,
-  //     sub: false,
-  //     maxAgeSec: process.env.ACCESS_TOKEN_AGE,
-  //   },
-  //   validate: (artifacts:any) => ({
-  //     isValid: true,
-  //     credentials: {
-  //       id: artifacts.decoded.payload.id,
-  //     },
-  //   }),
-  // });
+  await server.register([
+    {plugin: Jwt},
+  ]);
+  server.auth.strategy('forumapi_jwt', 'jwt', {
+    keys: process.env.ACCESS_TOKEN_KEY,
+    verify: {
+      aud: false,
+      iss: false,
+      sub: false,
+      maxAgeSec: process.env.ACCESS_TOKEN_AGE,
+    },
+    validate: (artifacts:any) => ({
+      isValid: true,
+      credentials: {
+        id: artifacts.decoded.payload.id,
+      },
+    }),
+  });
   await server.register([
     {
       plugin: users,
@@ -55,11 +56,11 @@ export const createServer = async (container:Container):Promise<Server> => {
     },
   ]);
 
-  server.ext('onPreResponse', (req:any, h:ResponseToolkit )=> {
+  server.ext('onPreResponse', (req:Request, h:ResponseToolkit )=> {
     const {response} = req;
-    if (response instanceof ClientError) {
-      // console.log(response);
+    if (response instanceof Error) {
       const translatedError = DomainErrorTranslator.translate(response);
+      console.log(response);
 
       if (translatedError instanceof ClientError) {
         const newResponse = h.response({

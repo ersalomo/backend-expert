@@ -2,7 +2,7 @@
 import InvariantError from './InvariantError';
 
 
-export class DomainErrorTranslator {
+export default class DomainErrorTranslator {
   static translate(error: any) {
     return DomainErrorTranslator._directories[error.message] || error;
   }

@@ -5,9 +5,9 @@ export const routes = (handler: ThreadsHandler) => ([
     method: 'POST',
     path: '/threads',
     handler: handler.postThreadHandler,
-    // options: {
-    //   auth: 'forumapi_jwt',
-    // },
+    options: {
+      auth: 'forumapi_jwt',
+    },
   },
   {
     method: 'GET',

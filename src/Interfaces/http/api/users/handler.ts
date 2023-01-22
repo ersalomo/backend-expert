@@ -6,9 +6,9 @@ export default class UserHandler {
   private _container:any;
   constructor(container:any) {
     this._container = container;
+    this.postUserHandler = this.postUserHandler.bind(this)
   }
   async postUserHandler(request:Request, h: ResponseToolkit) {
-    console.log('halllo con', this._container.getInstance('AddUserUseCase'));
     const addUserUseCase:AddUserUseCase = this._container.getInstance(AddUserUseCase.name);
     const addedUser = await addUserUseCase.execute(request.payload);
 

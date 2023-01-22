@@ -131,10 +131,10 @@ container.register([
     key: AddThreadUseCase.name,
     Class: AddThreadUseCase,
     parameter: {
-      injectType: 'destructuring',
+      // injectType: 'destructuring',
       dependencies: [
         {
-          name: 'threadRepository',
+          // name: 'threadRepository',
           internal: ThreadRepository.name,
         },
       ],
@@ -144,14 +144,14 @@ container.register([
     key: AddCommentUseCase.name,
     Class: AddCommentUseCase,
     parameter: {
-      injectType: 'destructuring',
+      // injectType: 'destructuring',
       dependencies: [
         {
-          name: 'commentRepository',
+          // name: 'commentRepository',
           internal: CommentRepository.name,
         },
         {
-          name: 'threadRepository',
+          // name: 'threadRepository',
           internal: ThreadRepository.name,
         },
       ],
@@ -161,18 +161,18 @@ container.register([
     key: DetailThreadUseCase.name,
     Class: DetailThreadUseCase,
     parameter: {
-      injectType: 'destructuring',
+      // injectType: 'destructuring',
       dependencies: [
         {
-          name: 'threadRepository',
+          // name: 'threadRepository',
           internal: ThreadRepository.name,
         },
         {
-          name: 'commentRepository',
+          // name: 'commentRepository',
           internal: CommentRepository.name,
         },
         {
-          name: 'replyCommentRepository',
+          // name: 'replyCommentRepository',
           internal: ReplyCommentRepository.name,
         },
       ],
@@ -216,22 +216,22 @@ container.register([
     key: LoginUserUseCase.name,
     Class: LoginUserUseCase,
     parameter: {
-      injectType: 'destructuring',
+      // injectType: 'destructuring',
       dependencies: [
         {
-          name: 'userRepository',
+          // name: 'userRepository',
           internal: UserRepository.name,
         },
         {
-          name: 'authenticationRepository',
+          // name: 'authenticationRepository',
           internal: AuthenticationRepository.name,
         },
         {
-          name: 'authenticationTokenManager',
+          // name: 'authenticationTokenManager',
           internal: AuthenticationTokenManager.name,
         },
         {
-          name: 'passwordHash',
+          // name: 'passwordHash',
           internal: PasswordHash.name,
         },
       ],
@@ -241,10 +241,10 @@ container.register([
     key: LogoutUserUseCase.name,
     Class: LogoutUserUseCase,
     parameter: {
-      injectType: 'destructuring',
+      // injectType: 'destructuring',
       dependencies: [
         {
-          name: 'authenticationRepository',
+          // name: 'authenticationRepository',
           internal: AuthenticationRepository.name,
         },
       ],
@@ -254,14 +254,14 @@ container.register([
     key: DeleteCommentUseCase.name,
     Class: DeleteCommentUseCase,
     parameter: {
-      injectType: 'destructuring',
+      // injectType: 'destructuring',
       dependencies: [
         {
-          name: 'commentRepository',
+          // name: 'commentRepository',
           internal: CommentRepository.name,
         },
         {
-          name: 'threadRepository',
+          // name: 'threadRepository',
           internal: ThreadRepository.name,
         },
       ],
@@ -271,14 +271,14 @@ container.register([
     key: DeleteReplyCommentUseCase.name,
     Class: DeleteReplyCommentUseCase,
     parameter: {
-      injectType: 'destructuring',
+      // injectType: 'destructuring',
       dependencies: [
         {
-          name: 'replyCommentRepository',
+          // name: 'replyCommentRepository',
           internal: ReplyCommentRepository.name,
         },
         {
-          name: 'commentRepository',
+          // name: 'commentRepository',
           internal: CommentRepository.name,
         },
       ],
@@ -288,14 +288,14 @@ container.register([
     key: RefreshAuthenticationUseCase.name,
     Class: RefreshAuthenticationUseCase,
     parameter: {
-      injectType: 'destructuring',
+      // injectType: 'destructuring',
       dependencies: [
         {
-          name: 'authenticationRepository',
+          // name: 'authenticationRepository',
           internal: AuthenticationRepository.name,
         },
         {
-          name: 'authenticationTokenManager',
+          // name: 'authenticationTokenManager',
           internal: AuthenticationTokenManager.name,
         },
       ],

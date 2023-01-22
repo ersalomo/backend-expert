@@ -1,4 +1,5 @@
 /* istanbul ignore file */
+import 'dotenv/config'
 import {Pool, PoolConfig} from 'pg';
 const testConfig = {
   host: process.env.PGHOST_TEST,

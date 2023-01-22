@@ -1,7 +1,7 @@
 export default class RegisterUser {
-  username;
-  password;
-  fullname;
+  public username;
+  public password;
+  public fullname;
   constructor(params:{username:string, password:string, fullname:string}) {
     const {username, password, fullname} = params;
     if (!username || !password || !fullname) {
