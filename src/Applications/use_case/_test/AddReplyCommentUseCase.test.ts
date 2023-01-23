@@ -1,8 +1,8 @@
-const CommentRepository = require('../../../Domains/comments/CommentRepository');
-const AddedReply = require('../../../Domains/reply_comments/entities/AddedReply');
-const AddReply = require('../../../Domains/reply_comments/entities/AddReply');
-const ReplyCommentRepository = require('../../../Domains/reply_comments/ReplyCommentRepository');
-const AddReplyCommentUseCase = require('../AddReplyCommentUseCase');
+import CommentRepository from '../../../Domains/comments/CommentRepository';
+import AddedReply from '../../../Domains/reply_comments/entities/AddedReply';
+import AddReply from '../../../Domains/reply_comments/entities/AddReply';
+import ReplyCommentRepository from '../../../Domains/reply_comments/ReplyCommentRepository';
+import AddReplyCommentUseCase from '../AddReplyCommentUseCase';
 
 describe('AddReplyCommentUseCase', () => {
 /**

@@ -7,7 +7,7 @@ export default class AddReply {
     if (!commentId || !owner || !content) {
       throw new Error('ADD_REPLY.NOT_CONTAIN_NEEDED_PROPERTY');
     }
-
+    console.log(payload);
     if (typeof commentId !== 'string'|| typeof owner !== 'string' || typeof content !== 'string') {
       throw new Error('ADD_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION');
     }

@@ -10,7 +10,7 @@ export default class ReplyCommentHandler {
   }
 
   async addPostReplayComment(req:Request, h: ResponseToolkit) {
-    const addReplyCommentUseCase = this._container.getInstance(AddReplyCommentUseCase.name);
+    const addReplyCommentUseCase:AddReplyCommentUseCase = this._container.getInstance(AddReplyCommentUseCase.name);
     const {id: owner} = req.auth.credentials;
     const useCasePayload = {
       threadId: req.params.threadId,

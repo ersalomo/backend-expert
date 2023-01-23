@@ -1,10 +1,10 @@
-const CommentRepository = require('../../../Domains/comments/CommentRepository');
-const CommentDetail = require('../../../Domains/comments/entities/CommentDetail');
-const ReplyDetail = require('../../../Domains/reply_comments/entities/ReplyDetail');
-const ReplyCommentRepository = require('../../../Domains/reply_comments/ReplyCommentRepository');
-const ThreadDetail = require('../../../Domains/threads/entities/ThreadDetail');
-const ThreadRepository = require('../../../Domains/threads/ThreadRepository');
-const DetailThreadUseCase = require('../DetailThreadUseCase');
+import CommentRepository from '../../../Domains/comments/CommentRepository';
+import CommentDetail from '../../../Domains/comments/entities/CommentDetail';
+import ReplyDetail from '../../../Domains/reply_comments/entities/ReplyDetail';
+import ReplyCommentRepository from '../../../Domains/reply_comments/ReplyCommentRepository';
+import ThreadDetail from '../../../Domains/threads/entities/ThreadDetail';
+import ThreadRepository from '../../../Domains/threads/ThreadRepository';
+import DetailThreadUseCase from '../DetailThreadUseCase';
 
 describe('DetailThreadUseCase', () => {
   /**

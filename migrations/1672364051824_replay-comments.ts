@@ -11,16 +11,16 @@ exports.up = (pgm) => {
     id_comment: {
       type: 'varchar(50)',
       notNull: true,
-      references: '"comments"',
-      onDelete: 'cascade',
-      onUpdate: 'cascade',
+      // references: '"comments"',
+      // onDelete: 'cascade',
+      // onUpdate: 'cascade',
     },
     id_user: {
       type: 'varchar(50)',
       notNull: true,
-      references: '"users"',
-      onDelete: 'cascade',
-      onUpdate: 'cascade',
+      // references: '"users"',
+      // onDelete: 'cascade',
+      // onUpdate: 'cascade',
     },
     content: {
       type: 'TEXT',

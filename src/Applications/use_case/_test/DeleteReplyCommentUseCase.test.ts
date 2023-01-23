@@ -1,6 +1,6 @@
-const ReplyCommentRepository = require('../../../Domains/reply_comments/ReplyCommentRepository');
-const CommentRepository = require('../../../Domains/comments/CommentRepository');
-const DeleteReplyUseCase = require('../DeleteReplyCommentUseCase');
+import ReplyCommentRepository from '../../../Domains/reply_comments/ReplyCommentRepository';
+import CommentRepository from '../../../Domains/comments/CommentRepository';
+import DeleteReplyUseCase from '../DeleteReplyCommentUseCase';
 
 describe('DeleteReplyUseCase', () => {
 /**

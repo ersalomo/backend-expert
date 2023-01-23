@@ -23,7 +23,7 @@ export default class ThreadsHandler {
   }
 
   async getThreads(req: Request, h:ResponseToolkit) {
-    const detailThreadUseCase = this._container.getInstance(DetailThreadUseCase.name);
+    const detailThreadUseCase: DetailThreadUseCase = this._container.getInstance(DetailThreadUseCase.name);
     const detailThread = await detailThreadUseCase.execute(req.params.threadId);
     return h.response({
       status: 'success',

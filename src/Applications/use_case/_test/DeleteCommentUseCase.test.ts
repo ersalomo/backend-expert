@@ -1,7 +1,7 @@
-const DeleteComment = require('../../../Domains/comments/entities/DeleteComment');
-const CommentRepository = require('../../../Domains/comments/CommentRepository');
-const ThreadRepository = require('../../../Domains/threads/ThreadRepository');
-const DeleteCommentUseCase = require('../DeleteCommentUseCase');
+import DeleteComment from '../../../Domains/comments/entities/DeleteComment';
+import CommentRepository from '../../../Domains/comments/CommentRepository';
+import ThreadRepository from '../../../Domains/threads/ThreadRepository';
+import DeleteCommentUseCase from '../DeleteCommentUseCase';
 
 describe('DeleteCommentUseCase', () => {
   /**
