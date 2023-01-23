@@ -2,7 +2,6 @@ const ThreadTableTestHelper = require('../../../../tests/ThreadTableTestHelper')
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const CommentTableTestHelper = require('../../../../tests/CommentTableTestHelper');
 const ReplayTableTestHelper = require('../../../../tests/ReplayTableTestHelper');
-
 const pool = require('../../database/postgres/pool');
 const AddThread = require('../../../Domains/threads/entities/AddThread');
 const AddedThread = require('../../../Domains/threads/entities/AddedThread');
@@ -40,9 +39,7 @@ describe('ThreadRepositoryPostgres', ()=>{
       await threadRepositoryPostgres.addThread(addThread);
 
       // Assert
-      const thread = await ThreadTableTestHelper.findThreadById(
-          'thread-123',
-      );
+      const thread = await ThreadTableTestHelper.findThreadById('thread-123');
       expect(thread).toHaveLength(1);
     });
 

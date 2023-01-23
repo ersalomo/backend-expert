@@ -10,6 +10,11 @@ const pool = require('../../database/postgres/pool');
 const CommentRepositoryPostgres = require('../CommentRepositoryPostgres');
 
 describe('CommentRepositoryPostgres', () => {
+  afterAll(async () => {
+    await UsersTableTestHelper.cleanTable();
+    await pool.end();
+  });
+
   beforeAll(async () => {
     await UsersTableTestHelper.addUser({});
   });
@@ -17,11 +22,6 @@ describe('CommentRepositoryPostgres', () => {
   afterEach(async () => {
     await ThreadTableTestHelper.cleanTable();
     await CommentTableTestHelper.cleanTable();
-  });
-
-  afterAll(async () => {
-    await UsersTableTestHelper.cleanTable();
-    await pool.end();
   });
 
   describe('verifyExistsCommentById function', () => {

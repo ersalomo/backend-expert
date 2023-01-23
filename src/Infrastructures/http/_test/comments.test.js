@@ -11,8 +11,8 @@ describe('/comments endpoint', () => {
     await pool.end();
   });
   afterEach(async () => {
-    await ThreadTableTestHelper.cleanTable();
     await UsersTableTestHelper.cleanTable();
+    await ThreadTableTestHelper.cleanTable();
   });
   describe('/when cemments /POST /threads/{threadId}/comments', () => {
     it('should response 400 when request payload not contain needed property', async () => {

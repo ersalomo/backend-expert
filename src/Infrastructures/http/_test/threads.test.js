@@ -13,8 +13,8 @@ describe('/threads endpoint', ()=> {
     await pool.end();
   });
   afterEach(async () => {
-    await ThreadTableTestHelper.cleanTable();
     await UsersTableTestHelper.cleanTable();
+    await ThreadTableTestHelper.cleanTable();
   });
 
 

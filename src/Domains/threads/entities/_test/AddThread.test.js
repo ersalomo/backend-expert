@@ -1,40 +1,23 @@
 const AddThread = require('../AddThread');
 
-describe('an AddThread entities', () => {
-  // it('should throw error when payload did not contain needed property', async () => {
-  // // Arrange
-  //   const payload = {
-  //     owner: '',
-  //   };
-  //   // Action and Assert
-  //   expect(() => new AddThread(payload).toThrowError('ADD_THREAD.NOT_CONTAIN_NEEDED_PROPERTY'));
-  // });
-
-  it('should throw error when payload did not meet data type specification', () => {
+describe('a AddThread entities', () => {
+  it('should throw error when payload did not contain needed property', () => {
     // Arrange
     const payload = {
-      title: 123,
-      body: [],
-      owner: 'user-123',
+      title: '',
     };
 
-    // Action and Assert
-    expect(() => new AddThread(payload)).toThrowError('ADD_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
+    // Action & Assert
+    expect(() => new AddThread(payload)).toThrowError('ADD_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
   });
 
-  it('should create addThread object correctly', async () => {
-    // Arrange
+  it('should throw error when payload did not meet data type specification', () => {
     const payload = {
-      title: 'What Back End',
-      body: 'I donno',
       owner: 'user-123',
+      title: [] + [] + {},
+      body: true,
     };
-    // Action
-    const {title, body, owner} = new AddThread(payload);
 
-    // Assert
-    expect(title).toEqual(payload.title);
-    expect(body).toEqual(payload.body);
-    expect(owner).toEqual(payload.owner);
+    expect(() => new AddThread(payload)).toThrowError('ADD_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
   });
 });
