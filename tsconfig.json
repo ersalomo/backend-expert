@@ -26,7 +26,6 @@
     "noImplicitThis": true,                           /* Enable error reporting when 'this' is given the type 'any'. */
     "noUnusedLocals": true,                           /* Enable error reporting when local variables aren't read. */
     "noImplicitReturns": true,                        /* Enable error reporting for codepaths that do not explicitly return in a function. */
-    "noFallthroughCasesInSwitch": true,               /* Enable error reporting for fallthrough cases in switch statements. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "exclude": ["node_modules/*"],
