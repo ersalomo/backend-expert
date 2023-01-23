@@ -1,5 +1,5 @@
 
-class AddThread {
+module.exports = class AddThread {
   constructor(payload) {
     const {owner, title, body} = payload;
     if (!owner || !title || !body) throw new Error('ADD_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
@@ -11,5 +11,3 @@ class AddThread {
     this.body = body;
   }
 };
-
-module.exports = AddThread;

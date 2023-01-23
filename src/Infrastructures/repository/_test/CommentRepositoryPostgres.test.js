@@ -168,9 +168,7 @@ describe('CommentRepositoryPostgres', () => {
 
       // Action and Assert
       await expect(commentRepositoryPostgres.deleteComment(deleteComment)).rejects.toThrow(ForbiddenError);
-      const comment = await CommentTableTestHelper.findCommentById(
-          'comment-123',
-      );
+      const comment = await CommentTableTestHelper.findCommentById('comment-123');
       expect(comment).toHaveLength(1);
     });
   });

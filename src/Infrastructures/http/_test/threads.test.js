@@ -198,7 +198,7 @@ describe('/threads endpoint', ()=> {
       const server = await createServer(container);
       const response = await server.inject({
         method: 'GET',
-        url: '/threads/'+threadId,
+        url: '/threads/' + threadId,
       });
 
       const responseJson = JSON.parse(response.payload);

@@ -134,10 +134,10 @@ describe('/replies endpoint', () => {
     it('should response 200 and persisted delete comment', async () => {
       // Arrange
       const accessToken = await ServerTestHelper.getAccessToken();
-      const server = await createServer(container);
       const {id: threadId} = await ThreadTableTestHelper.addThread({});
       const {id: commentId} = await CommentTableTestHelper.addComment({});
       const {id: replyId} = await ReplayTableTestHelper.addReply({});
+      const server = await createServer(container);
       // Action
       const response = await server.inject({
         method: 'DELETE',
@@ -154,7 +154,7 @@ describe('/replies endpoint', () => {
 
     it('should response 403 when reply is not mine to user', async () => {
       // Arrange
-      const accessToken = await ServerTestHelper.getAccessToken(id = 'user-124');
+      const accessToken = await ServerTestHelper.getAccessToken('user-124');
       const server = await createServer(container);
 
       await UsersTableTestHelper.addUser({});
