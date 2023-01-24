@@ -1,4 +1,4 @@
-const ReplyDetail = require('../ReplyDetail');
+import ReplyDetail from '../ReplyDetail';
 
 describe('a ReplyDetail entities', () => {
   it('should throw error when payload did not contain needed property', () => {

@@ -1,4 +1,4 @@
-const AddReply = require('../AddReply');
+import AddReply from '../AddReply';
 
 describe('an AddReply entities', () => {
   it('should throw error when payload did not contain needed property', () => {

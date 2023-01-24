@@ -1,11 +1,11 @@
-const ServerTestHelper = require('../../../../tests/ServerTestHelper');
-const ThreadTableTestHelper = require('../../../../tests/ThreadTableTestHelper');
-const CommentTableTestHelper = require('../../../../tests/CommentTableTestHelper');
-const ReplayTableTestHelper = require('../../../../tests/ReplayTableTestHelper');
-const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
-const container = require('../../../Infrastructures/container');
-const createServer = require('../../../Infrastructures/http/createServer');
-const pool = require('../../database/postgres/pool');
+import {ServerTestHelper} from '../../../../tests/ServerTestHelper';
+import {ThreadTableTestHelper} from '../../../../tests/ThreadTableTestHelper';
+import {CommentTableTestHelper} from '../../../../tests/CommentTableTestHelper';
+import {ReplayTableTestHelper} from '../../../../tests/ReplayTableTestHelper';
+import {UsersTableTestHelper} from '../../../../tests/UsersTableTestHelper';
+import {container} from '../../../Infrastructures/container';
+import {pool} from '../../database/postgres/pool';
+import {createServer} from '../CreateServer';
 
 describe('/replies endpoint', () => {
   afterAll(async () => {
@@ -154,7 +154,7 @@ describe('/replies endpoint', () => {
 
     it('should response 403 when reply is not mine to user', async () => {
       // Arrange
-      const accessToken = await ServerTestHelper.getAccessToken(id = 'user-124');
+      const accessToken = await ServerTestHelper.getAccessToken('user-124');
       const server = await createServer(container);
       await UsersTableTestHelper.addUser({});
       await ThreadTableTestHelper.addThread({});

@@ -21,7 +21,7 @@
     /* Type Checking */
     "strict": true,                                      /* Enable all strict type-checking options. */
     "strictNullChecks": true,                         /* When type checking, take into account 'null' and 'undefined'. */
-    "strictFunctionTypes": true,                      /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */
+    // "strictFunctionTypes": true,                      /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */
     "strictPropertyInitialization": true,             /* Check for class properties that are declared but not set in the constructor. */
     "noImplicitThis": true,                           /* Enable error reporting when 'this' is given the type 'any'. */
     "noUnusedLocals": true,                           /* Enable error reporting when local variables aren't read. */

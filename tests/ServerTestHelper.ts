@@ -1,8 +1,9 @@
 /* istanbul ignore file */
-import Jwt from '@hapi/jwt';
+import * as Jwt from '@hapi/jwt';
 import {UsersTableTestHelper} from './UsersTableTestHelper';
+import 'dotenv/config';
 
-export const ServerTesHelper = {
+export const ServerTestHelper = {
   getAccessToken: async (id = 'user-123', username = 'Dicoding'):Promise<string> => {
     const requestPayload = {
       id: id,
@@ -11,6 +12,6 @@ export const ServerTesHelper = {
       password: 'dicoding',
     };
     await UsersTableTestHelper.addUser(requestPayload);
-    return Jwt.token.generate(requestPayload, process.env.ACCESS_TOKEN_KEY);
+    return Jwt.token.generate(requestPayload, process.env['ACCESS_TOKEN_KEY']);
   },
 };

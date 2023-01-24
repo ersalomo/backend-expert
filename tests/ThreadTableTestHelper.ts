@@ -15,7 +15,7 @@ export const ThreadTableTestHelper = {
     const result = await pool.query(query);
     return result.rows[0];
   },
-  async findThreadById(id) {
+  async findThreadById(id:string) {
     const query = {
       text: 'SELECT * FROM threads WHERE id = $1',
       values: [id],

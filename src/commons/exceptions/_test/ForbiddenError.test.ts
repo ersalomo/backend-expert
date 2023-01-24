@@ -1,4 +1,4 @@
-const ForbiddenError = require('../ForbiddenError');
+import ForbiddenError from '../ForbiddenError';
 
 describe('ForbiddenError', () => {
   it('should create error correctly', () => {

@@ -1,4 +1,4 @@
-const ThreadDetail = require('../ThreadDetail');
+import ThreadDetail from '../ThreadDetail';
 
 describe('a ThreadDetail entities', () => {
   it('should throw error when payload did not contain needed property', () => {

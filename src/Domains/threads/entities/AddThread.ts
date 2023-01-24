@@ -10,7 +10,6 @@ export default class AddThread {
     this.title = title;
     this.body = body;
   }
-
   _verifyPayload(payload:AddThreadAPayload):void {
     const {owner, title, body} = payload;
     if (!owner || !title || !body) {

@@ -2,9 +2,8 @@ import {pool} from '../../database/postgres/pool';
 import {UsersTableTestHelper} from '../../../../tests/UsersTableTestHelper';
 import {AuthenticationsTableTestHelper} from '../../../../tests/AuthenticationsTableTestHelper';
 import {container} from '../../container';
-import {createServer} from '../createServer';
 import AuthenticationTokenManager from '../../../Applications/security/AuthenticationTokenManager';
-
+import {createServer} from '../CreateServer';
 describe('/authentications endpoint', () => {
   afterAll(async () => {
     await pool.end();

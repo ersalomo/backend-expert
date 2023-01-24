@@ -1,5 +1,5 @@
 import PasswordHash from '../../Applications/security/PasswordHash';
-import AuthenticationError from '../../commons/exceptions/AuthorizationError';
+import AuthenticationError from '../../Commons/exceptions/AuthorizationError';
 
 export default class BcryptPasswordHash extends PasswordHash {
   constructor(private _bcrypt:any, private _saltRound:number = 10) {

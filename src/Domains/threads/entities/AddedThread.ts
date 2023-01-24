@@ -9,7 +9,7 @@ export default class AddedThread {
     this.owner = owner;
   }
 
-  _verifyPayload({id, owner, title}:any) {
+  private _verifyPayload({id, owner, title}:any) {
     if (!id || !owner || !title) {
       throw new Error('ADDED_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
     }

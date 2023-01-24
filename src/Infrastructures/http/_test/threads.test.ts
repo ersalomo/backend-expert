@@ -1,11 +1,11 @@
-const pool = require('../../database/postgres/pool');
-const ThreadTableTestHelper = require('../../../../tests/ThreadTableTestHelper');
-const ServerTestHelper = require('../../../../tests/ServerTestHelper');
-const createServer = require('../../../Infrastructures/http/createServer');
-const container = require('../../../Infrastructures/container');
-const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
-const ReplayTableTestHelper = require('../../../../tests/ReplayTableTestHelper');
-const CommentTableTestHelper = require('../../../../tests/CommentTableTestHelper');
+import {pool} from '../../database/postgres/pool';
+import {ThreadTableTestHelper} from '../../../../tests/ThreadTableTestHelper';
+import {ServerTestHelper} from '../../../../tests/ServerTestHelper';
+import {container} from '../../../Infrastructures/container';
+import {UsersTableTestHelper} from '../../../../tests/UsersTableTestHelper';
+import {ReplayTableTestHelper} from '../../../../tests/ReplayTableTestHelper';
+import {CommentTableTestHelper} from '../../../../tests/CommentTableTestHelper';
+import {createServer} from '../CreateServer';
 
 
 describe('/threads endpoint', ()=> {

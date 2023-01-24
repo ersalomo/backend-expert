@@ -1,13 +1,13 @@
-const ThreadTableTestHelper = require('../../../../tests/ThreadTableTestHelper');
-const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
-const CommentTableTestHelper = require('../../../../tests/CommentTableTestHelper');
-const ReplayTableTestHelper = require('../../../../tests/ReplayTableTestHelper');
-const pool = require('../../database/postgres/pool');
-const AddReply = require('../../../Domains/reply_comments/entities/AddReply');
-const AddedReply = require('../../../Domains/reply_comments/entities/AddedReply');
-const ReplyRepositoryPostgres = require('../ReplyRepositoryPostgres');
-const NotFoundError = require('../../../Commons/exceptions/NotFoundError');
-const ForbiddenError = require('../../../Commons/exceptions/ForbiddenError');
+import {ThreadTableTestHelper} from '../../../../tests/ThreadTableTestHelper';
+import {UsersTableTestHelper} from '../../../../tests/UsersTableTestHelper';
+import {CommentTableTestHelper} from '../../../../tests/CommentTableTestHelper';
+import {ReplayTableTestHelper} from '../../../../tests/ReplayTableTestHelper';
+import {pool} from '../../database/postgres/pool';
+import AddReply from '../../../Domains/reply_comments/entities/AddReply';
+import AddedReply from '../../../Domains/reply_comments/entities/AddedReply';
+import ReplyRepositoryPostgres from '../ReplyRepositoryPostgres';
+import NotFoundError from '../../../Commons/exceptions/NotFoundError';
+import ForbiddenError from '../../../Commons/exceptions/ForbiddenError';
 
 describe('ReplyRepositoryPostgres', ()=>{
   beforeAll(async ()=> {
@@ -113,9 +113,7 @@ describe('ReplyRepositoryPostgres', ()=>{
       const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {});
 
       // Action
-      const replies = await replyRepositoryPostgres.getRepliesByThreadId({
-        threadId: 'thread-123',
-      });
+      const replies = await replyRepositoryPostgres.getRepliesByThreadId('thread-123');
 
       // Assert
       expect(replies).toHaveLength(0);

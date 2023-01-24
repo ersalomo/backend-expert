@@ -1,13 +1,12 @@
-const ThreadTableTestHelper = require('../../../../tests/ThreadTableTestHelper');
-const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
-const CommentTableTestHelper = require('../../../../tests/CommentTableTestHelper');
-const ReplayTableTestHelper = require('../../../../tests/ReplayTableTestHelper');
-
-const pool = require('../../database/postgres/pool');
-const AddThread = require('../../../Domains/threads/entities/AddThread');
-const AddedThread = require('../../../Domains/threads/entities/AddedThread');
-const ThreadRepositoryPostgres = require('../../repository/ThreadRepositoryPostgres');
-const NotFoundError = require('../../../Commons/exceptions/NotFoundError');
+import {ThreadTableTestHelper} from '../../../../tests/ThreadTableTestHelper';
+import {UsersTableTestHelper} from '../../../../tests/UsersTableTestHelper';
+import {CommentTableTestHelper} from '../../../../tests/CommentTableTestHelper';
+import {ReplayTableTestHelper} from '../../../../tests/ReplayTableTestHelper';
+import {pool} from '../../database/postgres/pool';
+import AddThread from '../../../Domains/threads/entities/AddThread';
+import AddedThread from '../../../Domains/threads/entities/AddedThread';
+import ThreadRepositoryPostgres from '../../repository/ThreadRepositoryPostgres';
+import NotFoundError from '../../../Commons/exceptions/NotFoundError';
 
 describe('ThreadRepositoryPostgres', ()=>{
   beforeAll(async () => {

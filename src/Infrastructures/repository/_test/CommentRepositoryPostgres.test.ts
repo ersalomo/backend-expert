@@ -1,13 +1,13 @@
-const CommentTableTestHelper = require('../../../../tests/CommentTableTestHelper');
-const ThreadTableTestHelper = require('../../../../tests/ThreadTableTestHelper');
-const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
-const ForbiddenError = require('../../../Commons/exceptions/ForbiddenError');
-const NotFoundError = require('../../../Commons/exceptions/NotFoundError');
-const AddComment = require('../../../Domains/comments/entities/AddComment');
-// const AddedComment = require('../../../Domains/comments/entities/AddedComment');
-const DeleteComment = require('../../../Domains/comments/entities/DeleteComment');
-const pool = require('../../database/postgres/pool');
-const CommentRepositoryPostgres = require('../CommentRepositoryPostgres');
+import {CommentTableTestHelper} from '../../../../tests/CommentTableTestHelper';
+import {ThreadTableTestHelper} from '../../../../tests/ThreadTableTestHelper';
+import {UsersTableTestHelper} from '../../../../tests/UsersTableTestHelper';
+import ForbiddenError from '../../../Commons/exceptions/ForbiddenError';
+import NotFoundError from '../../../Commons/exceptions/NotFoundError';
+import AddComment from '../../../Domains/comments/entities/AddComment';
+// import AddedComment from '../../../Domains/comments/entities/AddedComment');
+import DeleteComment from '../../../Domains/comments/entities/DeleteComment';
+import {pool} from '../../database/postgres/pool';
+import CommentRepositoryPostgres from '../CommentRepositoryPostgres';
 
 describe('CommentRepositoryPostgres', () => {
   beforeAll(async () => {

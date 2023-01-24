@@ -1,4 +1,4 @@
-const CommentDetail = require('../CommentDetail');
+import CommentDetail from '../CommentDetail';
 
 describe('a CommentDetail entities', () => {
   it('should throw error when payload did not contain needed property', () => {

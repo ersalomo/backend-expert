@@ -1,4 +1,4 @@
-const DeleteComment = require('../DeleteComment');
+import DeleteComment from '../DeleteComment';
 
 describe('a DeleteComment entities', () => {
   it('should throw error when payload did not contain needed property', () => {
