@@ -30,7 +30,7 @@ describe('ReplyRepositoryPostgres', ()=>{
       const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {});
 
       // Action and Assert
-      await expect(replyRepositoryPostgres.verifyExistsReplyById('reply-123')).rejects.toThrow(NotFoundError);
+      await expect(replyRepositoryPostgres.verifyExistsReplyById('reply-124')).rejects.toThrow(NotFoundError);
     });
 
     it('should not throw NotFoundError when reply exists', async () => {

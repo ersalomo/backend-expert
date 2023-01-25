@@ -1,4 +1,3 @@
-
 module.exports = class AddThread {
   constructor(payload) {
     const {owner, title, body} = payload;

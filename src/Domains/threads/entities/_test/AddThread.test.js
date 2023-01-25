@@ -20,4 +20,19 @@ describe('a AddThread entities', () => {
 
     expect(() => new AddThread(payload)).toThrowError('ADD_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
   });
+
+  it('should create AddThread object correctly', async () => {
+    // Arrange
+    const payload = {
+      'title': 'New thread nich Boy',
+      'owner': 'user-123',
+      'body': 'My Bad',
+    };
+    // Action
+    const {owner, title, body} = new AddThread(payload);
+    // Assert
+    expect(owner).toEqual(payload.owner);
+    expect(title).toEqual(payload.title);
+    expect(body).toEqual(payload.body);
+  });
 });

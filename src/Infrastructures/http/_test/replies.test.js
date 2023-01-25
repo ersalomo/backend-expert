@@ -16,6 +16,11 @@ describe('/replies endpoint', () => {
     await UsersTableTestHelper.cleanTable();
     await ThreadTableTestHelper.cleanTable();
   });
+
+  beforeEach(async () => {
+    await ReplayTableTestHelper.cleanTable();
+  });
+
   describe('/when replies /POST /threads/{threadId}/comments/{commentId}/replies', () => {
     it('should response 400 when request payload not contain needed property', async () => {
       // Arrange
