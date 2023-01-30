@@ -3,23 +3,24 @@
 exports.shorthands = undefined;
 
 exports.up = (pgm) => {
-  pgm.createTable('threads', {
+  pgm.createTable('likes', {
     id: {
-      type: 'VARCHAR(50)',
+      type: 'varchar(50)',
       primaryKey: true,
     },
-    user_id: {
-      type: 'VARCHAR(50)',
+    id_comment: {
+      type: 'varchar(50)',
+      notNull: true,
+      references: '"comments"',
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    },
+    id_user: {
+      type: 'varchar(50)',
       notNull: true,
       references: '"users"',
       onDelete: 'cascade',
       onUpdate: 'cascade',
-    },
-    title: {
-      type: 'VARCHAR(80)',
-    },
-    body: {
-      type: 'TEXT',
     },
     date: {
       type: 'timestamp',
@@ -30,5 +31,6 @@ exports.up = (pgm) => {
 };
 
 exports.down = (pgm) => {
-  pgm.dropTable('threads');
+  pgm.dropTable('likes');
 };
+

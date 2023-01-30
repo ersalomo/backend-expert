@@ -7,6 +7,7 @@ const authentications = require('../../Interfaces/http/api/authentications');
 const threads = require('../../Interfaces/http/api/threads');
 const comments = require('../../Interfaces/http/api/comments');
 const replies = require('../../Interfaces/http/api/reply_comments');
+const likes = require('../../Interfaces/http/api/likes');
 
 const createServer = async (container) => {
   const server = Hapi.server({
@@ -43,28 +44,32 @@ const createServer = async (container) => {
   await server.register([
     {
       plugin: users,
-      options: {container},
+      options: { container },
     },
     {
       plugin: authentications,
-      options: {container},
+      options: { container },
     },
     {
       plugin: threads,
-      options: {container},
+      options: { container },
     },
     {
       plugin: comments,
-      options: {container},
+      options: { container },
     },
     {
       plugin: replies,
-      options: {container},
+      options: { container },
+    },
+    {
+      plugin: likes,
+      options: { container },
     },
   ]);
 
   server.ext('onPreResponse', (req, h) => {
-    const {response} = req;
+    const { response } = req;
 
     if (response instanceof Error) {
       // console.log(response);

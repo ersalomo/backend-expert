@@ -1,8 +1,8 @@
 /* istanbul ignore file */
 
-const {createContainer} = require('instances-container');
+const { createContainer } = require('instances-container');
 // external agency
-const {nanoid} = require('nanoid');
+const { nanoid } = require('nanoid');
 const bcrypt = require('bcrypt');
 const pool = require('./database/postgres/pool');
 const Jwt = require('@hapi/jwt');
@@ -36,6 +36,10 @@ const LogoutUserUseCase = require('../Applications/use_case/LogoutUserUseCase');
 const RefreshAuthenticationUseCase = require('../Applications/use_case/RefreshAuthenticationUseCase');
 const AuthenticationTokenManager = require('../Applications/security/AuthenticationTokenManager');
 const JwtTokenManager = require('../Infrastructures/security/JwtTokenManager');
+
+const LikesRepository = require('../Domains/likes/LikesRepository');
+const LikeCommentUseCase = require('../Applications/use_case/LikeCommentUseCase');
+const UnLikeCommentUseCase = require('../Applications/use_case/UnLikeCommentUseCase');
 // creating container
 const container = createContainer();
 
@@ -126,6 +130,20 @@ container.register([
       dependencies: [
         {
           concrete: Jwt.token,
+        },
+      ],
+    },
+  },
+  {
+    key: LikesRepository.name,
+    class: LikeRepositoryPostgress,
+    parameter: {
+      dependencies: [
+        {
+          concrete: pool,
+        },
+        {
+          concrete: bcrypt,
         },
       ],
     },
@@ -304,6 +322,40 @@ container.register([
         {
           name: 'authenticationTokenManager',
           internal: AuthenticationTokenManager.name,
+        },
+      ],
+    },
+  },
+  {
+    key: LikeCommentUseCase.name,
+    class: LikeCommentUseCase,
+    parameter: {
+      injectType: 'destructuring',
+      dependencies: [
+        {
+          internal: LikeCommentUseCase,
+          name: 'likeCommentUseCase',
+        },
+        {
+          internal: CommentRepository,
+          name: 'commentRepository',
+        },
+      ],
+    },
+  },
+  {
+    key: UnLikeCommentUseCase.name,
+    class: UnLikeCommentUseCase,
+    parameter: {
+      injectType: 'destructuring',
+      dependencies: [
+        {
+          internal: LikeCommentUseCase,
+          name: 'likeCommentUseCase',
+        },
+        {
+          internal: CommentRepository,
+          name: 'commentRepository',
         },
       ],
     },
