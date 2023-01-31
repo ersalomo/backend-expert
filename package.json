@@ -7,7 +7,7 @@
     "start": "node src/app.js",
     "start:dev": "nodemon src/app.js",
     "test:watch": "jest --watchAll --coverage --runInBand --no-cache --setupFiles dotenv/config",
-    "test:w-folder": "jest ./src/Domains --coverage --runInBand --no-cache --setupFiles dotenv/config",
+    "test:w-folder": "jest ./src/Applications/use_case --coverage --runInBand --no-cache --setupFiles dotenv/config",
     "test:watch2": "jest --watchAll --coverage --setupFiles dotenv/config",
     "migrate": "node-pg-migrate",
     "migrate:test": "node-pg-migrate -f config/database/test.json",

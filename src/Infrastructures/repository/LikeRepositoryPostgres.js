@@ -24,6 +24,7 @@ class LikeRepositoryPostgres extends LikesRepository {
       text: 'DELETE FROM likes WHERE id_user = $1 AND id_comment = $2',
     };
     const result = await this._pool.query(query);
+    console.log('0000000000000000000000', result.rows[0]);
     return result.rows[0];
   }
   async isLiked({ owner, idComment }) {

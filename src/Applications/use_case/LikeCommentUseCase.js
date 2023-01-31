@@ -11,9 +11,9 @@ module.exports = class LikeCommentUseCase {
     await this._commentsRepository.verifyExistsCommentById(addLikeComment.idComment);
     const isLikedComment = await this._likesRepository.isLiked(addLikeComment);
     if (isLikedComment) {
-      await this._likesRepository.deleteLikeComment(addLikeComment);
+      return await this._likesRepository.deleteLikeComment(addLikeComment);
     } else {
-      await this._likesRepository.likeComment(addLikeComment);
+      return await this._likesRepository.likeComment(addLikeComment);
     }
   }
 };

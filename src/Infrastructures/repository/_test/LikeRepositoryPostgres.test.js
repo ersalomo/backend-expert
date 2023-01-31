@@ -22,7 +22,7 @@ describe('LikeRepositoryPostgres', () => {
     await UsersTableTestHelper.cleanTable();
     await pool.end();
   });
-  describe('', async () => {
+  describe('', () => {
     it('', async () => {});
   });
 });
