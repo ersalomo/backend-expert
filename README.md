@@ -12,15 +12,15 @@
 
 ## Kriteria 5: Kriteria Opsional Forum API
 
-## Fitur Menyukai dan Batal Menyukai Komentar
+    ### Fitur Menyukai dan Batal Menyukai Komentar
 
-    API harus dapat menyukai/batal menyukai komentar thread melalui route:
-    - Method: PUT
-    - Path: /threads/{threadId}/comments/{commentId}/likes
+        +API harus dapat menyukai/batal menyukai komentar thread melalui route:
+            - Method: PUT
+            - Path: /threads/{threadId}/comments/{commentId}/likes
 
-    Response yang dikembalikan:
-    - Status code: 200
-    - Response body:
-    ```{
-         "status": "success"
-    }```
+        +Response yang dikembalikan:
+            - Status code: 200
+            - Response body:
+            ```{
+                "status": "success"
+            }```
