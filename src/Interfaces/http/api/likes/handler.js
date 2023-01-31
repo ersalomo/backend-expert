@@ -4,24 +4,26 @@ const UnLikeCommentUseCase = require('../../../../Applications/use_case/UnLikeCo
 module.exports = class LikeHandler {
   constructor(container) {
     this._container = container;
-    this.postLike = this.postLike.bind(this);
-    this.postLike = this.postLike.bind(this);
+    this.postToAddLike = this.postToAddLike.bind(this);
+    this.putToUnLike = this.putToUnLike.bind(this);
   }
 
-  async postLike(req, h) {
+  async postToAddLike(req, h) {
     const { id: owner } = req.auth.credentials;
     const idComment = req.params.idComment;
-    const likeCommentUseCase = this._container.getInstance(LikeCommentUseCase);
+    const likeCommentUseCase = this._container.getInstance(LikeCommentUseCase.name);
     await likeCommentUseCase.execute({ owner, idComment });
-
     return h.response({
       status: 'success',
     });
   }
-  async putLike(res, req) {
+  async putToUnLike(req, h) {
     const { id: owner } = req.auth.credentials;
-    const idComment = req.params.idComment;
-    const unLikeCommentUseCase = this._container.getInstance(UnLikeCommentUseCase);
-    await unLikeCommentUseCase.execute({ owner, idComment });
+    const { idComment, idLike } = req.params;
+    const unLikeCommentUseCase = this._container.getInstance(UnLikeCommentUseCase.name);
+    await unLikeCommentUseCase.execute({ owner, idComment, idLike });
+    return h.response({
+      status: 'success',
+    });
   }
 };

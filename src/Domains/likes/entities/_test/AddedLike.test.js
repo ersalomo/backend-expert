@@ -1,0 +1,1 @@
+describe('a AddedLike entities', () => {});
