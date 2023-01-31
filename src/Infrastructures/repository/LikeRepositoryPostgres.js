@@ -9,7 +9,7 @@ class LikeRepositoryPostgres extends LikesRepository {
   }
   async likeComment(addLikeComment) {
     // check isLiked
-    const id = 'likes-' + this._idGenerator();
+    const id = 'like-' + this._idGenerator();
     const { idComment, owner } = addLikeComment;
     const query = {
       values: [id, idComment, owner],
@@ -24,7 +24,7 @@ class LikeRepositoryPostgres extends LikesRepository {
       text: 'DELETE FROM likes WHERE id_user = $1 AND id_comment = $2',
     };
     const result = await this._pool.query(query);
-    console.log('0000000000000000000000', result.rows[0]);
+    // console.log('0000000000000000000000', result);
     return result.rows[0];
   }
   async isLiked({ owner, idComment }) {
