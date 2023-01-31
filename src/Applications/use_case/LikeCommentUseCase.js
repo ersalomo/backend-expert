@@ -11,10 +11,7 @@ module.exports = class LikeCommentUseCase {
     await this._commentsRepository.verifyExistsCommentById(addLikeComment.idComment);
     const { owner, idComment } = addLikeComment;
     const isLikedComment = await this._likesRepository.isLiked(owner, idComment);
-    if (isLikedComment) {
-      console.log('suda liked');
-      return;
-    }
+    if (isLikedComment) return;
     await this._likesRepository.addLikeComment(addLikeComment);
   }
 };
