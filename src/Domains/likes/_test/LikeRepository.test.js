@@ -4,9 +4,9 @@ describe('LikeRepesitory interface', () => {
     // Arrange
     const likeRepository = new LikeRepository();
 
-    await expect(likeRepository.checkLikeExistsById('')).rejects.toThrowError('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-    await expect(likeRepository.addLikeComment({})).rejects.toThrowError('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-    await expect(likeRepository.isLiked('', '')).rejects.toThrowError('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-    await expect(likeRepository.unLikeComment('', '')).rejects.toThrowError('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    await expect(likeRepository.likeComment({})).rejects.toThrowError('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    await expect(likeRepository.isLiked({})).rejects.toThrowError('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    await expect(likeRepository.deleteLikeComment({})).rejects.toThrowError('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    await expect(likeRepository.getCountLikingByThreadId({})).rejects.toThrowError('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   });
 });

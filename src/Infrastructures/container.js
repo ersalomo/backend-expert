@@ -39,7 +39,6 @@ const JwtTokenManager = require('../Infrastructures/security/JwtTokenManager');
 
 const LikesRepository = require('../Domains/likes/LikesRepository');
 const LikeCommentUseCase = require('../Applications/use_case/LikeCommentUseCase');
-const UnLikeCommentUseCase = require('../Applications/use_case/UnLikeCommentUseCase');
 const LikeRepositoryPostgres = require('../Infrastructures/repository/LikeRepositoryPostgres');
 // creating container
 const container = createContainer();
@@ -344,23 +343,6 @@ container.register([
         {
           internal: CommentRepository.name,
           name: 'commentsRepository',
-        },
-      ],
-    },
-  },
-  {
-    key: UnLikeCommentUseCase.name,
-    Class: UnLikeCommentUseCase,
-    parameter: {
-      injectType: 'destructuring',
-      dependencies: [
-        {
-          internal: LikeCommentUseCase.name,
-          name: 'likeCommentUseCase',
-        },
-        {
-          internal: CommentRepository.name,
-          name: 'commentRepository',
         },
       ],
     },

@@ -9,9 +9,11 @@ module.exports = class LikeCommentUseCase {
   async execute(useCasePayload) {
     const addLikeComment = new AddLikeComment(useCasePayload);
     await this._commentsRepository.verifyExistsCommentById(addLikeComment.idComment);
-    const { owner, idComment } = addLikeComment;
-    const isLikedComment = await this._likesRepository.isLiked(owner, idComment);
-    if (isLikedComment) return;
-    await this._likesRepository.addLikeComment(addLikeComment);
+    const isLikedComment = await this._likesRepository.isLiked(addLikeComment);
+    if (isLikedComment) {
+      await this._likesRepository.deleteLikeComment(addLikeComment);
+    } else {
+      await this._likesRepository.likeComment(addLikeComment);
+    }
   }
 };

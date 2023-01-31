@@ -22,10 +22,6 @@ exports.up = (pgm) => {
       onDelete: 'cascade',
       onUpdate: 'cascade',
     },
-    is_liked: {
-      type: 'boolean',
-      default: true,
-    },
     date: {
       type: 'timestamp',
       notNull: true,

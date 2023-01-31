@@ -40,6 +40,7 @@ describe('AddReplyCommentUseCase', () => {
     const addReplyUseCase = new AddReplyCommentUseCase({
       replyCommentRepository: mockReplyRepository,
       commentRepository: mockCommentRepository,
+      threadRepository: mockThreadRepository,
     });
 
     // Action
