@@ -8,5 +8,8 @@ module.exports = class AddedLikeComment {
     if (typeof id !== 'string' || typeof idComment !== 'string' || typeof owner !== 'string') {
       throw new Error('ADDED_LIKE_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
     }
+    this.id = id;
+    this.owner = owner;
+    this.idComment = idComment;
   }
 };

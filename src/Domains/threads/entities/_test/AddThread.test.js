@@ -1,6 +1,6 @@
 const AddThread = require('../AddThread');
 
-describe('a AddThread entities', () => {
+describe('an AddThread entities', () => {
   it('should throw error when payload did not contain needed property', () => {
     // Arrange
     const payload = {
@@ -24,12 +24,12 @@ describe('a AddThread entities', () => {
   it('should create AddThread object correctly', async () => {
     // Arrange
     const payload = {
-      'title': 'New thread nich Boy',
-      'owner': 'user-123',
-      'body': 'My Bad',
+      title: 'New thread nich Boy',
+      owner: 'user-123',
+      body: 'My Bad',
     };
     // Action
-    const {owner, title, body} = new AddThread(payload);
+    const { owner, title, body } = new AddThread(payload);
     // Assert
     expect(owner).toEqual(payload.owner);
     expect(title).toEqual(payload.title);

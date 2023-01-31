@@ -1,14 +1,14 @@
 module.exports = class LikesRepository {
-  async addLikeComment(addLikeComment) {
+  async likeComment(addLikeComment) {
     throw new Error('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
-  async unLikeComment(owner, idLike) {
+  async deleteLikeComment({ owner, idComment }) {
     throw new Error('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
-  async checkLikeExistsById(idLike) {
+  async isLiked({ owner, idComment }) {
     throw new Error('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
-  async isLiked(owner, idComment) {
+  async getCountLikingByThreadId({ threadId }) {
     throw new Error('LIKES_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 };
