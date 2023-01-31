@@ -1,1 +1,3 @@
-describe('LikeRepositoryPostgres', () => {});
+describe('LikeRepositoryPostgres', () => {
+  it('', async () => {});
+});
