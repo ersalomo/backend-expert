@@ -25,23 +25,22 @@ describe('CommentRepositoryPostgres', () => {
   });
 
   describe('verifyExistsCommentById function', () => {
-    it('should throw NotFoundError when comment does\'nt exist', async () => {
-    // Arrange
+    it("should throw NotFoundError when comment doesn't exist", async () => {
+      // Arrange
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
-      // Action and Assertawait
+      // Action and Assert
       expect(commentRepositoryPostgres.verifyExistsCommentById('comment-1231')).rejects.toThrow(NotFoundError);
     });
 
     it('should not throw NotFoundError when comment is exist', async () => {
-    // Arrange
+      // Arrange
       await ThreadTableTestHelper.addThread({});
       await CommentTableTestHelper.addComment({});
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
       // Action and Assert
-      await expect(commentRepositoryPostgres.verifyExistsCommentById('comment-123'),
-      ).resolves.not.toThrowError(NotFoundError);
+      await expect(commentRepositoryPostgres.verifyExistsCommentById('comment-123')).resolves.not.toThrowError(NotFoundError);
     });
   });
 
@@ -51,7 +50,7 @@ describe('CommentRepositoryPostgres', () => {
     });
 
     it('should persist add comment', async () => {
-    // Arrange
+      // Arrange
       const addComment = new AddComment({
         owner: 'user-123',
         threadId: 'thread-123',
@@ -75,7 +74,7 @@ describe('CommentRepositoryPostgres', () => {
     });
 
     it('should return added comment correctly', async () => {
-    // Arrange
+      // Arrange
       const addComment = new AddComment({
         threadId: 'thread-123',
         content: 'Hai, apa kabar',
@@ -89,11 +88,13 @@ describe('CommentRepositoryPostgres', () => {
       const addedComment = await commentRepositoryPostgres.addComment(addComment);
 
       // Assert
-      expect(addedComment).toStrictEqual(new AddedComment({
-        id: 'comment-123',
-        content: 'Hai, apa kabar',
-        owner: 'user-123',
-      }));
+      expect(addedComment).toStrictEqual(
+        new AddedComment({
+          id: 'comment-123',
+          content: 'Hai, apa kabar',
+          owner: 'user-123',
+        })
+      );
     });
   });
 
@@ -103,7 +104,7 @@ describe('CommentRepositoryPostgres', () => {
     });
 
     it('should return empty comments if there is no comment in the thread', async () => {
-    // Arrange
+      // Arrange
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
       // Action
@@ -114,8 +115,8 @@ describe('CommentRepositoryPostgres', () => {
     });
 
     it('should return comments correctly', async () => {
-    // Arrange
-      const {date} = await CommentTableTestHelper.addComment({});
+      // Arrange
+      const { date } = await CommentTableTestHelper.addComment({});
 
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
@@ -139,7 +140,7 @@ describe('CommentRepositoryPostgres', () => {
     });
 
     it('should persist delete comment', async () => {
-    // Arrange
+      // Arrange
       const deleteComment = new DeleteComment({
         threadId: 'thread-123',
         commentId: 'comment-123',
@@ -150,14 +151,13 @@ describe('CommentRepositoryPostgres', () => {
 
       // Action and Assert
       await expect(commentRepositoryPostgres.deleteComment(deleteComment)).resolves.not.toThrow(ForbiddenError);
-      const comment = await CommentTableTestHelper.findCommentById(
-          'comment-123');
+      const comment = await CommentTableTestHelper.findCommentById('comment-123');
       expect(comment).toHaveLength(1);
       expect(comment[0]).toHaveProperty('is_deleted', true);
     });
 
     it('should throw ForbiddenError when the access user is not the owner', async () => {
-    // Arrange
+      // Arrange
       const deleteComment = new DeleteComment({
         threadId: 'thread-123',
         commentId: 'comment-123',
