@@ -24,7 +24,6 @@ class LikeRepositoryPostgres extends LikesRepository {
       text: 'DELETE FROM likes WHERE id_user = $1 AND id_comment = $2',
     };
     const result = await this._pool.query(query);
-    // console.log('0000000000000000000000', result);
     return result.rows[0];
   }
   async isLiked({ owner, idComment }) {
@@ -34,6 +33,30 @@ class LikeRepositoryPostgres extends LikesRepository {
     };
     const result = await this._pool.query(query);
     return result.rowCount ? true : false;
+  }
+  async getCountComentLikedByThreadId({ threadId }) {
+    /*
+    SELECT * FROM likes l INNER JOIN comments c
+    ON l.id_comment = c.id where c.thread_id = 'thread-53Em92CCuzN5sOwT3';
+    */
+
+    const query = {
+      text: `SELECT l.id_comment, COUNT(l.id) as like_count
+              FROM likes l INNER JOIN comments c
+              ON l.id_comment = c.id
+              WHERE c.thread_id = $1
+              GROUP BY l.id_comment`,
+      values: [threadId],
+    };
+    const result = await this._pool.query(query);
+    return result.rows;
+    /**
+     * SELECT * FROM likes l
+     * inner join comments c
+     * on l.id_comment = c.id
+     * inner join threads t
+     * on c.thread_id = t.id where t.id = 'thread-53Em92CCuzN5sOwT3';
+     */
   }
 }
 

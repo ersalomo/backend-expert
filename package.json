@@ -7,8 +7,9 @@
     "start": "node src/app.js",
     "start:dev": "nodemon src/app.js",
     "test:watch": "jest --watchAll --coverage --runInBand --no-cache --setupFiles dotenv/config",
-    "test:w-folder": "jest ./src/Domains/ --coverage --runInBand --no-cache --setupFiles dotenv/config",
+    "test:w-folder": "jest ./src/Applications/use_case/ --coverage --runInBand --no-cache --setupFiles dotenv/config",
     "test:watch2": "jest --watchAll --coverage --setupFiles dotenv/config",
+    "seed": "node seeder/seeder.js",
     "migrate": "node-pg-migrate",
     "migrate:test": "node-pg-migrate -f config/database/test.json",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,6 +28,7 @@
     "pg": "^8.8.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/jest": "^29.2.4",
     "eslint": "^8.29.0",
     "eslint-config-google": "^0.14.0",

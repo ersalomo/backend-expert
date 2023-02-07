@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 const CommentRepository = require('../../../Domains/comments/CommentRepository');
 const CommentDetail = require('../../../Domains/comments/entities/CommentDetail');
 const ReplyDetail = require('../../../Domains/reply_comments/entities/ReplyDetail');
@@ -5,11 +6,12 @@ const ReplyCommentRepository = require('../../../Domains/reply_comments/ReplyCom
 const ThreadDetail = require('../../../Domains/threads/entities/ThreadDetail');
 const ThreadRepository = require('../../../Domains/threads/ThreadRepository');
 const DetailThreadUseCase = require('../DetailThreadUseCase');
+const LikesRepository = require('../../../Domains/likes/LikesRepository');
 
 describe('DetailThreadUseCase', () => {
   /**
-     * Menguji apakah use case mampu mengoskestrasikan langkah demi langkah dengan benar.
-  */
+   * Menguji apakah use case mampu mengoskestrasikan langkah demi langkah dengan benar.
+   */
   it('should orchestrating the get thread details action correctly', async () => {
     // Arrange
     const useCasePayload = {
@@ -38,6 +40,7 @@ describe('DetailThreadUseCase', () => {
               is_deleted: true,
             }),
           ],
+          likeCount: 1,
         }),
         new CommentDetail({
           id: 'comment-124',
@@ -54,6 +57,7 @@ describe('DetailThreadUseCase', () => {
               is_deleted: false,
             }),
           ],
+          likeCount: 0,
         }),
       ],
     });
@@ -62,12 +66,11 @@ describe('DetailThreadUseCase', () => {
     const mockThreadRepository = new ThreadRepository();
     const mockCommentRepository = new CommentRepository();
     const mockReplyRepository = new ReplyCommentRepository();
+    const mockLikeRepository = new LikesRepository();
     // const mockLikeRepository = new LikeRepository();
 
     /** mocking needed function */
-    mockThreadRepository.checkExistsThreadById = jest.fn(() =>
-      Promise.resolve(),
-    );
+    mockThreadRepository.checkExistsThreadById = jest.fn(() => Promise.resolve());
     mockThreadRepository.getDetailThreadById = jest.fn(() =>
       Promise.resolve({
         id: 'thread-123',
@@ -75,7 +78,7 @@ describe('DetailThreadUseCase', () => {
         body: 'Ku ingin terbang',
         date: new Date('2021-08-08T07:19:09.775Z'),
         username: 'dicoding',
-      }),
+      })
     );
 
     mockCommentRepository.getCommentsByThreadId = jest.fn(() =>
@@ -96,7 +99,7 @@ describe('DetailThreadUseCase', () => {
           username: 'dicoding',
           is_deleted: true,
         },
-      ]),
+      ])
     );
 
     mockReplyRepository.getRepliesByThreadId = jest.fn(() =>
@@ -117,7 +120,15 @@ describe('DetailThreadUseCase', () => {
           username: 'dicoding',
           is_deleted: false,
         },
-      ]),
+      ])
+    );
+    mockLikeRepository.getCountComentLikedByThreadId = jest.fn(() =>
+      Promise.resolve([
+        {
+          id_comment: 'comment-123',
+          like_count: 1,
+        },
+      ])
     );
 
     /** creating use case instance */
@@ -125,6 +136,7 @@ describe('DetailThreadUseCase', () => {
       threadRepository: mockThreadRepository,
       commentRepository: mockCommentRepository,
       replyCommentRepository: mockReplyRepository,
+      likeRepository: mockLikeRepository,
     });
 
     // Action
@@ -135,5 +147,6 @@ describe('DetailThreadUseCase', () => {
     expect(mockThreadRepository.getDetailThreadById).toBeCalledWith('thread-123');
     expect(mockCommentRepository.getCommentsByThreadId).toBeCalledWith('thread-123');
     expect(mockReplyRepository.getRepliesByThreadId).toBeCalledWith('thread-123');
+    expect(mockLikeRepository.getCountComentLikedByThreadId).toBeCalledWith({ threadId: 'thread-123' });
   });
 });

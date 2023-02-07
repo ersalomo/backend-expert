@@ -88,7 +88,7 @@ describe('LikeRepositoryPostgres', () => {
       expect(isLiked).toEqual(true);
     });
 
-    it("should return false when like comment isn't liked", async () => {
+    it(`should return false when like comment isn't liked`, async () => {
       // Arrange
       const addLike = new AddLike({
         idComment: 'comment-123',
@@ -100,6 +100,32 @@ describe('LikeRepositoryPostgres', () => {
 
       // Assert
       expect(isLiked).toEqual(false);
+    });
+  });
+
+  describe('', () => {
+    it('should return empty array when thread id is not found', async () => {
+      // Arrange
+      const payload = {
+        threadId: 'thread-123',
+      };
+      const likeRepositoryPostgres = new LikeRepositoryPostgres(pool, {});
+      // Action
+      const likeCount = await likeRepositoryPostgres.getCountComentLikedByThreadId(payload);
+      // Assert
+      expect(likeCount).toHaveLength(0);
+    });
+    it('should return an array when thread id is found', async () => {
+      // Arrange
+      const payload = {
+        threadId: 'thread-123',
+      };
+      await LikesTableTestHelper.addLikeComment({});
+      const likeRepositoryPostgres = new LikeRepositoryPostgres(pool, {});
+      // Action
+      const likeCount = await likeRepositoryPostgres.getCountComentLikedByThreadId(payload);
+      // Assert
+      expect(likeCount).toHaveLength(1);
     });
   });
 });

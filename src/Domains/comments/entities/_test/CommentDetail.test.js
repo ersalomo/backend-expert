@@ -3,7 +3,7 @@ const CommentDetail = require('../CommentDetail');
 describe('a CommentDetail entities', () => {
   it('should throw error when payload did not contain needed property', () => {
     // Arrange
-    const payload = {id: 'comment-123'};
+    const payload = { id: 'comment-123' };
 
     // Action and Assert
     expect(() => new CommentDetail(payload)).toThrowError('COMMENT_DETAIL.NOT_CONTAIN_NEEDED_PROPERTY');
@@ -21,9 +21,7 @@ describe('a CommentDetail entities', () => {
     };
 
     // Action and Assert
-    expect(() => new CommentDetail(payload)).toThrowError(
-        'COMMENT_DETAIL.NOT_MEET_DATA_TYPE_SPECIFICATION',
-    );
+    expect(() => new CommentDetail(payload)).toThrowError('COMMENT_DETAIL.NOT_MEET_DATA_TYPE_SPECIFICATION');
   });
 
   it('should create CommentDetail object correctly', () => {
@@ -35,12 +33,11 @@ describe('a CommentDetail entities', () => {
       username: 'dicoding',
       is_deleted: false,
       replies: [],
+      likeCount: 0,
     };
 
     // Action
-    const {id, content, date, username, replies} = new CommentDetail(
-        payload,
-    );
+    const { id, content, date, username, replies, likeCount } = new CommentDetail(payload);
 
     // Assert
     expect(id).toEqual(payload.id);
@@ -48,6 +45,7 @@ describe('a CommentDetail entities', () => {
     expect(date).toEqual(payload.date);
     expect(username).toEqual(payload.username);
     expect(replies).toStrictEqual(payload.replies);
+    expect(likeCount).toStrictEqual(payload.likeCount);
   });
 
   it('should create CommentDetail object when the content is deleted correctly', () => {
@@ -59,10 +57,11 @@ describe('a CommentDetail entities', () => {
       username: 'dicoding',
       is_deleted: true,
       replies: [],
+      likeCount: 0,
     };
 
     // Action
-    const {id, content, date, username, replies} = new CommentDetail(payload);
+    const { id, content, date, username, replies, likeCount } = new CommentDetail(payload);
 
     // Assert
     expect(id).toEqual(payload.id);
@@ -70,5 +69,6 @@ describe('a CommentDetail entities', () => {
     expect(date).toEqual(payload.date);
     expect(username).toEqual(payload.username);
     expect(replies).toStrictEqual(payload.replies);
+    expect(likeCount).toStrictEqual(payload.likeCount);
   });
 });
