@@ -6,10 +6,10 @@ const container = require('../../../Infrastructures/container');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const ReplayTableTestHelper = require('../../../../tests/ReplayTableTestHelper');
 const CommentTableTestHelper = require('../../../../tests/CommentTableTestHelper');
+const LikesTableTestHelper = require('../../../../tests/LikesTableTestHelper');
 
-
-describe('/threads endpoint', ()=> {
-  afterAll(async ()=>{
+describe('/threads endpoint', () => {
+  afterAll(async () => {
     await pool.end();
   });
   afterEach(async () => {
@@ -17,8 +17,7 @@ describe('/threads endpoint', ()=> {
     await ThreadTableTestHelper.cleanTable();
   });
 
-
-  describe('when threads /POST threads', ()=> {
+  describe('when threads /POST threads', () => {
     it('should response 400 when request payload not contain needed property', async () => {
       // Arrange
       const reqPayload = {
@@ -116,7 +115,7 @@ describe('/threads endpoint', ()=> {
     });
   });
 
-  describe('when threads /GET', ()=>{
+  describe('when threads /GET', () => {
     it('should response 404 when thread is not found', async () => {
       // Arrange & Action
       const server = await createServer(container);
@@ -135,12 +134,12 @@ describe('/threads endpoint', ()=> {
     it('should response 200 and persisted thread detail without comment', async () => {
       // Arrange
       await UsersTableTestHelper.addUser({});
-      const {id: threadId} = await ThreadTableTestHelper.addThread({});
+      const { id: threadId } = await ThreadTableTestHelper.addThread({});
       // Action
       const server = await createServer(container);
       const response = await server.inject({
         method: 'GET',
-        url: '/threads/'+threadId,
+        url: '/threads/' + threadId,
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -160,13 +159,14 @@ describe('/threads endpoint', ()=> {
     it('should response 200 and persisted thread detail without replies', async () => {
       // Arrange
       await UsersTableTestHelper.addUser({});
-      const {id: threadId} = await ThreadTableTestHelper.addThread({});
+      const { id: threadId } = await ThreadTableTestHelper.addThread({});
       await CommentTableTestHelper.addComment({});
+      await LikesTableTestHelper.addLikeComment({});
       // Action
       const server = await createServer(container);
       const response = await server.inject({
         method: 'GET',
-        url: '/threads/'+threadId,
+        url: '/threads/' + threadId,
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -186,13 +186,16 @@ describe('/threads endpoint', ()=> {
       expect(responseJson.data.thread.comments[0]).toHaveProperty('content', 'Gak tau kok nanya saya');
       expect(responseJson.data.thread.comments[0].replies).toBeDefined();
       expect(responseJson.data.thread.comments[0].replies).toHaveLength(0);
+      expect(responseJson.data.thread.comments[0].likeCount).toBeDefined();
+      expect(responseJson.data.thread.comments[0].likeCount).toEqual(1);
     });
 
     it('should response 200 and persisted thread detail', async () => {
       // Arrange
       await UsersTableTestHelper.addUser({});
-      const {id: threadId} = await ThreadTableTestHelper.addThread({});
+      const { id: threadId } = await ThreadTableTestHelper.addThread({});
       await CommentTableTestHelper.addComment({});
+      await LikesTableTestHelper.addLikeComment({});
       await ReplayTableTestHelper.addReply({});
       // Action
       const server = await createServer(container);
@@ -223,6 +226,9 @@ describe('/threads endpoint', ()=> {
       expect(responseJson.data.thread.comments[0].replies[0].id).toBeDefined();
       expect(responseJson.data.thread.comments[0].replies[0].username).toBeDefined();
       expect(responseJson.data.thread.comments[0].replies[0]).toHaveProperty('content', 'Wow Wok');
+
+      expect(responseJson.data.thread.comments[0].likeCount).toBeDefined();
+      expect(responseJson.data.thread.comments[0].likeCount).toEqual(1);
     });
   });
 });
