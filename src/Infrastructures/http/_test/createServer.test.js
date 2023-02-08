@@ -1,7 +1,7 @@
 const createServer = require('../createServer');
-const pool = require('../../database/postgres/pool');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const AuthenticationsTableTestHelper = require('../../../../tests/AuthenticationsTableTestHelper');
+const pool = require('../../database/postgres/pool');
 
 describe('HTTP server', () => {
   afterAll(async () => {

@@ -21,9 +21,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install migrate and test
       run: |
-        npm install,
+        npm install
         npm run migrate up
-        npm run test
+        npm run test:watch
       env:
         CI: true
         PGHOST_TEST: ${{ secrets.PGHOST_TEST }}
