@@ -2,7 +2,6 @@ node_modules
 .env
 coverage
 .eslint.json
-config
 coverage
 config/database/test.json
 auth-api-app-server.pem
