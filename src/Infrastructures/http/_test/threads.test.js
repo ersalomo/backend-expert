@@ -156,7 +156,7 @@ describe('/threads endpoint', () => {
       expect(responseJson.data.thread.comments).toHaveLength(0);
     });
 
-    it('should response 200 and persisted thread detail without replies', async () => {
+    it('should response 200 and persisted thread details with comment and like', async () => {
       // Arrange
       await UsersTableTestHelper.addUser({});
       const { id: threadId } = await ThreadTableTestHelper.addThread({});
@@ -190,7 +190,7 @@ describe('/threads endpoint', () => {
       expect(responseJson.data.thread.comments[0].likeCount).toEqual(1);
     });
 
-    it('should response 200 and persisted thread detail', async () => {
+    it('should response 200 and persisted thread detail with comments and replies', async () => {
       // Arrange
       await UsersTableTestHelper.addUser({});
       const { id: threadId } = await ThreadTableTestHelper.addThread({});
@@ -229,6 +229,129 @@ describe('/threads endpoint', () => {
 
       expect(responseJson.data.thread.comments[0].likeCount).toBeDefined();
       expect(responseJson.data.thread.comments[0].likeCount).toEqual(1);
+    });
+    it('should response 200 and persisted thread details with deleted comments and exist replies', async () => {
+      // Arrange
+      await UsersTableTestHelper.addUser({});
+      const { id: threadId } = await ThreadTableTestHelper.addThread({});
+      await CommentTableTestHelper.addComment({});
+      await ReplayTableTestHelper.addReply({});
+      await CommentTableTestHelper.deleteComment({});
+
+      const server = await createServer(container);
+
+      // Action
+      const response = await server.inject({
+        method: 'GET',
+        url: `/threads/${threadId}`,
+      });
+
+      // Assert
+      const responseJson = JSON.parse(response.payload);
+      expect(response.statusCode).toEqual(200);
+      expect(responseJson.status).toEqual('success');
+      expect(responseJson.data.thread).toBeDefined();
+      expect(responseJson.data.thread).toHaveProperty('id', 'thread-123');
+      expect(responseJson.data.thread).toHaveProperty('title', 'New Thread');
+      expect(responseJson.data.thread).toHaveProperty('body', 'New body');
+      expect(responseJson.data.thread.date).toBeDefined();
+      expect(responseJson.data.thread).toHaveProperty('username', 'dicoding');
+      expect(responseJson.data.thread.comments).toBeDefined();
+      expect(responseJson.data.thread.comments).toHaveLength(1);
+      expect(responseJson.data.thread.comments[0]).toHaveProperty('id', 'comment-123');
+      expect(responseJson.data.thread.comments[0]).toHaveProperty('content', '**komentar telah dihapus**');
+      expect(responseJson.data.thread.comments[0].date).toBeDefined();
+      expect(responseJson.data.thread.comments[0]).toHaveProperty('username', 'dicoding');
+      expect(responseJson.data.thread.comments[0]).toHaveProperty('likeCount', 0);
+      expect(responseJson.data.thread.comments[0].replies).toBeDefined();
+      expect(responseJson.data.thread.comments[0].replies).toHaveLength(1);
+      expect(responseJson.data.thread.comments[0].replies[0]).toHaveProperty('id', 'reply-123');
+      expect(responseJson.data.thread.comments[0].replies[0]).toHaveProperty('content', 'Wow Wok');
+      expect(responseJson.data.thread.comments[0].replies[0].date).toBeDefined();
+      expect(responseJson.data.thread.comments[0].replies[0]).toHaveProperty('username', 'dicoding');
+    });
+
+    it('should response 200 and persisted thread details with exist comments and deleted replies', async () => {
+      // Arrange
+      await UsersTableTestHelper.addUser({});
+      const { id: threadId } = await ThreadTableTestHelper.addThread({});
+      await CommentTableTestHelper.addComment({});
+      await ReplayTableTestHelper.addReply({});
+      await ReplayTableTestHelper.deleteReply({});
+
+      const server = await createServer(container);
+
+      // Action
+      const response = await server.inject({
+        method: 'GET',
+        url: `/threads/${threadId}`,
+      });
+
+      // Assert
+      const responseJson = JSON.parse(response.payload);
+      expect(response.statusCode).toEqual(200);
+      expect(responseJson.status).toEqual('success');
+      expect(responseJson.data.thread).toBeDefined();
+      expect(responseJson.data.thread).toHaveProperty('id', 'thread-123');
+      expect(responseJson.data.thread).toHaveProperty('title', 'New Thread');
+      expect(responseJson.data.thread).toHaveProperty('body', 'New body');
+      expect(responseJson.data.thread.date).toBeDefined();
+      expect(responseJson.data.thread).toHaveProperty('username', 'dicoding');
+      expect(responseJson.data.thread.comments).toBeDefined();
+      expect(responseJson.data.thread.comments).toHaveLength(1);
+      expect(responseJson.data.thread.comments[0]).toHaveProperty('id', 'comment-123');
+      expect(responseJson.data.thread.comments[0]).toHaveProperty('content', 'Gak tau kok nanya saya');
+      expect(responseJson.data.thread.comments[0].date).toBeDefined();
+      expect(responseJson.data.thread.comments[0]).toHaveProperty('username', 'dicoding');
+      expect(responseJson.data.thread.comments[0]).toHaveProperty('likeCount', 0);
+      expect(responseJson.data.thread.comments[0].replies).toBeDefined();
+      expect(responseJson.data.thread.comments[0].replies).toHaveLength(1);
+      expect(responseJson.data.thread.comments[0].replies[0]).toHaveProperty('id', 'reply-123');
+      expect(responseJson.data.thread.comments[0].replies[0]).toHaveProperty('content', '**balasan telah dihapus**');
+      expect(responseJson.data.thread.comments[0].replies[0].date).toBeDefined();
+      expect(responseJson.data.thread.comments[0].replies[0]).toHaveProperty('username', 'dicoding');
+    });
+
+    it('should response 200 and persisted thread details with deleted comments and deleted replies', async () => {
+      // Arrange
+      await UsersTableTestHelper.addUser({});
+      const { id: threadId } = await ThreadTableTestHelper.addThread({});
+      await CommentTableTestHelper.addComment({});
+      await ReplayTableTestHelper.addReply({});
+      await CommentTableTestHelper.deleteComment({});
+      await ReplayTableTestHelper.deleteReply({});
+
+      const server = await createServer(container);
+
+      // Action
+      const response = await server.inject({
+        method: 'GET',
+        url: `/threads/${threadId}`,
+      });
+
+      // Assert
+      const responseJson = JSON.parse(response.payload);
+      expect(response.statusCode).toEqual(200);
+      expect(responseJson.status).toEqual('success');
+      expect(responseJson.data.thread).toBeDefined();
+      expect(responseJson.data.thread).toHaveProperty('id', 'thread-123');
+      expect(responseJson.data.thread).toHaveProperty('title', 'New Thread');
+      expect(responseJson.data.thread).toHaveProperty('body', 'New body');
+      expect(responseJson.data.thread.date).toBeDefined();
+      expect(responseJson.data.thread).toHaveProperty('username', 'dicoding');
+      expect(responseJson.data.thread.comments).toBeDefined();
+      expect(responseJson.data.thread.comments).toHaveLength(1);
+      expect(responseJson.data.thread.comments[0]).toHaveProperty('id', 'comment-123');
+      expect(responseJson.data.thread.comments[0]).toHaveProperty('content', '**komentar telah dihapus**');
+      expect(responseJson.data.thread.comments[0].date).toBeDefined();
+      expect(responseJson.data.thread.comments[0]).toHaveProperty('username', 'dicoding');
+      expect(responseJson.data.thread.comments[0]).toHaveProperty('likeCount', 0);
+      expect(responseJson.data.thread.comments[0].replies).toBeDefined();
+      expect(responseJson.data.thread.comments[0].replies).toHaveLength(1);
+      expect(responseJson.data.thread.comments[0].replies[0]).toHaveProperty('id', 'reply-123');
+      expect(responseJson.data.thread.comments[0].replies[0]).toHaveProperty('content', '**balasan telah dihapus**');
+      expect(responseJson.data.thread.comments[0].replies[0].date).toBeDefined();
+      expect(responseJson.data.thread.comments[0].replies[0]).toHaveProperty('username', 'dicoding');
     });
   });
 });
