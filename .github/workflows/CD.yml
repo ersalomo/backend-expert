@@ -1,25 +1,25 @@
-# name: Continuous Deployment
+name: Continuous Deployment
 
-# on:
-#   push:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
 
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - name: SSH and deploy app
-#       uses: appleboy/ssh-action@main
-#       with:
-#         host: ${{ secrets.SSH_HOST }}
-#         username: ${{ secrets.SSH_USERNAME}}
-#         key: ${{secrets.SSH_KEY}}
-#         port: ${{ secrets.SSH_PORT}}
-#         script: |
-#           cd ~/backend-expert
-#           git pull origin main
-#           npm i
-#           npm run migrate up
-#           pm2 restart backend-expert
+    steps:
+    - name: SSH and deploy app
+      uses: appleboy/ssh-action@main
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME}}
+        key: ${{secrets.SSH_KEY}}
+        port: ${{ secrets.SSH_PORT}}
+        script: |
+          cd ~/backend-expert
+          git pull origin main
+          npm i
+          npm run migrate up
+          pm2 restart backend-expert
