@@ -3,3 +3,4 @@ node_modules
 .eslint.json
 config
 coverage
+auth-api-app-server.pem
