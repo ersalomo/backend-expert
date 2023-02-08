@@ -17,6 +17,28 @@ describe('/likes endpoint', () => {
   });
 
   describe('/when replies /POST /threads/{threadId}/comments/{commentId}/likes', () => {
+    it('should response 401 when user Unauthenticate', async () => {
+      // Arrange
+      await UsersTableTestHelper.addUser({});
+      const { id: threadId } = await ThreadTableTestHelper.addThread({});
+      const { id: commentId } = await CommentTableTestHelper.addComment({});
+      const payload = {
+        idComment: 'comment-123',
+        owner: 'user-123',
+      };
+      const server = await createServer(container);
+      // Action
+      const response = await server.inject({
+        method: 'PUT',
+        url: `/threads/${threadId}/comments/${commentId}/likes`,
+        payload: payload,
+      });
+      const responseJson = JSON.parse(response.payload);
+      // Assert
+      expect(response.statusCode).toEqual(401);
+      expect(responseJson.message).toEqual('Missing authentication');
+    });
+
     it('should response 200 when user liked a comment', async () => {
       // Arrange
       const accessToken = await ServerTestHelper.getAccessToken();
@@ -29,7 +51,7 @@ describe('/likes endpoint', () => {
       const server = await createServer(container);
       // Action
       const response = await server.inject({
-        method: 'POST',
+        method: 'PUT',
         url: `/threads/${threadId}/comments/${commentId}/likes`,
         payload: payload,
         headers: {

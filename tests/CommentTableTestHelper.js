@@ -2,12 +2,7 @@
 const pool = require('../src/Infrastructures/database/postgres/pool');
 
 const CommentTableTestHelper = {
-  async addComment({
-    id= 'comment-123',
-    userId= 'user-123',
-    threadId= 'thread-123',
-    content= 'Gak tau kok nanya saya',
-  }) {
+  async addComment({ id = 'comment-123', userId = 'user-123', threadId = 'thread-123', content = 'Gak tau kok nanya saya' }) {
     const query = {
       text: 'INSERT INTO comments VALUES($1, $2, $3, $4) RETURNING id, date',
       values: [id, userId, threadId, content],
@@ -15,12 +10,9 @@ const CommentTableTestHelper = {
     const result = await pool.query(query);
     return result.rows[0];
   },
-  async deleteComment({
-    id = 'comment-123',
-    owner = 'user-123',
-  }) {
+  async deleteComment({ id = 'comment-123', owner = 'user-123' }) {
     const query = {
-      text: 'UPDATE comments SET is_deleted = true WHERE id = $1 AND owner = $2 RETURNING id',
+      text: 'UPDATE comments SET is_deleted = true WHERE id = $1 AND user_id = $2 RETURNING id',
       values: [id, owner],
     };
 
