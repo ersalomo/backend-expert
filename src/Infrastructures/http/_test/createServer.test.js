@@ -41,7 +41,6 @@ describe('HTTP server', () => {
     it('should return 200 and hello world', async () => {
       // Arange
       const server = await createServer({});
-
       // Action
       const response = await server.inject({
         method: 'GET',
