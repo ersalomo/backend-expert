@@ -5,3 +5,4 @@ coverage
 config
 coverage
 config/database/test.json
+auth-api-app-server.pem
