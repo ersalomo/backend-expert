@@ -67,6 +67,13 @@ const createServer = async (container) => {
       options: { container },
     },
   ]);
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: () => ({
+      value: 'Hello Dunia!',
+    }),
+  });
 
   server.ext('onPreResponse', (req, h) => {
     const { response } = req;
