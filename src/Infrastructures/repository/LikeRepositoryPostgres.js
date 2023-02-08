@@ -42,9 +42,12 @@ class LikeRepositoryPostgres extends LikesRepository {
 
     const query = {
       text: `SELECT l.id_comment, COUNT(l.id) as like_count
-              FROM likes l INNER JOIN comments c
+              FROM likes l
+              INNER JOIN comments c
               ON l.id_comment = c.id
-              WHERE c.thread_id = $1
+              INNER JOIN threads t
+              ON c.thread_id = t.id
+              WHERE t.id = $1
               GROUP BY l.id_comment`,
       values: [threadId],
     };
