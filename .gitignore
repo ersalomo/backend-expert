@@ -1,5 +1,10 @@
+config
+coverage
 node_modules
 .env
 .eslint.json
-config
-coverage
+package-lock.json
+auth-api-app-server.pem
+text.txt
+jest.config.js
+*.zip
